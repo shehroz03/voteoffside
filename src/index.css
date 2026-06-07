@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: 255 255 255;
+  --elevated: 248 250 252;
+  --ink: 15 23 42;
+  --muted: 100 116 139;
+  --line: 226 232 240;
+}
+
+.dark {
+  --surface: 9 14 28;
+  --elevated: 17 24 39;
+  --ink: 226 232 240;
+  --muted: 148 163 184;
+  --line: 30 41 59;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: rgb(var(--surface));
+  color: rgb(var(--ink));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Thin, branded scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--line));
+  border-radius: 999px;
+}
+
+@layer components {
+  .card {
+    @apply bg-elevated border border-line rounded-2xl shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold
+           transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white hover:bg-brand-700 px-4 py-2.5;
+  }
+  .btn-ghost {
+    @apply btn border border-line text-ink hover:bg-elevated px-4 py-2.5;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line
+           px-3 py-1.5 text-sm font-medium text-muted hover:text-ink hover:border-brand/40 transition-colors;
+  }
+  .chip-active {
+    @apply bg-brand text-white border-brand hover:text-white;
+  }
+}
+
+/* Vote bar fill animation */
+.vote-fill {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
