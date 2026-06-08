@@ -202,6 +202,8 @@ grant execute on function public.settle_match(text, text) to authenticated;
 -- 9) get_leaderboard: returns users ranked by total Beat-the-Crowd points.
 --    Falls back gracefully when no matches are settled (everyone at 0 pts).
 --
+drop function if exists public.get_leaderboard(int);
+
 create or replace function public.get_leaderboard(p_limit int default 50)
 returns table(
   username     text,
@@ -510,3 +512,228 @@ as $$
 $$;
 
 grant execute on function public.get_crowd_accuracy() to anon, authenticated;
+
+-- =====================================================================
+--  14) Virtual Coins prediction game
+--      Safe to re-run (IF NOT EXISTS / CREATE OR REPLACE throughout).
+-- =====================================================================
+
+-- 14a) Tables
+
+create table if not exists public.user_coins (
+  user_id    uuid        primary key references auth.users(id) on delete cascade,
+  balance    integer     not null default 1000 check (balance >= 0),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.coin_bets (
+  id         uuid         primary key default gen_random_uuid(),
+  user_id    uuid         not null references auth.users(id) on delete cascade,
+  match_id   text         not null,
+  team_code  text         not null,
+  amount     integer      not null check (amount >= 50 and amount <= 500),
+  odds       numeric(5,2) not null,
+  status     text         not null default 'pending'
+                          check (status in ('pending','won','lost')),
+  payout     integer,
+  created_at timestamptz  not null default now()
+);
+
+-- One bet per user per match (enforced at DB level)
+create unique index if not exists coin_bets_user_match
+  on public.coin_bets(user_id, match_id);
+
+-- 14b) RLS
+
+alter table public.user_coins enable row level security;
+alter table public.coin_bets  enable row level security;
+
+drop policy if exists "user_coins_self" on public.user_coins;
+create policy "user_coins_self" on public.user_coins
+  for all using (auth.uid() = user_id);
+
+drop policy if exists "coin_bets_self" on public.coin_bets;
+create policy "coin_bets_self" on public.coin_bets
+  for all using (auth.uid() = user_id);
+
+-- 14c) get_user_balance — ensures wallet row exists on first call
+
+create or replace function public.get_user_balance(p_user_id uuid)
+returns integer
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_bal integer;
+begin
+  insert into public.user_coins(user_id, balance)
+  values (p_user_id, 1000)
+  on conflict (user_id) do nothing;
+
+  select balance into v_bal
+  from public.user_coins
+  where user_id = p_user_id;
+
+  return coalesce(v_bal, 1000);
+end;
+$$;
+
+grant execute on function public.get_user_balance(uuid) to authenticated;
+
+-- 14d) place_bet — atomic deduct + insert in one transaction
+
+create or replace function public.place_bet(
+  p_user_id   uuid,
+  p_match_id  text,
+  p_team_code text,
+  p_amount    integer,
+  p_odds      numeric
+)
+returns json
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_balance integer;
+  v_bet_id  uuid;
+begin
+  if p_amount < 50 or p_amount > 500 then
+    raise exception 'Amount must be between 50 and 500 coins';
+  end if;
+
+  -- Ensure wallet exists (1000 starting coins)
+  insert into public.user_coins(user_id, balance)
+  values (p_user_id, 1000)
+  on conflict (user_id) do nothing;
+
+  -- Lock row and read balance atomically
+  select balance into v_balance
+  from public.user_coins
+  where user_id = p_user_id
+  for update;
+
+  if v_balance < p_amount then
+    raise exception 'Not enough coins (balance: %, bet: %)', v_balance, p_amount;
+  end if;
+
+  -- Deduct coins
+  update public.user_coins
+  set balance    = balance - p_amount,
+      updated_at = now()
+  where user_id = p_user_id;
+
+  -- Insert bet (unique index prevents double-betting on same match)
+  insert into public.coin_bets(user_id, match_id, team_code, amount, odds)
+  values (p_user_id, p_match_id, p_team_code, p_amount, p_odds)
+  returning id into v_bet_id;
+
+  return json_build_object(
+    'bet_id',      v_bet_id,
+    'new_balance', v_balance - p_amount
+  );
+end;
+$$;
+
+grant execute on function public.place_bet(uuid, text, text, integer, numeric) to authenticated;
+
+-- 14e) Extend settle_match to also settle coin bets for the same match.
+--      DROP first because return type doesn't change but body does.
+--      This replaces the function defined in section 8 above.
+
+drop function if exists public.settle_match(text, text);
+
+create function public.settle_match(
+  p_match_id text,
+  p_winner   text
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_winner_count numeric;
+  v_total_count  numeric;
+  v_winner_pct   integer;
+  v_points       integer;
+  v_bet          record;
+  v_payout       integer;
+  v_coin_winners integer := 0;
+  v_coin_losers  integer := 0;
+begin
+  -- Record result (upsert — idempotent)
+  insert into public.match_results (match_id, winner_team_code, settled_at)
+       values (p_match_id, p_winner, now())
+  on conflict (match_id)
+  do update set winner_team_code = excluded.winner_team_code,
+                settled_at       = now();
+
+  -- Aggregate vote counts
+  select
+    coalesce(sum(case when team_code = p_winner then count else 0 end), 0),
+    coalesce(sum(count), 0)
+    into v_winner_count, v_total_count
+    from public.vote_counts
+   where match_id = p_match_id;
+
+  v_winner_pct := case
+    when v_total_count > 0
+    then round(v_winner_count / v_total_count * 100)::integer
+    else 50
+  end;
+
+  v_points := 10 + (100 - v_winner_pct);
+
+  -- Settle Beat-the-Crowd picks
+  update public.votes
+     set correct = (team_code = p_winner),
+         points  = case when team_code = p_winner then v_points else 0 end
+   where match_id = p_match_id;
+
+  -- Settle coin bets
+  for v_bet in
+    select * from public.coin_bets
+     where match_id = p_match_id
+       and status   = 'pending'
+     for update
+  loop
+    if v_bet.team_code = p_winner then
+      v_payout := floor(v_bet.amount * v_bet.odds);
+      update public.coin_bets
+         set status = 'won', payout = v_payout
+       where id = v_bet.id;
+      update public.user_coins
+         set balance = balance + v_payout, updated_at = now()
+       where user_id = v_bet.user_id;
+      v_coin_winners := v_coin_winners + 1;
+    else
+      update public.coin_bets
+         set status = 'lost', payout = 0
+       where id = v_bet.id;
+      v_coin_losers := v_coin_losers + 1;
+    end if;
+  end loop;
+
+  return jsonb_build_object(
+    'match_id',       p_match_id,
+    'winner',         p_winner,
+    'winner_pct',     v_winner_pct,
+    'points_awarded', v_points,
+    'rows_settled',   (select count(*) from public.votes where match_id = p_match_id),
+    'coin_winners',   v_coin_winners,
+    'coin_losers',    v_coin_losers
+  );
+end;
+$$;
+
+grant execute on function public.settle_match(text, text) to authenticated;
+
+-- 14f) Realtime for user_coins so balance updates push instantly to clients
+do $$
+begin
+  alter publication supabase_realtime add table public.user_coins;
+exception
+  when duplicate_object then null;
+end $$;
