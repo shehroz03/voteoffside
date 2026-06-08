@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext.jsx'
 import { groupKeys } from '../lib/teams.js'
 import MatchCard from '../components/MatchCard.jsx'
 import AdSlot from '../components/AdSlot.jsx'
+import { StaggerList, StaggerItem } from '../motion.jsx'
 
 export default function Schedule() {
   const { matches } = useApp()
@@ -77,11 +78,13 @@ export default function Schedule() {
           <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted">
             {date}
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <StaggerList className="grid gap-4 md:grid-cols-2">
             {list.map((m) => (
-              <MatchCard key={m.id} match={m} />
+              <StaggerItem key={m.id}>
+                <MatchCard match={m} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerList>
         </section>
       ))}
 

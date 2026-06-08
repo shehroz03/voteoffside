@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { Heart, ArrowLeft } from 'lucide-react'
-import { getTeam, flag, groups } from '../lib/teams.js'
+import { getTeam, groups } from '../lib/teams.js'
+import TeamBadge from '../components/TeamBadge.jsx'
 import { players } from '../lib/players.js'
 import { useApp } from '../context/AppContext.jsx'
 import MatchCard from '../components/MatchCard.jsx'
@@ -21,7 +22,7 @@ export default function TeamProfile() {
       </Link>
 
       <div className="card flex items-center gap-4 p-5">
-        <div className="text-6xl">{flag(code)}</div>
+        <TeamBadge code={code} size={72} cdnSize="w160" />
         <div className="flex-1">
           <h1 className="text-2xl font-extrabold">{team.name}</h1>
           <p className="text-sm text-muted">
@@ -44,8 +45,8 @@ export default function TeamProfile() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {groupMates.map((c) => (
-            <Link key={c} to={`/teams/${c}`} className="chip">
-              <span className="text-lg">{flag(c)}</span> {getTeam(c).name}
+            <Link key={c} to={`/teams/${c}`} className="chip inline-flex items-center gap-1.5">
+              <TeamBadge code={c} size={18} cdnSize="w40" /> {getTeam(c).name}
             </Link>
           ))}
         </div>

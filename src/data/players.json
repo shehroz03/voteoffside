@@ -1,57 +1,645 @@
 {
   "_note": "Sample/seed players for building the UI. Stats are illustrative, not official. Replace with TheSportsDB / football-data.org before launch (see README).",
   "players": [
-    { "id": "messi", "name": "Lionel Messi", "team": "ARG", "position": "FW", "number": 10, "club": "Inter Miami", "age": 38, "stats": { "apps": 187, "goals": 112, "assists": 58, "rating": 9.1 } },
-    { "id": "alvarez", "name": "Julián Álvarez", "team": "ARG", "position": "FW", "number": 9, "club": "Atlético Madrid", "age": 26, "stats": { "apps": 64, "goals": 31, "assists": 18, "rating": 8.0 } },
-    { "id": "mac-allister", "name": "Alexis Mac Allister", "team": "ARG", "position": "MF", "number": 20, "club": "Liverpool", "age": 27, "stats": { "apps": 58, "goals": 9, "assists": 14, "rating": 7.8 } },
-
-    { "id": "mbappe", "name": "Kylian Mbappé", "team": "FRA", "position": "FW", "number": 10, "club": "Real Madrid", "age": 27, "stats": { "apps": 92, "goals": 71, "assists": 33, "rating": 8.9 } },
-    { "id": "dembele", "name": "Ousmane Dembélé", "team": "FRA", "position": "FW", "number": 11, "club": "Paris Saint-Germain", "age": 28, "stats": { "apps": 60, "goals": 22, "assists": 26, "rating": 8.1 } },
-    { "id": "tchouameni", "name": "Aurélien Tchouaméni", "team": "FRA", "position": "MF", "number": 8, "club": "Real Madrid", "age": 26, "stats": { "apps": 48, "goals": 4, "assists": 6, "rating": 7.6 } },
-
-    { "id": "vinicius", "name": "Vinícius Júnior", "team": "BRA", "position": "FW", "number": 7, "club": "Real Madrid", "age": 25, "stats": { "apps": 71, "goals": 38, "assists": 29, "rating": 8.6 } },
-    { "id": "rodrygo", "name": "Rodrygo", "team": "BRA", "position": "FW", "number": 11, "club": "Real Madrid", "age": 25, "stats": { "apps": 58, "goals": 24, "assists": 21, "rating": 8.0 } },
-    { "id": "casemiro", "name": "Casemiro", "team": "BRA", "position": "MF", "number": 5, "club": "Manchester United", "age": 34, "stats": { "apps": 78, "goals": 7, "assists": 9, "rating": 7.5 } },
-
-    { "id": "yamal", "name": "Lamine Yamal", "team": "ESP", "position": "FW", "number": 19, "club": "Barcelona", "age": 18, "stats": { "apps": 30, "goals": 12, "assists": 19, "rating": 8.3 } },
-    { "id": "pedri", "name": "Pedri", "team": "ESP", "position": "MF", "number": 8, "club": "Barcelona", "age": 23, "stats": { "apps": 44, "goals": 9, "assists": 16, "rating": 8.1 } },
-    { "id": "rodri", "name": "Rodri", "team": "ESP", "position": "MF", "number": 16, "club": "Manchester City", "age": 29, "stats": { "apps": 52, "goals": 11, "assists": 8, "rating": 8.4 } },
-
-    { "id": "kane", "name": "Harry Kane", "team": "ENG", "position": "FW", "number": 9, "club": "Bayern Munich", "age": 32, "stats": { "apps": 105, "goals": 74, "assists": 22, "rating": 8.5 } },
-    { "id": "bellingham", "name": "Jude Bellingham", "team": "ENG", "position": "MF", "number": 10, "club": "Real Madrid", "age": 22, "stats": { "apps": 44, "goals": 20, "assists": 14, "rating": 8.4 } },
-    { "id": "saka", "name": "Bukayo Saka", "team": "ENG", "position": "FW", "number": 7, "club": "Arsenal", "age": 24, "stats": { "apps": 48, "goals": 17, "assists": 21, "rating": 8.2 } },
-
-    { "id": "ronaldo", "name": "Cristiano Ronaldo", "team": "POR", "position": "FW", "number": 7, "club": "Al Nassr", "age": 41, "stats": { "apps": 217, "goals": 138, "assists": 45, "rating": 8.7 } },
-    { "id": "fernandes", "name": "Bruno Fernandes", "team": "POR", "position": "MF", "number": 8, "club": "Manchester United", "age": 31, "stats": { "apps": 78, "goals": 24, "assists": 31, "rating": 8.0 } },
-    { "id": "leao", "name": "Rafael Leão", "team": "POR", "position": "FW", "number": 15, "club": "AC Milan", "age": 26, "stats": { "apps": 40, "goals": 12, "assists": 14, "rating": 7.7 } },
-
-    { "id": "kdb", "name": "Kevin De Bruyne", "team": "BEL", "position": "MF", "number": 7, "club": "Napoli", "age": 34, "stats": { "apps": 110, "goals": 31, "assists": 56, "rating": 8.6 } },
-    { "id": "lukaku", "name": "Romelu Lukaku", "team": "BEL", "position": "FW", "number": 9, "club": "Napoli", "age": 32, "stats": { "apps": 120, "goals": 88, "assists": 22, "rating": 8.0 } },
-
-    { "id": "haaland", "name": "Erling Haaland", "team": "NOR", "position": "FW", "number": 9, "club": "Manchester City", "age": 25, "stats": { "apps": 42, "goals": 41, "assists": 7, "rating": 8.8 } },
-    { "id": "odegaard", "name": "Martin Ødegaard", "team": "NOR", "position": "MF", "number": 10, "club": "Arsenal", "age": 27, "stats": { "apps": 48, "goals": 13, "assists": 19, "rating": 8.1 } },
-
-    { "id": "musiala", "name": "Jamal Musiala", "team": "GER", "position": "MF", "number": 10, "club": "Bayern Munich", "age": 23, "stats": { "apps": 44, "goals": 16, "assists": 12, "rating": 8.2 } },
-    { "id": "wirtz", "name": "Florian Wirtz", "team": "GER", "position": "MF", "number": 17, "club": "Liverpool", "age": 22, "stats": { "apps": 40, "goals": 14, "assists": 20, "rating": 8.3 } },
-    { "id": "kimmich", "name": "Joshua Kimmich", "team": "GER", "position": "MF", "number": 6, "club": "Bayern Munich", "age": 31, "stats": { "apps": 90, "goals": 8, "assists": 28, "rating": 7.9 } },
-
-    { "id": "vandijk", "name": "Virgil van Dijk", "team": "NED", "position": "DF", "number": 4, "club": "Liverpool", "age": 34, "stats": { "apps": 78, "goals": 8, "assists": 4, "rating": 8.0 } },
-    { "id": "gakpo", "name": "Cody Gakpo", "team": "NED", "position": "FW", "number": 11, "club": "Liverpool", "age": 26, "stats": { "apps": 40, "goals": 15, "assists": 9, "rating": 7.7 } },
-
-    { "id": "modric", "name": "Luka Modrić", "team": "CRO", "position": "MF", "number": 10, "club": "AC Milan", "age": 40, "stats": { "apps": 188, "goals": 27, "assists": 32, "rating": 8.4 } },
-    { "id": "gvardiol", "name": "Joško Gvardiol", "team": "CRO", "position": "DF", "number": 20, "club": "Manchester City", "age": 24, "stats": { "apps": 38, "goals": 5, "assists": 4, "rating": 7.6 } },
-
-    { "id": "valverde", "name": "Federico Valverde", "team": "URU", "position": "MF", "number": 15, "club": "Real Madrid", "age": 27, "stats": { "apps": 64, "goals": 12, "assists": 13, "rating": 8.0 } },
-    { "id": "nunez", "name": "Darwin Núñez", "team": "URU", "position": "FW", "number": 9, "club": "Al Hilal", "age": 26, "stats": { "apps": 40, "goals": 16, "assists": 8, "rating": 7.4 } },
-
-    { "id": "kudus", "name": "Mohammed Kudus", "team": "GHA", "position": "MF", "number": 20, "club": "Tottenham", "age": 25, "stats": { "apps": 38, "goals": 12, "assists": 7, "rating": 7.6 } },
-    { "id": "salah", "name": "Mohamed Salah", "team": "EGY", "position": "FW", "number": 11, "club": "Liverpool", "age": 33, "stats": { "apps": 102, "goals": 63, "assists": 31, "rating": 8.6 } },
-    { "id": "hakimi", "name": "Achraf Hakimi", "team": "MAR", "position": "DF", "number": 2, "club": "Paris Saint-Germain", "age": 27, "stats": { "apps": 70, "goals": 11, "assists": 19, "rating": 8.0 } },
-    { "id": "osimhen", "name": "Victor Osimhen", "team": "MAR", "position": "FW", "number": 9, "club": "Galatasaray", "age": 27, "stats": { "apps": 44, "goals": 26, "assists": 5, "rating": 7.9 } },
-    { "id": "mitoma", "name": "Kaoru Mitoma", "team": "JPN", "position": "FW", "number": 11, "club": "Brighton", "age": 28, "stats": { "apps": 40, "goals": 9, "assists": 11, "rating": 7.6 } },
-    { "id": "pulisic", "name": "Christian Pulisic", "team": "USA", "position": "FW", "number": 10, "club": "AC Milan", "age": 27, "stats": { "apps": 78, "goals": 31, "assists": 24, "rating": 7.9 } },
-    { "id": "musah", "name": "Yunus Musah", "team": "USA", "position": "MF", "number": 6, "club": "AC Milan", "age": 23, "stats": { "apps": 48, "goals": 2, "assists": 4, "rating": 7.2 } },
-    { "id": "davies", "name": "Alphonso Davies", "team": "CAN", "position": "DF", "number": 19, "club": "Bayern Munich", "age": 25, "stats": { "apps": 52, "goals": 14, "assists": 13, "rating": 7.8 } },
-    { "id": "lozano", "name": "Hirving Lozano", "team": "MEX", "position": "FW", "number": 22, "club": "San Diego FC", "age": 30, "stats": { "apps": 70, "goals": 19, "assists": 15, "rating": 7.5 } }
+    {
+      "id": "messi",
+      "name": "Lionel Messi",
+      "team": "ARG",
+      "position": "FW",
+      "number": 10,
+      "club": "Inter Miami",
+      "age": 38,
+      "stats": {
+        "apps": 187,
+        "goals": 112,
+        "assists": 58,
+        "rating": 9.1
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/e0i2051750317027.png"
+    },
+    {
+      "id": "alvarez",
+      "name": "Julián Álvarez",
+      "team": "ARG",
+      "position": "FW",
+      "number": 9,
+      "club": "Atlético Madrid",
+      "age": 26,
+      "stats": {
+        "apps": 64,
+        "goals": 31,
+        "assists": 18,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/91pla41762288186.png"
+    },
+    {
+      "id": "mac-allister",
+      "name": "Alexis Mac Allister",
+      "team": "ARG",
+      "position": "MF",
+      "number": 20,
+      "club": "Liverpool",
+      "age": 27,
+      "stats": {
+        "apps": 58,
+        "goals": 9,
+        "assists": 14,
+        "rating": 7.8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/96dmuf1757087513.png"
+    },
+    {
+      "id": "mbappe",
+      "name": "Kylian Mbappé",
+      "team": "FRA",
+      "position": "FW",
+      "number": 10,
+      "club": "Real Madrid",
+      "age": 27,
+      "stats": {
+        "apps": 92,
+        "goals": 71,
+        "assists": 33,
+        "rating": 8.9
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/h9u9vz1733653583.png"
+    },
+    {
+      "id": "dembele",
+      "name": "Ousmane Dembélé",
+      "team": "FRA",
+      "position": "FW",
+      "number": 11,
+      "club": "Paris Saint-Germain",
+      "age": 28,
+      "stats": {
+        "apps": 60,
+        "goals": 22,
+        "assists": 26,
+        "rating": 8.1
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/pstgy21766335175.png"
+    },
+    {
+      "id": "tchouameni",
+      "name": "Aurélien Tchouaméni",
+      "team": "FRA",
+      "position": "MF",
+      "number": 8,
+      "club": "Real Madrid",
+      "age": 26,
+      "stats": {
+        "apps": 48,
+        "goals": 4,
+        "assists": 6,
+        "rating": 7.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/4o417k1733653668.png"
+    },
+    {
+      "id": "vinicius",
+      "name": "Vinícius Júnior",
+      "team": "BRA",
+      "position": "FW",
+      "number": 7,
+      "club": "Real Madrid",
+      "age": 25,
+      "stats": {
+        "apps": 71,
+        "goals": 38,
+        "assists": 29,
+        "rating": 8.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ejuxsh1750271859.png"
+    },
+    {
+      "id": "rodrygo",
+      "name": "Rodrygo",
+      "team": "BRA",
+      "position": "FW",
+      "number": 11,
+      "club": "Real Madrid",
+      "age": 25,
+      "stats": {
+        "apps": 58,
+        "goals": 24,
+        "assists": 21,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/uzoghw1733653286.png"
+    },
+    {
+      "id": "casemiro",
+      "name": "Casemiro",
+      "team": "BRA",
+      "position": "MF",
+      "number": 5,
+      "club": "Manchester United",
+      "age": 34,
+      "stats": {
+        "apps": 78,
+        "goals": 7,
+        "assists": 9,
+        "rating": 7.5
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ydr3j41766826524.png"
+    },
+    {
+      "id": "yamal",
+      "name": "Lamine Yamal",
+      "team": "ESP",
+      "position": "FW",
+      "number": 19,
+      "club": "Barcelona",
+      "age": 18,
+      "stats": {
+        "apps": 30,
+        "goals": 12,
+        "assists": 19,
+        "rating": 8.3
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/m9n4ja1761512633.png"
+    },
+    {
+      "id": "pedri",
+      "name": "Pedri",
+      "team": "ESP",
+      "position": "MF",
+      "number": 8,
+      "club": "Barcelona",
+      "age": 23,
+      "stats": {
+        "apps": 44,
+        "goals": 9,
+        "assists": 16,
+        "rating": 8.1
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/srwppu1424795582.png"
+    },
+    {
+      "id": "rodri",
+      "name": "Rodri",
+      "team": "ESP",
+      "position": "MF",
+      "number": 16,
+      "club": "Manchester City",
+      "age": 29,
+      "stats": {
+        "apps": 52,
+        "goals": 11,
+        "assists": 8,
+        "rating": 8.4
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/0ml2zi1761148957.png"
+    },
+    {
+      "id": "kane",
+      "name": "Harry Kane",
+      "team": "ENG",
+      "position": "FW",
+      "number": 9,
+      "club": "Bayern Munich",
+      "age": 32,
+      "stats": {
+        "apps": 105,
+        "goals": 74,
+        "assists": 22,
+        "rating": 8.5
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/j4ouvd1756408895.png"
+    },
+    {
+      "id": "bellingham",
+      "name": "Jude Bellingham",
+      "team": "ENG",
+      "position": "MF",
+      "number": 10,
+      "club": "Real Madrid",
+      "age": 22,
+      "stats": {
+        "apps": 44,
+        "goals": 20,
+        "assists": 14,
+        "rating": 8.4
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/trk5271750271712.png"
+    },
+    {
+      "id": "saka",
+      "name": "Bukayo Saka",
+      "team": "ENG",
+      "position": "FW",
+      "number": 7,
+      "club": "Arsenal",
+      "age": 24,
+      "stats": {
+        "apps": 48,
+        "goals": 17,
+        "assists": 21,
+        "rating": 8.2
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/xfwok41769331816.png"
+    },
+    {
+      "id": "ronaldo",
+      "name": "Cristiano Ronaldo",
+      "team": "POR",
+      "position": "FW",
+      "number": 7,
+      "club": "Al Nassr",
+      "age": 41,
+      "stats": {
+        "apps": 217,
+        "goals": 138,
+        "assists": 45,
+        "rating": 8.7
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/a19jje1761592498.png"
+    },
+    {
+      "id": "fernandes",
+      "name": "Bruno Fernandes",
+      "team": "POR",
+      "position": "MF",
+      "number": 8,
+      "club": "Manchester United",
+      "age": 31,
+      "stats": {
+        "apps": 78,
+        "goals": 24,
+        "assists": 31,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/jhasls1766826690.png"
+    },
+    {
+      "id": "leao",
+      "name": "Rafael Leão",
+      "team": "POR",
+      "position": "FW",
+      "number": 15,
+      "club": "AC Milan",
+      "age": 26,
+      "stats": {
+        "apps": 40,
+        "goals": 12,
+        "assists": 14,
+        "rating": 7.7
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/tlgrvf1758892567.png"
+    },
+    {
+      "id": "kdb",
+      "name": "Kevin De Bruyne",
+      "team": "BEL",
+      "position": "MF",
+      "number": 7,
+      "club": "Napoli",
+      "age": 34,
+      "stats": {
+        "apps": 110,
+        "goals": 31,
+        "assists": 56,
+        "rating": 8.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/o4flia1764089447.png"
+    },
+    {
+      "id": "lukaku",
+      "name": "Romelu Lukaku",
+      "team": "BEL",
+      "position": "FW",
+      "number": 9,
+      "club": "Napoli",
+      "age": 32,
+      "stats": {
+        "apps": 120,
+        "goals": 88,
+        "assists": 22,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/qi2z1d1764089572.png"
+    },
+    {
+      "id": "haaland",
+      "name": "Erling Haaland",
+      "team": "NOR",
+      "position": "FW",
+      "number": 9,
+      "club": "Manchester City",
+      "age": 25,
+      "stats": {
+        "apps": 42,
+        "goals": 41,
+        "assists": 7,
+        "rating": 8.8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/un3jr11769182465.png"
+    },
+    {
+      "id": "odegaard",
+      "name": "Martin Ødegaard",
+      "team": "NOR",
+      "position": "MF",
+      "number": 10,
+      "club": "Arsenal",
+      "age": 27,
+      "stats": {
+        "apps": 48,
+        "goals": 13,
+        "assists": 19,
+        "rating": 8.1
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5g6vww1769331695.png"
+    },
+    {
+      "id": "musiala",
+      "name": "Jamal Musiala",
+      "team": "GER",
+      "position": "MF",
+      "number": 10,
+      "club": "Bayern Munich",
+      "age": 23,
+      "stats": {
+        "apps": 44,
+        "goals": 16,
+        "assists": 12,
+        "rating": 8.2
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/vbkv611756416067.png"
+    },
+    {
+      "id": "wirtz",
+      "name": "Florian Wirtz",
+      "team": "GER",
+      "position": "MF",
+      "number": 17,
+      "club": "Liverpool",
+      "age": 22,
+      "stats": {
+        "apps": 40,
+        "goals": 14,
+        "assists": 20,
+        "rating": 8.3
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8t6bzo1757088899.png"
+    },
+    {
+      "id": "kimmich",
+      "name": "Joshua Kimmich",
+      "team": "GER",
+      "position": "MF",
+      "number": 6,
+      "club": "Bayern Munich",
+      "age": 31,
+      "stats": {
+        "apps": 90,
+        "goals": 8,
+        "assists": 28,
+        "rating": 7.9
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oqb7rg1756408859.png"
+    },
+    {
+      "id": "vandijk",
+      "name": "Virgil van Dijk",
+      "team": "NED",
+      "position": "DF",
+      "number": 4,
+      "club": "Liverpool",
+      "age": 34,
+      "stats": {
+        "apps": 78,
+        "goals": 8,
+        "assists": 4,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/9cxf2q1757087742.png"
+    },
+    {
+      "id": "gakpo",
+      "name": "Cody Gakpo",
+      "team": "NED",
+      "position": "FW",
+      "number": 11,
+      "club": "Liverpool",
+      "age": 26,
+      "stats": {
+        "apps": 40,
+        "goals": 15,
+        "assists": 9,
+        "rating": 7.7
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/lwkl5n1757088091.png"
+    },
+    {
+      "id": "modric",
+      "name": "Luka Modrić",
+      "team": "CRO",
+      "position": "MF",
+      "number": 10,
+      "club": "AC Milan",
+      "age": 40,
+      "stats": {
+        "apps": 188,
+        "goals": 27,
+        "assists": 32,
+        "rating": 8.4
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/msewdx1758892756.png"
+    },
+    {
+      "id": "gvardiol",
+      "name": "Joško Gvardiol",
+      "team": "CRO",
+      "position": "DF",
+      "number": 20,
+      "club": "Manchester City",
+      "age": 24,
+      "stats": {
+        "apps": 38,
+        "goals": 5,
+        "assists": 4,
+        "rating": 7.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/mmowa11769183247.png"
+    },
+    {
+      "id": "valverde",
+      "name": "Federico Valverde",
+      "team": "URU",
+      "position": "MF",
+      "number": 15,
+      "club": "Real Madrid",
+      "age": 27,
+      "stats": {
+        "apps": 64,
+        "goals": 12,
+        "assists": 13,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5249151768499204.png"
+    },
+    {
+      "id": "nunez",
+      "name": "Darwin Núñez",
+      "team": "URU",
+      "position": "FW",
+      "number": 9,
+      "club": "Al Hilal",
+      "age": 26,
+      "stats": {
+        "apps": 40,
+        "goals": 16,
+        "assists": 8,
+        "rating": 7.4
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/i78juc1693941560.png"
+    },
+    {
+      "id": "kudus",
+      "name": "Mohammed Kudus",
+      "team": "GHA",
+      "position": "MF",
+      "number": 20,
+      "club": "Tottenham",
+      "age": 25,
+      "stats": {
+        "apps": 38,
+        "goals": 12,
+        "assists": 7,
+        "rating": 7.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5wk6s81757016366.png"
+    },
+    {
+      "id": "salah",
+      "name": "Mohamed Salah",
+      "team": "EGY",
+      "position": "FW",
+      "number": 11,
+      "club": "Liverpool",
+      "age": 33,
+      "stats": {
+        "apps": 102,
+        "goals": 63,
+        "assists": 31,
+        "rating": 8.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3blc581757088735.png"
+    },
+    {
+      "id": "hakimi",
+      "name": "Achraf Hakimi",
+      "team": "MAR",
+      "position": "DF",
+      "number": 2,
+      "club": "Paris Saint-Germain",
+      "age": 27,
+      "stats": {
+        "apps": 70,
+        "goals": 11,
+        "assists": 19,
+        "rating": 8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oqu69c1766335243.png"
+    },
+    {
+      "id": "osimhen",
+      "name": "Victor Osimhen",
+      "team": "MAR",
+      "position": "FW",
+      "number": 9,
+      "club": "Galatasaray",
+      "age": 27,
+      "stats": {
+        "apps": 44,
+        "goals": 26,
+        "assists": 5,
+        "rating": 7.9
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/lw0qcf1769177786.png"
+    },
+    {
+      "id": "mitoma",
+      "name": "Kaoru Mitoma",
+      "team": "JPN",
+      "position": "FW",
+      "number": 11,
+      "club": "Brighton",
+      "age": 28,
+      "stats": {
+        "apps": 40,
+        "goals": 9,
+        "assists": 11,
+        "rating": 7.6
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/1hwrck1756998804.png"
+    },
+    {
+      "id": "pulisic",
+      "name": "Christian Pulisic",
+      "team": "USA",
+      "position": "FW",
+      "number": 10,
+      "club": "AC Milan",
+      "age": 27,
+      "stats": {
+        "apps": 78,
+        "goals": 31,
+        "assists": 24,
+        "rating": 7.9
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/qwii9r1758893548.png"
+    },
+    {
+      "id": "musah",
+      "name": "Yunus Musah",
+      "team": "USA",
+      "position": "MF",
+      "number": 6,
+      "club": "AC Milan",
+      "age": 23,
+      "stats": {
+        "apps": 48,
+        "goals": 2,
+        "assists": 4,
+        "rating": 7.2
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/wpi3ym1764281224.png"
+    },
+    {
+      "id": "davies",
+      "name": "Alphonso Davies",
+      "team": "CAN",
+      "position": "DF",
+      "number": 19,
+      "club": "Bayern Munich",
+      "age": 25,
+      "stats": {
+        "apps": 52,
+        "goals": 14,
+        "assists": 13,
+        "rating": 7.8
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/11afh31756409066.png"
+    },
+    {
+      "id": "lozano",
+      "name": "Hirving Lozano",
+      "team": "MEX",
+      "position": "FW",
+      "number": 22,
+      "club": "San Diego FC",
+      "age": 30,
+      "stats": {
+        "apps": 70,
+        "goals": 19,
+        "assists": 15,
+        "rating": 7.5
+      },
+      "photo": "https://r2.thesportsdb.com/images/media/player/cutout/sumitr1762901593.png"
+    }
   ]
 }

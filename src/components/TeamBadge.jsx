@@ -1,36 +1,42 @@
-import { Link } from 'react-router-dom'
-import { flag, getTeam } from '../lib/teams.js'
+import { useState } from 'react'
+import { flagUrl, flag, getTeam } from '../lib/teams.js'
 
-export default function TeamBadge({ code, size = 'md', link = false, reverse = false }) {
-  const team = getTeam(code)
-  const sizes = {
-    sm: 'text-base',
-    md: 'text-xl',
-    lg: 'text-3xl',
-  }
-  const text = {
-    sm: 'text-xs',
-    md: 'text-sm',
-    lg: 'text-base',
-  }
+/**
+ * Circular country-flag badge using flagcdn.com.
+ * Falls back to the emoji flag on image error so nothing ever breaks.
+ *
+ * Props:
+ *   code      — 3-letter team code, e.g. "BRA"
+ *   size      — pixel diameter of the circle (default 32)
+ *   cdnSize   — flagcdn size slug: "w40" | "w80" | "w160" (default "w80")
+ *   className — extra Tailwind classes (margins, etc.)
+ */
+export default function TeamBadge({ code, size = 32, cdnSize = 'w80', className = '' }) {
+  const [errored, setErrored] = useState(false)
+  const url = flagUrl(code, cdnSize)
 
-  const inner = (
-    <span
-      className={`inline-flex items-center gap-2 ${reverse ? 'flex-row-reverse' : ''}`}
-    >
-      <span className={sizes[size]} aria-hidden>
+  // Emoji fallback — same circle footprint so layout is never disturbed
+  if (errored || !url) {
+    return (
+      <span
+        aria-hidden
+        className={`inline-flex shrink-0 select-none items-center justify-center rounded-full leading-none ${className}`}
+        style={{ width: size, height: size, fontSize: size * 0.62 }}
+      >
         {flag(code)}
       </span>
-      <span className={`font-semibold ${text[size]}`}>{team.name}</span>
-    </span>
-  )
-
-  if (link) {
-    return (
-      <Link to={`/teams/${code}`} className="hover:text-brand transition-colors">
-        {inner}
-      </Link>
     )
   }
-  return inner
+
+  return (
+    <img
+      src={url}
+      alt={getTeam(code).name}
+      loading="lazy"
+      width={size}
+      height={size}
+      onError={() => setErrored(true)}
+      className={`shrink-0 rounded-full object-cover shadow-sm ring-1 ring-black/10 dark:ring-white/10 ${className}`}
+    />
+  )
 }

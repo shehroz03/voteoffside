@@ -2,9 +2,11 @@ import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Heart, GitCompare } from 'lucide-react'
 import { players, positions } from '../lib/players.js'
-import { getTeam, flag, teams } from '../lib/teams.js'
+import { getTeam, teams } from '../lib/teams.js'
+import TeamBadge from '../components/TeamBadge.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import AdSlot from '../components/AdSlot.jsx'
+import { StaggerList, StaggerItem } from '../motion.jsx'
 
 export default function Players() {
   const { isFavPlayer, toggleFavPlayer } = useApp()
@@ -67,10 +69,10 @@ export default function Players() {
 
       <AdSlot label="Ad" />
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerList className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((p) => (
-          <div key={p.id} className="card flex items-center gap-3 p-4">
-            <div className="text-3xl">{flag(p.team)}</div>
+          <StaggerItem key={p.id} lift className="card flex items-center gap-3 p-4">
+            <TeamBadge code={p.team} size={36} />
             <Link to={`/players/${p.id}`} className="min-w-0 flex-1">
               <div className="truncate font-bold leading-tight">{p.name}</div>
               <div className="truncate text-xs text-muted">
@@ -91,9 +93,9 @@ export default function Players() {
             >
               <Heart size={18} className={isFavPlayer(p.id) ? 'fill-red-500 text-red-500' : ''} />
             </button>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerList>
 
       {list.length === 0 && <p className="py-12 text-center text-muted">No players found.</p>}
     </div>

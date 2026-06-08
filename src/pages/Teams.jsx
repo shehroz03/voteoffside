@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart } from 'lucide-react'
-import { teams, groupKeys, confederations, flag } from '../lib/teams.js'
+import { teams, groupKeys, confederations } from '../lib/teams.js'
+import TeamBadge from '../components/TeamBadge.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import AdSlot from '../components/AdSlot.jsx'
+import { StaggerList, StaggerItem } from '../motion.jsx'
 
 export default function Teams() {
   const { isFavTeam, toggleFavTeam } = useApp()
@@ -58,9 +60,9 @@ export default function Teams() {
 
       <AdSlot label="Ad" />
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      <StaggerList className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {list.map((t) => (
-          <div key={t.code} className="card relative p-4">
+          <StaggerItem key={t.code} lift className="card relative p-4">
             <button
               onClick={() => toggleFavTeam(t.code)}
               aria-label="Favourite"
@@ -72,16 +74,16 @@ export default function Teams() {
               />
             </button>
             <Link to={`/teams/${t.code}`} className="block">
-              <div className="text-4xl">{flag(t.code)}</div>
+              <TeamBadge code={t.code} size={40} />
               <div className="mt-2 font-bold leading-tight">{t.name}</div>
               <div className="mt-1 text-xs text-muted">
                 Group {t.group} · {t.confederation}
                 {t.host && <span className="ml-1 text-brand">· Host</span>}
               </div>
             </Link>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerList>
 
       {list.length === 0 && <p className="py-12 text-center text-muted">No teams found.</p>}
     </div>

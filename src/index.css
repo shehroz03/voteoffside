@@ -2,24 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design tokens ─────────────────────────────────────────────── */
 :root {
-  --surface: 255 255 255;
-  --elevated: 248 250 252;
-  --ink: 15 23 42;
-  --muted: 100 116 139;
-  --line: 226 232 240;
+  --surface: 245 248 255;
+  --elevated: 255 255 255;
+  --ink: 10 18 38;
+  --muted: 90 107 133;
+  --line: 214 224 240;
+
+  /* Glow / accent */
+  --brand-glow: rgba(26, 86, 219, 0.18);
+  --gold-glow: rgba(245, 158, 11, 0.2);
 }
 
 .dark {
-  --surface: 9 14 28;
-  --elevated: 17 24 39;
-  --ink: 226 232 240;
-  --muted: 148 163 184;
-  --line: 30 41 59;
+  /* Deep navy — premium sports dark mode */
+  --surface: 6 10 24;
+  --elevated: 11 18 40;
+  --ink: 220 232 255;
+  --muted: 120 140 180;
+  --line: 24 36 68;
+
+  --brand-glow: rgba(26, 86, 219, 0.28);
+  --gold-glow: rgba(245, 158, 11, 0.22);
 }
 
+/* ─── Base resets ─────────────────────────────────────────────────── */
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 html {
@@ -35,38 +46,170 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Thin, branded scrollbar */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Premium gradient background layer in dark mode */
+.dark body {
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(26, 86, 219, 0.12) 0%, transparent 70%);
+}
+
+/* ─── Branded scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--line));
   border-radius: 999px;
 }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 86, 219, 0.4);
+}
 
+/* ─── Component library ───────────────────────────────────────────── */
 @layer components {
+
+  /* Card — frosted glass in dark, white float in light */
   .card {
-    @apply bg-elevated border border-line rounded-2xl shadow-card;
+    @apply rounded-2xl border border-line/70 bg-elevated
+           shadow-[0_2px_8px_rgba(16,24,40,0.06),0_8px_32px_rgba(16,24,40,0.08)];
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
   }
+  .dark .card {
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.35),
+      0 8px 32px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    background: rgba(11, 18, 40, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: rgba(24,36,68, 0.9);
+  }
+  .card:hover {
+    box-shadow:
+      0 4px 16px rgba(26,86,219,0.1),
+      0 16px 48px rgba(16,24,40,0.12);
+  }
+  .dark .card:hover {
+    box-shadow:
+      0 4px 20px rgba(26,86,219,0.18),
+      0 16px 48px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* Card with blue glow accent (for featured/highlighted) */
+  .card-glow {
+    @apply card;
+    box-shadow:
+      0 0 0 1px rgba(26,86,219,0.15),
+      0 8px 32px rgba(26,86,219,0.12),
+      0 2px 8px rgba(16,24,40,0.08);
+  }
+  .dark .card-glow {
+    box-shadow:
+      0 0 0 1px rgba(26,86,219,0.3),
+      0 8px 40px rgba(26,86,219,0.2),
+      0 2px 8px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  /* Buttons */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold
-           transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+           transition-all duration-150 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-primary {
-    @apply btn bg-brand text-white hover:bg-brand-700 px-4 py-2.5;
+    @apply btn bg-brand text-white px-5 py-2.5;
+    background-image: linear-gradient(135deg, #1a56db 0%, #1846b0 100%);
+    box-shadow: 0 2px 12px rgba(26,86,219,0.35);
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+  }
+  .btn-primary:hover {
+    background-image: linear-gradient(135deg, #2563eb 0%, #1a56db 100%);
+    box-shadow: 0 4px 20px rgba(26,86,219,0.5);
+    transform: translateY(-1px);
   }
   .btn-ghost {
-    @apply btn border border-line text-ink hover:bg-elevated px-4 py-2.5;
+    @apply btn border border-line text-ink hover:bg-elevated px-5 py-2.5;
   }
+
+  /* Chip filter pills */
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-line
-           px-3 py-1.5 text-sm font-medium text-muted hover:text-ink hover:border-brand/40 transition-colors;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line/80
+           px-3 py-1.5 text-sm font-medium text-muted hover:text-ink hover:border-brand/40 transition-all duration-150;
   }
   .chip-active {
-    @apply bg-brand text-white border-brand hover:text-white;
+    @apply text-white border-brand;
+    background: linear-gradient(135deg, #1a56db 0%, #1846b0 100%);
+    box-shadow: 0 2px 10px rgba(26,86,219,0.35);
+  }
+  .chip-active:hover {
+    @apply text-white;
+  }
+
+  /* Sport score number — big, bold, tabular */
+  .score-num {
+    @apply font-extrabold tabular-nums tracking-tight;
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* Vote percentage — large bold sport style */
+  .vote-pct {
+    @apply font-extrabold tabular-nums;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Live badge */
+  .badge-live {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold text-white;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: 0 2px 8px rgba(239,68,68,0.4);
+  }
+
+  /* Section divider label */
+  .section-label {
+    @apply text-[11px] font-bold uppercase tracking-[0.12em] text-muted;
   }
 }
 
-/* Vote bar fill animation */
+/* ─── Vote bar fill animation ────────────────────────────────────── */
 .vote-fill {
-  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Global link color ─────────────────────────────────────────── */
+a { color: inherit; }
+
+/* ─── Smooth number counter pulse ──────────────────────────────── */
+@keyframes score-pop {
+  0%   { transform: scale(1.0); }
+  40%  { transform: scale(1.08); }
+  100% { transform: scale(1.0); }
+}
+.score-pop {
+  animation: score-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Shimmer skeleton ─────────────────────────────────────────── */
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgb(var(--line));
+  border-radius: 0.5rem;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.06),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
 }

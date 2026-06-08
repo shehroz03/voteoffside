@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { X, Plus, Search } from 'lucide-react'
 import { players, getPlayer } from '../lib/players.js'
-import { getTeam, flag } from '../lib/teams.js'
+import { getTeam } from '../lib/teams.js'
+import TeamBadge from '../components/TeamBadge.jsx'
 
 const STAT_KEYS = ['apps', 'goals', 'assists', 'rating']
 const STAT_LABEL = { apps: 'Appearances', goals: 'Goals', assists: 'Assists', rating: 'Avg rating' }
@@ -64,7 +65,7 @@ export default function Compare() {
                 >
                   <X size={16} />
                 </button>
-                <div className="text-4xl">{flag(p.team)}</div>
+                <TeamBadge code={p.team} size={48} />
                 <div className="mt-2 text-sm font-bold leading-tight">{p.name}</div>
                 <div className="text-xs text-muted">{getTeam(p.team).name}</div>
               </div>
@@ -143,7 +144,7 @@ export default function Compare() {
                   }}
                   className="flex w-full items-center gap-3 rounded-xl p-2 text-left hover:bg-elevated"
                 >
-                  <span className="text-2xl">{flag(p.team)}</span>
+                  <TeamBadge code={p.team} size={28} cdnSize="w40" />
                   <span className="flex-1">
                     <span className="block text-sm font-semibold">{p.name}</span>
                     <span className="block text-xs text-muted">{getTeam(p.team).name}</span>

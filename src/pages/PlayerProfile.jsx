@@ -1,7 +1,8 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Heart, GitCompare } from 'lucide-react'
 import { getPlayer } from '../lib/players.js'
-import { getTeam, flag } from '../lib/teams.js'
+import { getTeam } from '../lib/teams.js'
+import TeamBadge from '../components/TeamBadge.jsx'
 import { useApp } from '../context/AppContext.jsx'
 
 const STAT_MAX = { apps: 220, goals: 140, assists: 60, rating: 10 }
@@ -33,7 +34,7 @@ export default function PlayerProfile() {
 
       <div className="card p-6">
         <div className="flex items-start gap-4">
-          <div className="text-6xl">{flag(player.team)}</div>
+          <TeamBadge code={player.team} size={72} cdnSize="w160" />
           <div className="flex-1">
             <h1 className="text-2xl font-extrabold">{player.name}</h1>
             <p className="text-sm text-muted">

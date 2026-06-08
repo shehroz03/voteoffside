@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "enrich:players": "node scripts/enrichPlayers.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
+    "canvas-confetti": "^1.9.4",
     "framer-motion": "^11.0.0",
+    "html-to-image": "^1.11.13",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
