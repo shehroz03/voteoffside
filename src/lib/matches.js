@@ -69,6 +69,22 @@ export function getMatch(id) {
   return matches.find((m) => m.id === id)
 }
 
+export function getMatchVoteState(match) {
+  const now = new Date()
+  const kickoff = new Date(match.date)
+
+  if (kickoff <= now) return 'closed'
+
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const dayAfterTomorrowStart = new Date(todayStart)
+  dayAfterTomorrowStart.setDate(todayStart.getDate() + 2)
+
+  const kickoffDayStart = new Date(kickoff.getFullYear(), kickoff.getMonth(), kickoff.getDate())
+
+  if (kickoffDayStart < dayAfterTomorrowStart) return 'open'
+  return 'locked'
+}
+
 // Demo helper: pretend the first few matches are live/finished so the
 // Live page has something to show. Remove once a real scores API is wired.
 export function withDemoLiveState(list) {

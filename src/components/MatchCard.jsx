@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence, useAnimation, useReducedMotion } from 'framer-motion'
+import { Lock } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import { getTeam } from '../lib/teams.js'
+import { getMatchVoteState } from '../lib/matches.js'
 import TeamBadge from './TeamBadge.jsx'
 import { communityVotes } from '../lib/community.js'
 import { supabaseEnabled } from '../lib/supabase.js'
@@ -15,6 +17,9 @@ function fmtDate(iso) {
 }
 function fmtTime(iso) {
   return new Date(iso).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+}
+function fmtVotingOpens(iso) {
+  return new Date(iso).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })
 }
 
 // Animates a score digit: scale-pops + green glow when the value changes during a live match.
@@ -114,6 +119,17 @@ export default function MatchCard({ match, votable = true }) {
   const live = match.status === 'live'
   const finished = match.status === 'finished'
 
+  const voteState = getMatchVoteState(match)
+  const showVoteBar = live || finished || voteState === 'open'
+  const effectiveVotable = votable && !live && !finished && voteState === 'open'
+
+  // Re-evaluate vote window once a minute as real time passes
+  const [, setTick] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 60_000)
+    return () => clearInterval(id)
+  }, [])
+
   // Load real counts when this card is an open, votable match
   useEffect(() => {
     if (votable && !finished) ensureLoaded(match.id)
@@ -155,7 +171,7 @@ export default function MatchCard({ match, votable = true }) {
 
   // Emoji spawner — fires every 3.5 s on votable, upcoming matches only
   useEffect(() => {
-    if (!votable || finished || reduced) return
+    if (!effectiveVotable || reduced) return
 
     const spawn = () => {
       const { isTie: t, homeLeads: hL } = momentumRef.current
@@ -184,11 +200,11 @@ export default function MatchCard({ match, votable = true }) {
       clearTimeout(initTimer)
       clearInterval(loopTimer)
     }
-  }, [votable, finished, reduced]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [effectiveVotable, reduced]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleVote = useCallback(
     (side, teamCode) => {
-      if (!votable || finished) return
+      if (!effectiveVotable) return
       vote(match.id, teamCode)
 
       // Ripple flash
@@ -207,7 +223,7 @@ export default function MatchCard({ match, votable = true }) {
             : ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff'],
       })
     },
-    [votable, finished, vote, match.id]
+    [effectiveVotable, vote, match.id]
   )
 
   return (
@@ -251,10 +267,10 @@ export default function MatchCard({ match, votable = true }) {
         {/* Home team */}
         <motion.button
           onClick={() => handleVote('home', match.home)}
-          whileTap={votable && !finished ? { scale: 0.96 } : undefined}
+          whileTap={effectiveVotable ? { scale: 0.96 } : undefined}
           transition={TAP_SPRING}
           className={`relative flex flex-1 items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors duration-150 ${
-            votable && !finished
+            effectiveVotable
               ? 'hover:bg-brand/6 cursor-pointer dark:hover:bg-brand/10'
               : 'cursor-default'
           } ${
@@ -318,10 +334,10 @@ export default function MatchCard({ match, votable = true }) {
         {/* Away team */}
         <motion.button
           onClick={() => handleVote('away', match.away)}
-          whileTap={votable && !finished ? { scale: 0.96 } : undefined}
+          whileTap={effectiveVotable ? { scale: 0.96 } : undefined}
           transition={TAP_SPRING}
           className={`relative flex flex-1 items-center justify-end gap-3 rounded-2xl px-3 py-2.5 text-right transition-colors duration-150 ${
-            votable && !finished
+            effectiveVotable
               ? 'hover:bg-gold/6 cursor-pointer dark:hover:bg-gold/8'
               : 'cursor-default'
           } ${
@@ -363,21 +379,34 @@ export default function MatchCard({ match, votable = true }) {
       {/* Vote bar section */}
       {votable && (
         <div className="mt-5 space-y-2">
-          <VoteBar
-            homePct={homePct}
-            awayPct={awayPct}
-            userPick={userPick}
-            homeCode={match.home}
-            awayCode={match.away}
-          />
-          <p className="text-center text-xs text-muted">
-            {userPick ? (
-              <>You picked <b className="text-ink font-bold">{getTeam(userPick).name}</b> · </>
-            ) : (
-              <>Tap a team to predict · </>
-            )}
-            <span className="font-semibold">{total.toLocaleString()}</span> votes
-          </p>
+          {showVoteBar ? (
+            <>
+              <VoteBar
+                homePct={homePct}
+                awayPct={awayPct}
+                userPick={userPick}
+                homeCode={match.home}
+                awayCode={match.away}
+              />
+              <p className="text-center text-xs text-muted">
+                {userPick ? (
+                  <>You picked <b className="text-ink font-bold">{getTeam(userPick).name}</b> · </>
+                ) : (
+                  <>Tap a team to predict · </>
+                )}
+                <span className="font-semibold">{total.toLocaleString()}</span> votes
+              </p>
+            </>
+          ) : voteState === 'locked' ? (
+            <div className="flex items-center justify-center gap-1.5 rounded-xl border border-line/50 bg-elevated/60 py-2.5 text-xs font-semibold text-muted">
+              <Lock size={12} strokeWidth={2.5} />
+              <span>Voting opens {fmtVotingOpens(match.date)}</span>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center py-2.5 text-xs font-semibold text-muted">
+              Voting closed
+            </div>
+          )}
         </div>
       )}
 

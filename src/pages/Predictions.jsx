@@ -6,11 +6,13 @@ import AdSlot from '../components/AdSlot.jsx'
 import SharePredictions from '../components/SharePredictions.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
 import { fetchMyStreak } from '../lib/votesApi.js'
+import { getMatchVoteState } from '../lib/matches.js'
 
 export default function Predictions() {
   const { votes, matches, username } = useApp()
   const [group, setGroup] = useState('all')
   const [onlyOpen, setOnlyOpen] = useState(false)
+  const [openNow, setOpenNow] = useState(false)
   const [streak, setStreak] = useState(0)
 
   // Fetch current user's prediction streak (0 in demo mode)
@@ -23,9 +25,10 @@ export default function Predictions() {
     return matches.filter((m) => {
       if (group !== 'all' && m.group !== group) return false
       if (onlyOpen && votes[m.id]) return false
+      if (openNow && getMatchVoteState(m) !== 'open') return false
       return true
     })
-  }, [group, onlyOpen, votes, matches])
+  }, [group, onlyOpen, openNow, votes, matches])
 
   const predicted = Object.keys(votes).length
 
@@ -101,8 +104,14 @@ export default function Predictions() {
           </button>
         ))}
         <button
+          onClick={() => setOpenNow((v) => !v)}
+          className={`chip ml-auto ${openNow ? 'chip-active' : ''}`}
+        >
+          Open now
+        </button>
+        <button
           onClick={() => setOnlyOpen((v) => !v)}
-          className={`chip ml-auto ${onlyOpen ? 'chip-active' : ''}`}
+          className={`chip ${onlyOpen ? 'chip-active' : ''}`}
         >
           Not predicted yet
         </button>
