@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "enrich:players": "node scripts/enrichPlayers.js"
+    "enrich:players": "node scripts/enrichPlayers.js",
+    "fetch:squads": "node --env-file=.env scripts/fetch-squads.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

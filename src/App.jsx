@@ -14,6 +14,10 @@ const Players       = lazy(() => import('./pages/Players.jsx'))
 const PlayerProfile = lazy(() => import('./pages/PlayerProfile.jsx'))
 const Compare       = lazy(() => import('./pages/Compare.jsx'))
 const Leaderboard   = lazy(() => import('./pages/Leaderboard.jsx'))
+const About         = lazy(() => import('./pages/About.jsx'))
+const Privacy       = lazy(() => import('./pages/Privacy.jsx'))
+const Contact       = lazy(() => import('./pages/Contact.jsx'))
+const Disclaimer    = lazy(() => import('./pages/Disclaimer.jsx'))
 const NotFound      = lazy(() => import('./pages/NotFound.jsx'))
 
 function Loader() {
@@ -39,6 +43,10 @@ function AppRoutes() {
         <Route path="/players/:id" element={<PageTransition><PlayerProfile /></PageTransition>} />
         <Route path="/compare"     element={<PageTransition><Compare /></PageTransition>} />
         <Route path="/leaderboard" element={<PageTransition><Leaderboard /></PageTransition>} />
+        <Route path="/about"       element={<PageTransition><About /></PageTransition>} />
+        <Route path="/privacy"     element={<PageTransition><Privacy /></PageTransition>} />
+        <Route path="/contact"     element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/disclaimer"  element={<PageTransition><Disclaimer /></PageTransition>} />
         <Route path="*"            element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
