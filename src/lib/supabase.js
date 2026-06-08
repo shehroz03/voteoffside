@@ -9,6 +9,6 @@ export const supabaseEnabled = Boolean(url && anon)
 export const supabase = supabaseEnabled
   ? createClient(url, anon, {
       realtime: { params: { eventsPerSecond: 10 } },
-      auth: { persistSession: false },
+      auth: { persistSession: true, autoRefreshToken: true },
     })
   : null

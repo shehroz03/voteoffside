@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Heart, GitCompare, Briefcase } from 'lucide-react'
+import { ArrowLeft, Heart, GitCompare, Briefcase, Trophy } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { getPlayer, players } from '../lib/players.js'
 import { getTeam } from '../lib/teams.js'
@@ -87,6 +87,15 @@ export default function PlayerProfile() {
               </span>
               <span className="text-xs font-semibold text-muted">Age {player.age}</span>
             </div>
+
+            {/* Personal Details */}
+            {(player.fullName || player.birthDate || player.height) && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs text-muted pt-3 w-full border-t border-line/50">
+                {player.fullName && <div><span className="font-semibold text-ink">Full Name:</span> {player.fullName}</div>}
+                {player.birthDate && <div><span className="font-semibold text-ink">Born:</span> {player.birthDate} {player.birthPlace && `(${player.birthPlace})`}</div>}
+                {player.height && <div><span className="font-semibold text-ink">Height:</span> {player.height}</div>}
+              </div>
+            )}
           </div>
 
           {/* Right: photo with flag overlay */}
@@ -118,6 +127,38 @@ export default function PlayerProfile() {
           ))}
         </div>
       </motion.div>
+
+      {/* Bio and Honours */}
+      {(player.bio || (player.honours && player.honours.length > 0)) && (
+        <motion.section {...fadeIn} transition={{ delay: 0.12 }} className="card p-5 space-y-5">
+          {player.bio && (
+            <div>
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted">
+                Biography
+              </h2>
+              <p className="text-sm leading-relaxed text-ink/90">
+                {player.bio}
+              </p>
+            </div>
+          )}
+          
+          {player.honours && player.honours.length > 0 && (
+            <div>
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted flex items-center gap-2">
+                <Trophy size={16} /> Major Honours
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {player.honours.map((honour, idx) => (
+                  <div key={idx} className="flex items-center gap-1.5 rounded-lg border border-line/60 bg-line/20 px-3 py-1.5 text-xs font-semibold">
+                    <Trophy size={14} className="text-brand" />
+                    <span>{honour.count}x {honour.title}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </motion.section>
+      )}
 
       {/* Stat bars section */}
       <motion.section {...fadeIn} transition={{ delay: 0.15 }} className="card p-5">

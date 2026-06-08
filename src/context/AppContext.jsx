@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { getFingerprint, getUsername, regenerateUsername } from '../lib/identity.js'
 import { matches as staticMatches } from '../lib/matches.js'
+import { useAuth } from './AuthContext.jsx'
 
 const AppContext = createContext()
 
@@ -43,8 +44,14 @@ function mapApiMatch(m) {
 }
 
 export function AppProvider({ children }) {
-  const [username, setUsername] = useState(getUsername)
+  const { user } = useAuth()
+  const [anonUsername, setAnonUsername] = useState(getUsername)
   const [fingerprint] = useState(getFingerprint)
+
+  // When logged in, use the user's display name or email; otherwise use the anon username.
+  const username = user
+    ? (user.user_metadata?.full_name || user.email || anonUsername)
+    : anonUsername
 
   // favorites: { teams: [codes], players: [ids] }
   const [favorites, setFavorites] = useState(() =>
@@ -122,7 +129,7 @@ export function AppProvider({ children }) {
     setVotes((v) => ({ ...v, [matchId]: teamCode }))
   }, [])
 
-  const newUsername = useCallback(() => setUsername(regenerateUsername()), [])
+  const newUsername = useCallback(() => setAnonUsername(regenerateUsername()), [])
 
   return (
     <AppContext.Provider
