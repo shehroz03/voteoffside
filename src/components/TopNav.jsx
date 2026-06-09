@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { Moon, Sun, Trophy, ChevronDown, LogOut } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
@@ -68,11 +69,62 @@ function UserDropdown({ user, onSignOut }) {
   )
 }
 
+// ── Animated coin balance pill ────────────────────────────────────────────────
+
+function CoinPill({ balance, loading }) {
+  const reduced       = useReducedMotion()
+  const prevRef       = useRef(balance)
+  const [flashKey, setFlashKey]   = useState(0)
+  const [flashDir, setFlashDir]   = useState(null) // 'up' | 'down' | null
+
+  useEffect(() => {
+    if (balance === null || prevRef.current === null) {
+      prevRef.current = balance
+      return
+    }
+    if (balance !== prevRef.current) {
+      setFlashDir(balance > prevRef.current ? 'up' : 'down')
+      setFlashKey((k) => k + 1)
+    }
+    prevRef.current = balance
+  }, [balance])
+
+  const displayValue = loading && balance === null
+    ? '—'
+    : (balance ?? 0).toLocaleString()
+
+  return (
+    <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-1 text-xs font-bold text-yellow-400 overflow-hidden">
+      🪙
+      <motion.span
+        key={flashKey}
+        initial={
+          flashDir && !reduced
+            ? { opacity: 0.6, y: flashDir === 'up' ? 5 : -5 }
+            : false
+        }
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        style={
+          flashDir && !reduced
+            ? { textShadow: '0 0 10px rgba(234,179,8,0.9)' }
+            : {}
+        }
+        onAnimationComplete={() => setFlashDir(null)}
+      >
+        {displayValue}
+      </motion.span>
+    </span>
+  )
+}
+
+// ─── TopNav ───────────────────────────────────────────────────────────────────
+
 export default function TopNav() {
   const { dark, toggle } = useTheme()
-  const { username } = useApp()
+  const { username }     = useApp()
   const { user, signOut } = useAuth()
-  const { balance } = useCoins()
+  const { balance, loading } = useCoins()
   const [authOpen, setAuthOpen] = useState(false)
 
   return (
@@ -123,16 +175,13 @@ export default function TopNav() {
             {supabaseEnabled && (
               user ? (
                 <>
-                  {balance !== null && (
-                    <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-1 text-xs font-bold text-yellow-400">
-                      🪙 {balance.toLocaleString()}
-                    </span>
-                  )}
+                  {/* Animated coin balance pill */}
+                  <CoinPill balance={balance} loading={loading} />
                   <UserDropdown user={user} onSignOut={signOut} />
                 </>
               ) : (
                 <>
-                  {/* Anon username pill — only show when logged out */}
+                  {/* Anon username pill */}
                   <span className="hidden items-center gap-1.5 rounded-full border border-line/70 bg-elevated px-3 py-1.5 text-xs font-semibold text-muted sm:inline-flex dark:bg-white/5 dark:border-white/10">
                     <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.6)]" />
                     {username}

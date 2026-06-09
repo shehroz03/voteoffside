@@ -24,7 +24,7 @@ const statusLabel = { pending: '⏳ Pending', won: '🏆 Won', lost: '❌ Lost' 
 
 export default function BetModal({ match, onClose, onSignIn }) {
   const { user } = useAuth()
-  const { balance, placeBet, betForMatch } = useCoins()
+  const { balance, placeBet, getBet } = useCoins()
   const { countsMap, ensureLoaded } = useVotes()
 
   const [team, setTeam] = useState(match.home)
@@ -45,7 +45,7 @@ export default function BetModal({ match, onClose, onSignIn }) {
 
   const selectedOdds = team === match.home ? homeOdds : awayOdds
   const payout       = Math.floor(amount * selectedOdds)
-  const existingBet  = betForMatch(match.id)
+  const existingBet  = getBet(match.id)
 
   const handleBet = async (e) => {
     e.preventDefault()

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence, useAnimation, useReducedMotion } from 'framer-motion'
-import { Lock } from 'lucide-react'
+import { Lock, Loader2 } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import { getTeam } from '../lib/teams.js'
 import { getMatchVoteState } from '../lib/matches.js'
@@ -10,7 +10,10 @@ import { supabaseEnabled } from '../lib/supabase.js'
 import { useApp } from '../context/AppContext.jsx'
 import { useVotes } from '../context/VotesContext.jsx'
 import { useReactions } from '../context/ReactionsContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
+import { useCoins } from '../context/CoinsContext.jsx'
 import VoteBar from './VoteBar.jsx'
+import AuthModal from './AuthModal.jsx'
 
 function fmtDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
@@ -22,7 +25,8 @@ function fmtVotingOpens(iso) {
   return new Date(iso).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })
 }
 
-// Animates a score digit: scale-pops + green glow when the value changes during a live match.
+// ─── ScoreDigit (unchanged) ───────────────────────────────────────────────────
+
 function ScoreDigit({ value, isLive, className }) {
   const reduced = useReducedMotion()
   const controls = useAnimation()
@@ -49,10 +53,11 @@ function ScoreDigit({ value, isLive, className }) {
   )
 }
 
+// ─── Constants ────────────────────────────────────────────────────────────────
+
 const TAP_SPRING  = { type: 'spring', stiffness: 420, damping: 28 }
 const CARD_SPRING = { type: 'spring', stiffness: 340, damping: 30 }
 
-// Continuous pulse variants for the live dot and badge glow
 const DOT_PULSE = {
   animate: { scale: [1, 1.65, 1], opacity: [1, 0.35, 1] },
   transition: { duration: 1.15, repeat: Infinity, ease: 'easeInOut' },
@@ -68,23 +73,15 @@ const BADGE_GLOW = {
   transition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' },
 }
 
-// ─── Live reaction bar ────────────────────────────────────────────────────────
-
 const REACTION_EMOJIS = ['🔥', '⚽', '😱', '👏', '💪']
-
-// ─── Floating emoji sets ──────────────────────────────────────────────────────
-
 const WIN_EMOJIS  = ['🔥', '🏆', '⚡', '💪']
 const LOSE_EMOJIS = ['💔', '😭', '😰', '❌']
 const TIE_EMOJIS  = ['🔥', '⚽', '⚡', '🤝']
-
 const TIE_GAP = 5
 
-function pick(arr) {
-  return arr[Math.floor(Math.random() * arr.length)]
-}
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)] }
 
-// ─── Single floating emoji ────────────────────────────────────────────────────
+// ─── FloatEmoji ───────────────────────────────────────────────────────────────
 
 function FloatEmoji({ id, emoji, x, onDone }) {
   return (
@@ -104,6 +101,189 @@ function FloatEmoji({ id, emoji, x, onDone }) {
   )
 }
 
+// ─── Odds formula ─────────────────────────────────────────────────────────────
+// 70% favourite → ~1.54×   30% underdog → ~2.26×   50/50 → 1.9×
+
+function computeOdds(pct) {
+  if (!pct || pct <= 0) return 1.9
+  const raw = 1 + (1 - pct) * 1.8
+  return Math.round(Math.max(1.1, Math.min(4.5, raw)) * 100) / 100
+}
+
+// ─── Status badge styles ──────────────────────────────────────────────────────
+
+const BET_STATUS_CLS = {
+  pending: 'border-yellow-500/40 bg-yellow-500/10 text-yellow-400',
+  won:     'border-green-500/40  bg-green-500/10  text-green-400',
+  lost:    'border-red-500/40    bg-red-500/10    text-red-400',
+}
+const BET_STATUS_LABEL = { pending: '⏳ Pending', won: '🏆 Won', lost: '❌ Lost' }
+
+const BET_AMOUNTS = [50, 100, 250, 500]
+
+// ─── Inline BetPanel ─────────────────────────────────────────────────────────
+
+function BetPanel({ match, userPick, homePct, awayPct, reduced }) {
+  const { user }                       = useAuth()
+  const { balance, getBet, placeBet }  = useCoins()
+
+  const [amount, setAmount]   = useState(100)
+  const [loading, setLoading] = useState(false)
+  const [error, setError]     = useState('')
+  const [placed, setPlaced]   = useState(false)
+  const [authOpen, setAuthOpen] = useState(false)
+
+  const existingBet = getBet(match.id)
+
+  // Default bet team = the team the user voted for
+  const [betTeam, setBetTeam] = useState(userPick ?? match.home)
+
+  // Keep betTeam in sync if userPick changes while panel is open
+  useEffect(() => {
+    if (userPick && !existingBet) setBetTeam(userPick)
+  }, [userPick, existingBet])
+
+  const homeOdds = computeOdds(homePct)
+  const awayOdds = computeOdds(awayPct)
+  const selectedOdds = betTeam === match.home ? homeOdds : awayOdds
+  const payout = Math.floor(amount * selectedOdds)
+
+  const handlePlace = useCallback(async () => {
+    if (loading) return
+    setError('')
+    setLoading(true)
+    const result = await placeBet({ matchId: match.id, teamCode: betTeam, amount, odds: selectedOdds })
+    setLoading(false)
+    if (result?.error) { setError(result.error); return }
+    setPlaced(true)
+  }, [loading, placeBet, match.id, betTeam, amount, selectedOdds])
+
+  // ── Not logged in → subtle sign-in nudge ───────────────────────────────────
+  if (!user) {
+    return (
+      <div className="mt-3 border-t border-line/30 pt-2.5 text-center">
+        <p className="text-xs text-muted">
+          🪙{' '}
+          <button
+            onClick={() => setAuthOpen(true)}
+            className="font-semibold text-brand hover:underline focus:outline-none"
+          >
+            Sign in to bet coins
+          </button>
+        </p>
+        {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
+      </div>
+    )
+  }
+
+  // ── Already bet on this match ──────────────────────────────────────────────
+  if (existingBet) {
+    const statusCls = BET_STATUS_CLS[existingBet.status] ?? BET_STATUS_CLS.pending
+    const label     = BET_STATUS_LABEL[existingBet.status] ?? '⏳'
+    const potentialOrPayout =
+      existingBet.status === 'won'
+        ? `+🪙 ${existingBet.payout ?? Math.floor(existingBet.amount * existingBet.odds)}`
+        : existingBet.status === 'pending'
+        ? `→ 🪙 ${Math.floor(existingBet.amount * existingBet.odds)}`
+        : `-🪙 ${existingBet.amount}`
+
+    return (
+      <div className="mt-3 border-t border-line/30 pt-2.5">
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <span className="font-semibold text-muted">
+            🪙 {existingBet.amount} on{' '}
+            <span className="text-ink">{existingBet.team_code}</span>
+            {' '}@ {existingBet.odds}×
+          </span>
+          <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-bold ${statusCls}`}>
+            {label}
+            <span className="ml-1">{potentialOrPayout}</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Success flash ──────────────────────────────────────────────────────────
+  if (placed) {
+    return (
+      <div className="mt-3 border-t border-line/30 pt-2.5 text-center text-xs text-green-400 font-semibold">
+        🎉 Bet placed! Good luck.
+      </div>
+    )
+  }
+
+  // ── Bet form ───────────────────────────────────────────────────────────────
+  const noFunds = balance !== null && balance < amount
+
+  return (
+    <div className="mt-3 border-t border-line/30 pt-2.5 space-y-2">
+      {/* Team selector + amount buttons row */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {/* Team toggle */}
+        <div className="flex gap-1">
+          {[match.home, match.away].map((code) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => setBetTeam(code)}
+              className={`rounded-lg border px-2 py-0.5 text-[11px] font-bold transition-colors ${
+                betTeam === code
+                  ? 'border-brand/60 bg-brand/15 text-brand'
+                  : 'border-line/50 bg-elevated/40 text-muted hover:border-brand/30 hover:text-ink'
+              }`}
+            >
+              {code}
+            </button>
+          ))}
+        </div>
+
+        {/* Amount buttons */}
+        <div className="flex gap-1 ml-auto">
+          {BET_AMOUNTS.map((v) => (
+            <button
+              key={v}
+              type="button"
+              onClick={() => setAmount(v)}
+              className={`rounded-md px-2 py-0.5 text-[11px] font-bold transition-colors ${
+                amount === v
+                  ? 'bg-brand text-white'
+                  : 'bg-line/30 text-muted hover:bg-line/50 dark:bg-white/8 dark:hover:bg-white/15'
+              }`}
+            >
+              {v}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Odds + payout preview + place button */}
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[11px] text-muted leading-tight">
+          Win =&nbsp;<span className="font-bold text-ink">{selectedOdds}×</span>
+          &nbsp;·&nbsp;
+          <span className="font-semibold text-green-400">🪙 {payout.toLocaleString()}</span>
+        </span>
+        <button
+          type="button"
+          onClick={handlePlace}
+          disabled={loading || noFunds}
+          className="flex shrink-0 items-center gap-1.5 rounded-lg bg-brand-gradient px-3 py-1 text-[11px] font-bold text-white shadow-brand hover:opacity-90 disabled:opacity-40 transition-opacity"
+        >
+          {loading
+            ? <Loader2 size={11} className={!reduced ? 'animate-spin' : ''} />
+            : '🪙'}
+          {noFunds ? 'No coins' : 'Place Bet'}
+        </button>
+      </div>
+
+      {error && (
+        <p className="text-[11px] text-red-400 leading-tight">{error}</p>
+      )}
+    </div>
+  )
+}
+
 // ─── MatchCard ────────────────────────────────────────────────────────────────
 
 export default function MatchCard({ match, votable = true }) {
@@ -116,69 +296,58 @@ export default function MatchCard({ match, votable = true }) {
   const home = getTeam(match.home)
   const away = getTeam(match.away)
 
-  const live = match.status === 'live'
+  const live     = match.status === 'live'
   const finished = match.status === 'finished'
+  const upcoming = match.status === 'upcoming'
 
-  const voteState = getMatchVoteState(match)
-  const showVoteBar = live || finished || voteState === 'open'
+  const voteState       = getMatchVoteState(match)
+  const showVoteBar     = live || finished || voteState === 'open'
   const effectiveVotable = votable && !live && !finished && voteState === 'open'
 
-  // Re-evaluate vote window once a minute as real time passes
+  // Re-evaluate vote window once a minute
   const [, setTick] = useState(0)
   useEffect(() => {
     const id = setInterval(() => setTick((n) => n + 1), 60_000)
     return () => clearInterval(id)
   }, [])
 
-  // Load real counts when this card is an open, votable match
   useEffect(() => {
     if (votable && !finished) ensureLoaded(match.id)
   }, [match.id, votable, finished, ensureLoaded])
 
-  // Derive percentages: real data from Supabase, or demo fallback
   let homePct, awayPct, total
   if (supabaseEnabled) {
     const c = countsMap[match.id] || {}
     const h = c[match.home] || 0
     const a = c[match.away] || 0
-    total = h + a
+    total   = h + a
     homePct = total ? Math.round((h / total) * 100) : 50
     awayPct = total ? 100 - homePct : 50
   } else {
     const cv = communityVotes(match, userPick)
-    homePct = cv.home
-    awayPct = cv.away
-    total = cv.total
+    homePct  = cv.home
+    awayPct  = cv.away
+    total    = cv.total
   }
 
-  // Momentum state (mirrors VoteBar logic so emojis reflect same data)
-  const gap = homePct - awayPct
-  const isTie = Math.abs(gap) <= TIE_GAP
+  const gap       = homePct - awayPct
+  const isTie     = Math.abs(gap) <= TIE_GAP
   const homeLeads = !isTie && gap > 0
 
-  // Flash state: { side: 'home'|'away', key: number } — drives the ripple overlay
   const [flashState, setFlashState] = useState(null)
-
-  // Floating emojis state — keep max 2 visible per side
   const [homeEmojis, setHomeEmojis] = useState([])
   const [awayEmojis, setAwayEmojis] = useState([])
 
-  // Ref so the interval callback reads current momentum without deps triggering restarts
   const momentumRef = useRef({ isTie, homeLeads })
-  useEffect(() => {
-    momentumRef.current = { isTie, homeLeads }
-  }, [isTie, homeLeads])
+  useEffect(() => { momentumRef.current = { isTie, homeLeads } }, [isTie, homeLeads])
 
-  // Emoji spawner — fires every 3.5 s on votable, upcoming matches only
   useEffect(() => {
     if (!effectiveVotable || reduced) return
-
     const spawn = () => {
       const { isTie: t, homeLeads: hL } = momentumRef.current
       const baseId = Date.now()
       const hx = 12 + Math.random() * 58
       const ax = 12 + Math.random() * 58
-
       if (t) {
         const e = pick(TIE_EMOJIS)
         setHomeEmojis((s) => [...s.slice(-2), { id: baseId + 'h', emoji: e, x: hx }])
@@ -191,40 +360,31 @@ export default function MatchCard({ match, votable = true }) {
         setHomeEmojis((s) => [...s.slice(-2), { id: baseId + 'h', emoji: pick(LOSE_EMOJIS), x: hx }])
       }
     }
-
-    // Stagger initial spawn so not all cards fire at the same time
     const initDelay = 1500 + Math.random() * 2000
     const initTimer = setTimeout(spawn, initDelay)
     const loopTimer = setInterval(spawn, 3500)
-    return () => {
-      clearTimeout(initTimer)
-      clearInterval(loopTimer)
-    }
+    return () => { clearTimeout(initTimer); clearInterval(loopTimer) }
   }, [effectiveVotable, reduced]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleVote = useCallback(
     (side, teamCode) => {
       if (!effectiveVotable) return
       vote(match.id, teamCode)
-
-      // Ripple flash
       setFlashState((prev) => ({ side, key: (prev?.key ?? 0) + 1 }))
-
-      // Confetti burst — non-blocking, fires and forgets
       confetti({
-        particleCount: 55,
-        spread: 52,
-        origin: { y: 0.65 },
-        gravity: 1.3,
-        scalar: 0.85,
-        colors:
-          side === 'home'
-            ? ['#1a56db', '#3b82f6', '#93c5fd', '#ffffff']
-            : ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff'],
+        particleCount: 55, spread: 52, origin: { y: 0.65 },
+        gravity: 1.3, scalar: 0.85,
+        colors: side === 'home'
+          ? ['#1a56db', '#3b82f6', '#93c5fd', '#ffffff']
+          : ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff'],
       })
     },
     [effectiveVotable, vote, match.id]
   )
+
+  // Whether to show the inline bet panel
+  // Condition: votable upcoming match + vote window open + user has voted (or Supabase shown for sign-in nudge)
+  const showBetPanel = supabaseEnabled && votable && upcoming && voteState === 'open' && !!userPick
 
   return (
     <motion.div
@@ -236,7 +396,6 @@ export default function MatchCard({ match, votable = true }) {
       {/* Meta row */}
       <div className="mb-4 flex items-center justify-between">
         <span className="section-label">{match.stage}</span>
-
         {live ? (
           <motion.span
             className="badge-live"
@@ -270,29 +429,19 @@ export default function MatchCard({ match, votable = true }) {
           whileTap={effectiveVotable ? { scale: 0.96 } : undefined}
           transition={TAP_SPRING}
           className={`relative flex flex-1 items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors duration-150 ${
-            effectiveVotable
-              ? 'hover:bg-brand/6 cursor-pointer dark:hover:bg-brand/10'
-              : 'cursor-default'
+            effectiveVotable ? 'hover:bg-brand/6 cursor-pointer dark:hover:bg-brand/10' : 'cursor-default'
           } ${
             userPick === match.home
               ? 'ring-2 ring-brand/70 bg-brand/5 dark:bg-brand/10 shadow-[0_0_12px_rgba(26,86,219,0.15)]'
               : ''
           }`}
         >
-          {/* Floating emojis — home side */}
           <AnimatePresence>
             {homeEmojis.map(({ id, emoji, x }) => (
-              <FloatEmoji
-                key={id}
-                id={id}
-                emoji={emoji}
-                x={x}
-                onDone={() => setHomeEmojis((s) => s.filter((e) => e.id !== id))}
-              />
+              <FloatEmoji key={id} id={id} emoji={emoji} x={x}
+                onDone={() => setHomeEmojis((s) => s.filter((e) => e.id !== id))} />
             ))}
           </AnimatePresence>
-
-          {/* Ripple overlay */}
           {flashState?.side === 'home' && (
             <motion.span
               key={flashState.key}
@@ -312,17 +461,11 @@ export default function MatchCard({ match, votable = true }) {
         <div className="shrink-0 min-w-[3.5rem] text-center">
           {live || finished ? (
             <div className="flex items-center justify-center gap-1">
-              <ScoreDigit
-                value={match.score?.home ?? 0}
-                isLive={live}
-                className={`score-num ${live ? 'text-red-500 dark:text-red-400' : 'text-ink'}`}
-              />
+              <ScoreDigit value={match.score?.home ?? 0} isLive={live}
+                className={`score-num ${live ? 'text-red-500 dark:text-red-400' : 'text-ink'}`} />
               <span className="text-muted font-semibold text-lg select-none">–</span>
-              <ScoreDigit
-                value={match.score?.away ?? 0}
-                isLive={live}
-                className={`score-num ${live ? 'text-red-500 dark:text-red-400' : 'text-ink'}`}
-              />
+              <ScoreDigit value={match.score?.away ?? 0} isLive={live}
+                className={`score-num ${live ? 'text-red-500 dark:text-red-400' : 'text-ink'}`} />
             </div>
           ) : (
             <div className="rounded-xl border border-line/60 bg-elevated px-3 py-1.5 dark:bg-white/5">
@@ -337,29 +480,19 @@ export default function MatchCard({ match, votable = true }) {
           whileTap={effectiveVotable ? { scale: 0.96 } : undefined}
           transition={TAP_SPRING}
           className={`relative flex flex-1 items-center justify-end gap-3 rounded-2xl px-3 py-2.5 text-right transition-colors duration-150 ${
-            effectiveVotable
-              ? 'hover:bg-gold/6 cursor-pointer dark:hover:bg-gold/8'
-              : 'cursor-default'
+            effectiveVotable ? 'hover:bg-gold/6 cursor-pointer dark:hover:bg-gold/8' : 'cursor-default'
           } ${
             userPick === match.away
               ? 'ring-2 ring-gold/70 bg-gold/5 dark:bg-gold/10 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
               : ''
           }`}
         >
-          {/* Floating emojis — away side */}
           <AnimatePresence>
             {awayEmojis.map(({ id, emoji, x }) => (
-              <FloatEmoji
-                key={id}
-                id={id}
-                emoji={emoji}
-                x={x}
-                onDone={() => setAwayEmojis((s) => s.filter((e) => e.id !== id))}
-              />
+              <FloatEmoji key={id} id={id} emoji={emoji} x={x}
+                onDone={() => setAwayEmojis((s) => s.filter((e) => e.id !== id))} />
             ))}
           </AnimatePresence>
-
-          {/* Ripple overlay */}
           {flashState?.side === 'away' && (
             <motion.span
               key={flashState.key}
@@ -410,15 +543,24 @@ export default function MatchCard({ match, votable = true }) {
         </div>
       )}
 
+      {/* ── Inline bet panel (appears after the user votes on an upcoming match) */}
+      {showBetPanel && (
+        <BetPanel
+          match={match}
+          userPick={userPick}
+          homePct={homePct / 100}
+          awayPct={awayPct / 100}
+          reduced={!!reduced}
+        />
+      )}
+
       {/* Venue */}
       <div className="mt-4 text-center text-[11px] font-medium text-muted/70 tracking-wide">
         {match.venue}
       </div>
 
-      {/* Reaction bar — visible on all match states */}
+      {/* Reaction bar */}
       <div className="relative mt-3 border-t border-line/40 pt-2.5">
-
-        {/* Floater zone: sits above the reaction buttons, pointers disabled */}
         {!reduced && (
           <div
             className="pointer-events-none absolute inset-x-0"
@@ -443,8 +585,6 @@ export default function MatchCard({ match, votable = true }) {
             </AnimatePresence>
           </div>
         )}
-
-        {/* Emoji buttons */}
         <div className="flex items-center justify-center gap-0.5">
           {REACTION_EMOJIS.map((emoji) => (
             <motion.button
