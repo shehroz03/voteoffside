@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Trophy } from 'lucide-react'
+import { Trophy, Github } from 'lucide-react'
 
 const PAGES = [
   { to: '/',            label: 'Home' },
@@ -19,13 +19,13 @@ const LEGAL = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line/60 bg-elevated/60 pb-28 pt-10 dark:bg-[rgba(6,10,24,0.6)] lg:pb-12">
+    <footer className="border-t border-line/50 bg-elevated/50 pb-28 pt-12 dark:bg-[rgba(6,10,24,0.55)] dark:border-white/5 lg:pb-12">
       <div className="mx-auto max-w-6xl px-4">
 
-        {/* Top row: logo + columns */}
+        {/* Top row */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
-          {/* Brand block */}
+          {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex items-center gap-2.5 font-extrabold tracking-tight">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient shadow-brand">
@@ -39,6 +39,18 @@ export default function Footer() {
               The fan prediction game for the 2026 FIFA World Cup. Pick winners, beat the crowd,
               and climb the leaderboard.
             </p>
+            {/* Stats pills */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line/60 bg-elevated px-3 py-1 text-xs font-semibold text-muted dark:bg-white/4 dark:border-white/8">
+                ⚽ 104 matches
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line/60 bg-elevated px-3 py-1 text-xs font-semibold text-muted dark:bg-white/4 dark:border-white/8">
+                🌍 48 nations
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line/60 bg-elevated px-3 py-1 text-xs font-semibold text-muted dark:bg-white/4 dark:border-white/8">
+                🪙 Free to play
+              </span>
+            </div>
           </div>
 
           {/* Pages */}
@@ -47,10 +59,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {PAGES.map(({ to, label }) => (
                 <li key={to}>
-                  <Link
-                    to={to}
-                    className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-300"
-                  >
+                  <Link to={to} className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-300">
                     {label}
                   </Link>
                 </li>
@@ -64,10 +73,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {LEGAL.map(({ to, label }) => (
                 <li key={to}>
-                  <Link
-                    to={to}
-                    className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-300"
-                  >
+                  <Link to={to} className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-300">
                     {label}
                   </Link>
                 </li>
@@ -77,14 +83,13 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mt-10 border-t border-line/50" />
+        <div className="mt-10 h-px bg-gradient-to-r from-transparent via-line/70 to-transparent dark:via-white/8" />
 
         {/* Bottom row */}
         <div className="mt-5 flex flex-col items-start gap-1.5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 VoteOffside. All rights reserved.</span>
-          <span className="text-muted/70">
-            Unofficial fan site — not affiliated with, endorsed by, or connected to FIFA or any
-            national football association.
+          <span className="text-muted/60 max-w-sm text-right">
+            Unofficial fan site — not affiliated with FIFA or any national football association.
           </span>
         </div>
       </div>

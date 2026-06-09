@@ -14,23 +14,13 @@ const DEMO_NAMES = [
   'CobraChamp_5561', 'ThunderHero_3098', 'FalconBoss_8842', 'RocketLegend_6610',
   'BlazeNinja_2934', 'SharkMaster_1457', 'WolfStar_9923', 'CometCaptain_3376',
 ]
-
 const DEMO_STREAKS = [5, 3, 0, 4, 0, 2, 0, 0, 0, 3, 0, 1]
-
-const DEMO_POTD = {
-  username: 'EagleKing_2207',
-  day_points: 240,
-  day_correct: 4,
-  matchday: '2026-06-07',
-}
+const DEMO_POTD = { username: 'EagleKing_2207', day_points: 240, day_correct: 4, matchday: '2026-06-07' }
 
 function makeDemoRows(username) {
   const base = DEMO_NAMES.map((name, i) => ({
-    name,
-    correct: 58 - i * 3 - (i % 2),
-    played:  64,
-    points:  2340 - i * 172 - (i % 3) * 28,
-    streak:  DEMO_STREAKS[i] ?? 0,
+    name, correct: 58 - i * 3 - (i % 2), played: 64,
+    points: 2340 - i * 172 - (i % 3) * 28, streak: DEMO_STREAKS[i] ?? 0,
   }))
   base.splice(6, 0, { name: username, correct: 31, played: 40, points: 1260, you: true, streak: 3 })
   return base
@@ -38,15 +28,7 @@ function makeDemoRows(username) {
     .sort((a, b) => b.points - a.points)
 }
 
-// ─── Rank decorations ─────────────────────────────────────────────────────────
-
-const RANK_STYLES = [
-  { bg: 'bg-gold/10 dark:bg-gold/15',  num: 'text-gold-500',  icon: <Trophy size={16} className="text-gold-500" /> },
-  { bg: 'bg-line/40 dark:bg-white/5',  num: 'text-muted',     icon: <Medal  size={16} className="text-muted" /> },
-  { bg: 'bg-brand/8 dark:bg-brand/12', num: 'text-brand/80',  icon: <Medal  size={16} className="text-brand/80" /> },
-]
-
-// ─── Beat the Crowd tooltip ───────────────────────────────────────────────────
+// ─── Beat the Crowd legend ────────────────────────────────────────────────────
 
 function BeatTheCrowdLegend() {
   const [open, setOpen] = useState(false)
@@ -54,34 +36,27 @@ function BeatTheCrowdLegend() {
     <div className="relative inline-block">
       <button
         onClick={() => setOpen((v) => !v)}
-        aria-label="How points are calculated"
-        className="inline-flex items-center gap-1 rounded-full border border-gold-500/40 bg-gold/8 px-2.5 py-1 text-[11px] font-bold text-gold-500 transition-colors hover:bg-gold/14"
+        className="inline-flex items-center gap-1.5 rounded-full border border-gold-500/40 bg-gold/8 px-3 py-1.5 text-[11px] font-bold text-gold-500 transition-colors hover:bg-gold/14"
       >
-        <Flame size={11} />
-        Beat the Crowd
-        <Info size={11} className="opacity-70" />
+        <Flame size={11} /> Beat the Crowd <Info size={11} className="opacity-70" />
       </button>
-
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
           <div className="absolute left-0 top-full z-20 mt-2 w-72 rounded-2xl border border-gold-500/30 bg-surface p-4 shadow-pop">
-            <p className="mb-2 flex items-center gap-2 text-sm font-extrabold text-gold-500">
-              <Flame size={14} /> Beat the Crowd scoring
-            </p>
-            <p className="text-xs text-muted leading-relaxed">
-              Correctly backing an underdog the crowd doubted scores <strong className="text-ink">much higher</strong> than backing the favourite.
-            </p>
+            <p className="mb-2 flex items-center gap-2 text-sm font-extrabold text-gold-500"><Flame size={14} /> Beat the Crowd scoring</p>
+            <p className="text-xs text-muted leading-relaxed">Correctly backing an underdog the crowd doubted scores <strong className="text-ink">much higher</strong> than backing the favourite.</p>
             <div className="mt-3 space-y-1.5 rounded-xl bg-elevated px-3 py-2.5 text-xs font-mono">
               <p className="font-sans text-[10px] font-bold uppercase tracking-widest text-muted mb-1.5">Formula</p>
               <p className="text-ink font-semibold">Points = 10 + (100 − winner's vote %)</p>
             </div>
             <div className="mt-3 space-y-1 text-xs text-muted">
-              <div className="flex justify-between"><span>70% backed the winner</span><span className="font-bold text-ink">40 pts</span></div>
-              <div className="flex justify-between"><span>50% backed the winner</span><span className="font-bold text-ink">60 pts</span></div>
-              <div className="flex justify-between"><span>30% backed the winner</span><span className="font-bold text-gold-500 font-black">80 pts 🔥</span></div>
-              <div className="flex justify-between"><span>10% backed the winner</span><span className="font-bold text-gold-500 font-black">100 pts ⚡</span></div>
-              <div className="flex justify-between text-muted/60"><span>Wrong pick</span><span>0 pts</span></div>
+              {[['70% backed the winner', '40 pts', false], ['50% backed the winner', '60 pts', false], ['30% backed the winner', '80 pts 🔥', true], ['10% backed the winner', '100 pts ⚡', true], ['Wrong pick', '0 pts', false]].map(([label, val, hot]) => (
+                <div key={label} className="flex justify-between">
+                  <span>{label}</span>
+                  <span className={`font-bold ${hot ? 'text-gold-500 font-black' : 'text-ink'}`}>{val}</span>
+                </div>
+              ))}
             </div>
           </div>
         </>
@@ -90,7 +65,7 @@ function BeatTheCrowdLegend() {
   )
 }
 
-// ─── Predictor of the Day card ────────────────────────────────────────────────
+// ─── Predictor of the Day ─────────────────────────────────────────────────────
 
 function PredictorOfDay({ potd, currentUsername, isLive }) {
   if (!potd) {
@@ -110,65 +85,35 @@ function PredictorOfDay({ potd, currentUsername, isLive }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22,1,0.36,1] }}
       className="relative overflow-hidden rounded-3xl border border-gold-500/40 bg-gradient-to-br from-amber-500/12 via-yellow-500/8 to-orange-500/10 p-6 dark:from-amber-500/10 dark:via-yellow-500/6 dark:to-orange-500/8"
     >
-      {/* Background glow orbs */}
-      <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold/25 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -left-6 -bottom-8 h-32 w-32 rounded-full bg-orange-400/15 blur-2xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold/25 blur-3xl" />
+      <div className="pointer-events-none absolute -left-6 -bottom-8 h-32 w-32 rounded-full bg-orange-400/15 blur-2xl" />
 
-      {/* Header */}
       <div className="relative mb-5 flex items-center gap-2">
         <span className="text-xl leading-none">👑</span>
-        <span className="section-label text-[11px] text-gold-600 dark:text-gold-400 tracking-[0.14em]">
-          Predictor of the Day
-        </span>
-        {!isLive && (
-          <span className="ml-1 rounded-full border border-gold-500/30 px-1.5 py-0.5 text-[9px] font-bold text-gold-500/70 uppercase tracking-wide">
-            demo
-          </span>
-        )}
-        {dayLabel && (
-          <span className="ml-auto text-xs font-medium text-muted">{dayLabel}</span>
-        )}
+        <span className="section-label text-[11px] text-gold-600 dark:text-gold-400 tracking-[0.14em]">Predictor of the Day</span>
+        {!isLive && <span className="ml-1 rounded-full border border-gold-500/30 px-1.5 py-0.5 text-[9px] font-bold text-gold-500/70 uppercase tracking-wide">demo</span>}
+        {dayLabel && <span className="ml-auto text-xs font-medium text-muted">{dayLabel}</span>}
       </div>
 
-      {/* Main content */}
       <div className="relative flex items-center gap-4">
-        {/* Avatar */}
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold-500/20 text-3xl shadow-[0_0_18px_rgba(251,191,36,0.2)]">
-          ⚽
-        </div>
-
-        {/* Name + stats */}
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold-500/20 text-3xl shadow-[0_0_18px_rgba(251,191,36,0.2)]">⚽</div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className="truncate text-xl font-black text-ink">{potd.username}</span>
-            {isYou && (
-              <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[10px] font-black text-white tracking-wide">
-                YOU
-              </span>
-            )}
+            {isYou && <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[10px] font-black text-white tracking-wide">YOU</span>}
           </div>
-          <div className="mt-0.5 text-xs text-muted">
-            {Number(potd.day_correct)} correct pick{Number(potd.day_correct) !== 1 ? 's' : ''} today
-          </div>
+          <div className="mt-0.5 text-xs text-muted">{Number(potd.day_correct)} correct pick{Number(potd.day_correct) !== 1 ? 's' : ''} today</div>
         </div>
-
-        {/* Points earned today */}
         <div className="shrink-0 text-right">
-          <div className="text-3xl font-black tabular-nums text-gold-500 leading-none">
-            +{Number(potd.day_points)}
-          </div>
-          <div className="mt-0.5 text-[11px] font-semibold text-gold-600/70 dark:text-gold-400/70">
-            pts today
-          </div>
+          <div className="text-3xl font-black tabular-nums text-gold-500 leading-none">+{Number(potd.day_points)}</div>
+          <div className="mt-0.5 text-[11px] font-semibold text-gold-600/70 dark:text-gold-400/70">pts today</div>
         </div>
       </div>
 
-      {/* "That's you!" banner */}
       {isYou && (
         <div className="relative mt-4 rounded-2xl border border-gold-500/30 bg-gold/12 py-2 text-center text-sm font-bold text-gold-600 dark:text-gold-400">
           That's you! 🎉 Amazing prediction day!
@@ -182,20 +127,41 @@ function PredictorOfDay({ potd, currentUsername, isLive }) {
 
 function StreakBadge({ streak }) {
   if (streak < 1) return null
-  const hot = streak >= 5
+  const hot  = streak >= 5
   const warm = streak >= 3
   return (
-    <span
-      className={`inline-flex shrink-0 items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-black leading-none ${
-        hot
-          ? 'bg-orange-500/18 text-orange-500 dark:text-orange-400'
-          : warm
-          ? 'bg-orange-400/14 text-orange-500 dark:text-orange-400'
+    <span className={`inline-flex shrink-0 items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-black leading-none ${
+      hot ? 'bg-orange-500/18 text-orange-500 dark:text-orange-400'
+          : warm ? 'bg-orange-400/14 text-orange-500 dark:text-orange-400'
           : 'bg-orange-400/10 text-orange-400/90'
-      }`}
-    >
+    }`}>
       🔥 ×{streak}
     </span>
+  )
+}
+
+// ─── Rank cell ────────────────────────────────────────────────────────────────
+
+function RankCell({ rank }) {
+  if (rank === 0) return (
+    <div className="rank-badge-1 shrink-0">
+      <Trophy size={14} />
+    </div>
+  )
+  if (rank === 1) return (
+    <div className="rank-badge-2 shrink-0">
+      <Medal size={14} />
+    </div>
+  )
+  if (rank === 2) return (
+    <div className="rank-badge-3 shrink-0">
+      <Medal size={14} />
+    </div>
+  )
+  return (
+    <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+      <span className="text-sm font-extrabold tabular-nums text-muted">{rank + 1}</span>
+    </div>
   )
 }
 
@@ -203,7 +169,6 @@ function StreakBadge({ streak }) {
 
 export default function Leaderboard() {
   const { username } = useApp()
-
   const [rows,    setRows]    = useState(() => makeDemoRows(username))
   const [potd,    setPotd]    = useState(!supabaseEnabled ? DEMO_POTD : null)
   const [isLive,  setIsLive]  = useState(false)
@@ -234,14 +199,17 @@ export default function Leaderboard() {
     })
   }, [username])
 
+  const top3 = rows.slice(0, 3)
+  const rest  = rows.slice(3)
+
   return (
     <div className="space-y-6">
 
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-3xl font-black tracking-tight">Leaderboard</h1>
-          <p className="mt-1 text-sm text-muted">
+          <h1 className="page-title">Leaderboard</h1>
+          <p className="mt-1.5 text-sm text-muted">
             {isLive ? 'Live standings · ranked by Beat the Crowd points' : 'Top predictors worldwide'}
           </p>
         </div>
@@ -253,79 +221,109 @@ export default function Leaderboard() {
 
       <AdSlot label="Ad" />
 
-      {/* Column headers */}
-      <div className="flex items-center gap-4 px-5 text-[10px] font-bold uppercase tracking-widest text-muted">
-        <div className="w-8 shrink-0 text-center">#</div>
-        <div className="flex-1">Player</div>
-        <div className="w-20 text-right shrink-0">Points</div>
-        <div className="w-16 text-right shrink-0 hidden sm:block">Correct</div>
-        <div className="w-14 text-right shrink-0 hidden sm:block">Acc</div>
-      </div>
+      {/* ── Top 3 Podium ─────────────────────────────────────────── */}
+      {top3.length > 0 && (
+        <div className="grid grid-cols-3 gap-3">
+          {/* Reorder: 2nd, 1st, 3rd */}
+          {[top3[1], top3[0], top3[2]].map((r, podiumPos) => {
+            if (!r) return <div key={podiumPos} />
+            const realRank = top3.indexOf(r)
+            const isFirst = realRank === 0
+            const heights = ['h-28', 'h-36', 'h-24']
+            const podiumHeights = [heights[1], heights[0], heights[2]] // center is tallest
+            const glows = [
+              '',
+              'shadow-[0_0_30px_rgba(245,158,11,0.22)] border-amber-500/40',
+              '',
+            ]
+            const podiumBgs = [
+              'from-slate-400/10 to-slate-500/5 border-slate-400/30',
+              'from-amber-500/15 to-yellow-500/8 border-amber-500/50',
+              'from-orange-600/10 to-orange-700/5 border-orange-600/30',
+            ]
+            const medals = ['🥈', '🥇', '🥉']
 
-      {/* Table card */}
-      <StaggerList className="card overflow-hidden divide-y divide-line/50">
-        {rows.map((r, i) => {
-          const rank = RANK_STYLES[i] ?? null
-          return (
+            return (
+              <motion.div
+                key={r.name}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: podiumPos * 0.08, ease: [0.22,1,0.36,1] }}
+                className={`relative flex flex-col items-center justify-end rounded-2xl border bg-gradient-to-b p-3 text-center ${podiumBgs[podiumPos]} ${glows[podiumPos]} ${podiumHeights[podiumPos]}`}
+              >
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl">{medals[podiumPos]}</div>
+                <p className={`font-black leading-tight truncate w-full text-ink ${isFirst ? 'text-sm' : 'text-xs'}`}>
+                  {r.name}{r.you && <span className="ml-1 text-brand text-[9px]">(you)</span>}
+                </p>
+                <p className={`mt-0.5 font-black tabular-nums ${isFirst ? 'text-2xl text-amber-500' : 'text-lg text-ink'}`}>
+                  {r.points.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-semibold text-muted">pts</p>
+                {r.streak > 0 && <StreakBadge streak={r.streak} />}
+              </motion.div>
+            )
+          })}
+        </div>
+      )}
+
+      {/* ── Full table (rank 4+) ───────────────────────────────────── */}
+      <div>
+        {/* Column headers */}
+        <div className="flex items-center gap-4 px-5 mb-1 text-[10px] font-bold uppercase tracking-widest text-muted">
+          <div className="w-8 shrink-0 text-center">#</div>
+          <div className="flex-1">Player</div>
+          <div className="w-20 text-right shrink-0">Points</div>
+          <div className="w-16 text-right shrink-0 hidden sm:block">Correct</div>
+          <div className="w-14 text-right shrink-0 hidden sm:block">Acc</div>
+        </div>
+
+        <StaggerList className="card overflow-hidden divide-y divide-line/50 dark:divide-white/5">
+          {rows.map((r, i) => (
             <StaggerItem
               key={r.name}
               className={`flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-brand/3 dark:hover:bg-white/3 ${
                 r.you
-                  ? 'bg-brand/6 dark:bg-brand/12 border-l-2 border-brand'
-                  : rank?.bg ?? ''
+                  ? 'bg-brand/6 dark:bg-brand/12 border-l-2 border-l-brand'
+                  : i === 0 ? 'bg-amber-500/5 dark:bg-amber-500/8'
+                  : i === 1 ? 'bg-slate-400/4 dark:bg-slate-400/6'
+                  : i === 2 ? 'bg-orange-600/4 dark:bg-orange-600/6'
+                  : ''
               }`}
             >
-              {/* Rank */}
-              <div className="w-8 shrink-0 text-center">
-                {rank?.icon ? (
-                  <span className="flex justify-center">{rank.icon}</span>
-                ) : (
-                  <span className={`text-sm font-extrabold tabular-nums ${i < 3 ? 'text-brand' : 'text-muted'}`}>
-                    {i + 1}
-                  </span>
-                )}
-              </div>
+              <RankCell rank={i} />
 
-              {/* Name + streak badge */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-1.5">
                   <span className={`font-bold truncate ${r.you ? 'text-brand dark:text-brand-300' : 'text-ink'}`}>
                     {r.name}
                   </span>
-                  {r.you && (
-                    <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[10px] font-black text-white tracking-wide">
-                      YOU
-                    </span>
-                  )}
+                  {r.you && <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[10px] font-black text-white tracking-wide">YOU</span>}
                   <StreakBadge streak={r.streak} />
                 </div>
               </div>
 
-              {/* Points */}
               <div className="w-20 text-right shrink-0">
-                <div className={`text-xl font-black tabular-nums ${
-                  i === 0 ? 'text-gold-500' : r.you ? 'text-brand' : 'text-ink'
+                <div className={`text-xl font-black tabular-nums leading-tight ${
+                  i === 0 ? 'text-amber-500' : r.you ? 'text-brand' : 'text-ink'
                 }`}>
                   {r.points.toLocaleString()}
                 </div>
                 <div className="text-[10px] font-semibold text-muted">pts</div>
               </div>
 
-              {/* Correct — hidden on mobile */}
               <div className="w-16 text-right shrink-0 hidden sm:block">
                 <div className="text-base font-black tabular-nums text-ink">{r.correct}</div>
                 <div className="text-[10px] font-semibold text-muted">correct</div>
               </div>
 
-              {/* Accuracy — hidden on mobile */}
               <div className="w-14 text-right shrink-0 hidden sm:block">
                 <div className="text-base font-black tabular-nums text-ink">{r.acc}%</div>
                 <div className="text-[10px] font-semibold text-muted">acc</div>
               </div>
             </StaggerItem>
-          )
-        })}
-      </StaggerList>
+          ))}
+        </StaggerList>
+      </div>
 
       {/* Status footer */}
       {isLive ? (

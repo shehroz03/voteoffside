@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-surface">
       <TopNav />
-      <main className="mx-auto max-w-6xl px-4 pb-10 pt-8 lg:pb-12 lg:pt-10">
+      <main className="mx-auto max-w-6xl px-4 pb-12 pt-8 lg:pb-14 lg:pt-10">
         {children}
       </main>
       <Footer />
