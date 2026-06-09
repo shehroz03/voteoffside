@@ -14,7 +14,7 @@
         "apps": 700,
         "goals": 1,
         "assists": 4,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Néstor Fernando Muslera Micol",
       "birthDate": "1986-06-16",
@@ -653,40 +653,34 @@
       "club": "Real Madrid",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5249151768499204.png",
       "stats": {
-        "apps": 296,
-        "goals": 21,
-        "assists": 23,
-        "rating": 8.9
+        "apps": 280,
+        "goals": 38,
+        "assists": 44,
+        "rating": 8.8
       },
       "career": [
         {
           "club": "Peñarol",
-          "years": "2015-2016",
-          "apps": 13,
-          "goals": 0
-        },
-        {
-          "club": "Deportivo La Coruña",
-          "years": "2017-2018",
-          "apps": 25,
-          "goals": 0
+          "years": "2015–2016",
+          "apps": 18,
+          "goals": 2
         },
         {
           "club": "Real Madrid",
-          "years": "2018-Present",
-          "apps": 258,
-          "goals": 21
+          "years": "2016–Present",
+          "apps": 262,
+          "goals": 36
         }
       ],
       "fullName": "Federico Santiago Valverde Dipetta",
       "birthDate": "1998-07-22",
       "birthPlace": "Montevideo, Uruguay",
       "height": "1.82 m",
-      "bio": "Federico Valverde is an exceptionally versatile and tireless midfielder, known for his incredible stamina, powerful long-range shooting, and immense tactical discipline. He is a driving force in the midfield for both Real Madrid and Uruguay.",
+      "bio": "Federico Valverde is the box-to-box engine driving Real Madrid's engine room — a player of relentless energy, powerful driving runs, and a rocket shot that has become one of the most feared in Europe. The Uruguayan international has matured into one of the world's top midfielders, excelling in breaking up play and transitioning quickly into attack.",
       "honours": [
         {
           "title": "Champions League",
-          "count": 2
+          "count": 3
         },
         {
           "title": "La Liga",
@@ -695,10 +689,16 @@
         {
           "title": "Club World Cup",
           "count": 2
-        },
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 65,
+      "worldCupHistory": [
         {
-          "title": "Copa del Rey",
-          "count": 1
+          "year": 2022,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -1698,7 +1698,7 @@
         "apps": 220,
         "goals": 12,
         "assists": 50,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "David Raum",
       "birthDate": "1998-04-22",
@@ -1912,16 +1912,16 @@
       "club": "Bayern Munich",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oqb7rg1756408859.png",
       "stats": {
-        "apps": 480,
-        "goals": 45,
-        "assists": 110,
-        "rating": 8.8
+        "apps": 420,
+        "goals": 50,
+        "assists": 118,
+        "rating": 8.9
       },
       "fullName": "Joshua Walter Kimmich",
       "birthDate": "1995-02-08",
       "birthPlace": "Rottweil, Germany",
       "height": "1.77 m",
-      "bio": "A highly versatile and tactically intelligent player, Kimmich is known for his aggressive tackling, pinpoint crossing, and exceptional vision as both a right-back and defensive midfielder.",
+      "bio": "Joshua Kimmich is Germany's on-field leader and Bayern Munich's midfield general — a player of extraordinary reading of the game, precise passing, and tenacious defending who started his career as a right-back before excelling in his natural role as a deep-lying playmaker. A Champions League winner in 2020, he is the embodiment of Bavarian football excellence.",
       "honours": [
         {
           "title": "Champions League",
@@ -1929,21 +1929,41 @@
         },
         {
           "title": "Bundesliga",
-          "count": 8
+          "count": 7
+        },
+        {
+          "title": "DFB-Pokal",
+          "count": 5
         }
       ],
       "career": [
         {
           "club": "RB Leipzig",
-          "years": "2013-2015",
-          "apps": 55,
+          "years": "2013–2015",
+          "apps": 48,
           "goals": 3
         },
         {
           "club": "Bayern Munich",
-          "years": "2015-Present",
-          "apps": 390,
-          "goals": 41
+          "years": "2015–Present",
+          "apps": 380,
+          "goals": 47
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 90,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -2050,24 +2070,30 @@
       "club": "Liverpool",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8t6bzo1757088899.png",
       "stats": {
-        "apps": 152,
-        "goals": 41,
-        "assists": 50,
+        "apps": 195,
+        "goals": 64,
+        "assists": 72,
         "rating": 8.8
       },
       "career": [
         {
           "club": "Bayer Leverkusen",
-          "years": "2020-Present",
-          "apps": 152,
-          "goals": 41
+          "years": "2020–2025",
+          "apps": 162,
+          "goals": 57
+        },
+        {
+          "club": "Liverpool",
+          "years": "2025–Present",
+          "apps": 33,
+          "goals": 7
         }
       ],
       "fullName": "Florian Richard Wirtz",
       "birthDate": "2003-05-03",
       "birthPlace": "Pulheim, Germany",
       "height": "1.76 m",
-      "bio": "Florian Wirtz is a brilliant playmaker known for his vision, incisive passing, and technical flair. He was the creative force behind Bayer Leverkusen's historic, undefeated domestic double-winning season under Xabi Alonso.",
+      "bio": "Florian Wirtz is the creative heartbeat of Bayer Leverkusen's historic unbeaten Bundesliga season in 2023/24 and Germany's brightest midfield prospect. Elegant on the ball with an exceptional reading of the game and killer final pass, he completed a dream transfer to Liverpool in June 2025 — making him one of the most anticipated Premier League arrivals in years.",
       "honours": [
         {
           "title": "Bundesliga",
@@ -2076,6 +2102,16 @@
         {
           "title": "DFB-Pokal",
           "count": 1
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 40,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -2134,7 +2170,7 @@
         "apps": 120,
         "goals": 5,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Angelo Stiller",
       "birthDate": "2001-04-04",
@@ -2173,36 +2209,42 @@
       "club": "Bayern Munich",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/vbkv611756416067.png",
       "stats": {
-        "apps": 163,
-        "goals": 43,
-        "assists": 30,
+        "apps": 295,
+        "goals": 85,
+        "assists": 48,
         "rating": 8.9
       },
       "career": [
         {
           "club": "Bayern Munich",
-          "years": "2020-Present",
-          "apps": 163,
-          "goals": 43
+          "years": "2020–Present",
+          "apps": 295,
+          "goals": 85
         }
       ],
       "fullName": "Jamal Musiala",
       "birthDate": "2003-02-26",
       "birthPlace": "Stuttgart, Germany",
       "height": "1.84 m",
-      "bio": "Jamal Musiala is a highly creative and technically gifted attacking midfielder with exceptional close control in tight spaces. Affectionately nicknamed 'Bambi' for his agility, he has quickly become a pivotal player for both Bayern Munich and the German national team.",
+      "bio": "Born in Stuttgart and raised in England before choosing Germany, Jamal Musiala is an instinctive, elusive attacking midfielder whose close control and dribbling in tight spaces make him almost impossible to dispossess. Widely seen as the natural heir to Mesut Özil's creative mantle, he has 281 career appearances and 79 goals across all competitions despite being just 23.",
       "honours": [
         {
           "title": "Bundesliga",
-          "count": 4
+          "count": 3
         },
         {
-          "title": "Club World Cup",
-          "count": 1
-        },
+          "title": "DFB-Pokal",
+          "count": 2
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 50,
+      "worldCupHistory": [
         {
-          "title": "UEFA Super Cup",
-          "count": 1
+          "year": 2022,
+          "stage": "Group Stage",
+          "goals": 1,
+          "assists": 1
         }
       ]
     },
@@ -2400,7 +2442,7 @@
         "apps": 240,
         "goals": 120,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Deniz Undav",
       "birthDate": "1996-07-19",
@@ -2639,7 +2681,7 @@
         "apps": 190,
         "goals": 0,
         "assists": 1,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Unai Simón Mendibil",
       "birthDate": "1997-06-11",
@@ -2917,7 +2959,7 @@
         "apps": 150,
         "goals": 6,
         "assists": 3,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Eric García Martret",
       "birthDate": "2001-01-09",
@@ -3145,58 +3187,66 @@
       "club": "Manchester City",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/0ml2zi1761148957.png",
       "stats": {
-        "apps": 280,
-        "goals": 85,
-        "assists": 25,
-        "rating": 7.7
+        "apps": 420,
+        "goals": 40,
+        "assists": 62,
+        "rating": 9
       },
       "career": [
         {
-          "club": "Liverpool (URU)",
-          "years": "2012-2014",
-          "apps": 43,
-          "goals": 17
+          "club": "Villarreal",
+          "years": "2017–2018",
+          "apps": 42,
+          "goals": 3
         },
         {
-          "club": "Udinese",
-          "years": "2014-2015",
-          "apps": 20,
-          "goals": 1
+          "club": "Atlético Madrid",
+          "years": "2018–2019",
+          "apps": 39,
+          "goals": 3
         },
         {
-          "club": "Nacional (loan)",
-          "years": "2017",
-          "apps": 33,
-          "goals": 14
-        },
-        {
-          "club": "LDU Quito",
-          "years": "2019-2020",
-          "apps": 38,
-          "goals": 16
-        },
-        {
-          "club": "Monterrey",
-          "years": "2022-2024",
-          "apps": 60,
-          "goals": 9
-        },
-        {
-          "club": "América",
-          "years": "2024-Present",
-          "apps": 0,
-          "goals": 0
+          "club": "Manchester City",
+          "years": "2019–Present",
+          "apps": 257,
+          "goals": 26
         }
       ],
       "fullName": "Rodrigo Sebastián Aguirre Soto",
       "birthDate": "1994-10-01",
       "birthPlace": "Montevideo, Uruguay",
       "height": "1.86 m",
-      "bio": "A powerful and aggressive center-forward with a booming left foot. Aguirre is a physical menace who has scored goals across Italy, Ecuador, and Mexico.",
+      "bio": "The 2024 Ballon d'Or winner and the engine of both Manchester City's four-year Premier League dynasty and Spain's Euro 2024 triumph, Rodri is the complete midfielder — a metronomic passer with a midfielder's brain, a defender's tenacity, and a striker's eye for the decisive goal. His absence through ACL injury in 2024/25 was immediately felt.",
       "honours": [
         {
-          "title": "Liga MX",
+          "title": "Champions League",
           "count": 1
+        },
+        {
+          "title": "Premier League",
+          "count": 4
+        },
+        {
+          "title": "European Championship",
+          "count": 1
+        },
+        {
+          "title": "Nations League",
+          "count": 1
+        },
+        {
+          "title": "Ballon d'Or",
+          "count": 1
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 60,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 1
         }
       ]
     },
@@ -3315,7 +3365,7 @@
         "apps": 250,
         "goals": 55,
         "assists": 35,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Ferran Torres García",
       "birthDate": "2000-02-29",
@@ -3406,42 +3456,52 @@
       "club": "Barcelona",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/srwppu1424795582.png",
       "stats": {
-        "apps": 180,
-        "goals": 20,
-        "assists": 30,
+        "apps": 215,
+        "goals": 22,
+        "assists": 38,
         "rating": 8.7
       },
       "fullName": "Pedro González López",
       "birthDate": "2002-11-25",
       "birthPlace": "Tegueste, Spain",
       "height": "1.74 m",
-      "bio": "A generational midfield maestro, Pedri dictates the game with exceptional vision, close control, and passing accuracy, drawing comparisons to Barcelona legends Xavi and Iniesta.",
+      "bio": "Pedro González López, known as Pedri, is a generational midfield talent from Tenerife whose intelligent movement, exceptional touch in tight spaces, and vision at just 23 years old draw inevitable comparisons to Andrés Iniesta. He was named Young Player of the Year at Euro 2020 and was a key figure in Spain's Euro 2024 triumph.",
       "honours": [
+        {
+          "title": "European Championship",
+          "count": 1
+        },
         {
           "title": "La Liga",
           "count": 1
         },
         {
-          "title": "Copa del Rey",
-          "count": 1
-        },
-        {
-          "title": "Golden Boy",
+          "title": "Nations League",
           "count": 1
         }
       ],
       "career": [
         {
           "club": "Las Palmas",
-          "years": "2019-2020",
-          "apps": 37,
-          "goals": 4
+          "years": "2019–2021",
+          "apps": 30,
+          "goals": 3
         },
         {
           "club": "Barcelona",
-          "years": "2020-Present",
-          "apps": 140,
+          "years": "2020–Present",
+          "apps": 185,
           "goals": 19
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 45,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -3455,17 +3515,21 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/amm91q1726510077.png",
       "stats": {
-        "apps": 120,
-        "goals": 8,
-        "assists": 15,
-        "rating": 8.5
+        "apps": 195,
+        "goals": 15,
+        "assists": 30,
+        "rating": 8.6
       },
       "fullName": "Pablo Martín Páez Gavira (Gavi)",
       "birthDate": "2004-08-05",
       "birthPlace": "Los Palacios y Villafranca, Spain",
       "height": "1.73 m",
-      "bio": "A combative and incredibly passionate midfielder, Gavi combines La Masia technique with an unbelievable work rate and aggression, winning the Golden Boy award in 2022.",
+      "bio": "Pablo Martín Páez Gavira — known simply as Gavi — is one of the most tenacious and technically gifted midfielders of his generation. A product of La Masia, he became a regular for Barcelona and Spain as a teenager, winning the Kopa Trophy in 2022. Compact, press-resistant and with excellent vision, he is the prototype modern Spanish midfielder.",
       "honours": [
+        {
+          "title": "European Championship",
+          "count": 1
+        },
         {
           "title": "La Liga",
           "count": 1
@@ -3475,16 +3539,26 @@
           "count": 1
         },
         {
-          "title": "Golden Boy",
+          "title": "Kopa Trophy",
           "count": 1
         }
       ],
       "career": [
         {
           "club": "Barcelona",
-          "years": "2021-Present",
-          "apps": 111,
-          "goals": 7
+          "years": "2021–Present",
+          "apps": 195,
+          "goals": 15
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 50,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -3646,7 +3720,7 @@
         "apps": 140,
         "goals": 20,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Yeremi Jesús Pino Santos",
       "birthDate": "2002-10-20",
@@ -3721,30 +3795,41 @@
       "club": "Barcelona",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/m9n4ja1761512633.png",
       "stats": {
-        "apps": 51,
-        "goals": 7,
-        "assists": 10,
-        "rating": 8.5
+        "apps": 157,
+        "goals": 54,
+        "assists": 62,
+        "rating": 8.8
       },
       "career": [
         {
           "club": "Barcelona",
-          "years": "2023-Present",
-          "apps": 51,
-          "goals": 7
+          "years": "2023–Present",
+          "apps": 157,
+          "goals": 54
         }
       ],
       "fullName": "Lamine Yamal Nasraoui Ebana",
       "birthDate": "2007-07-13",
       "birthPlace": "Esplugues de Llobregat, Spain",
       "height": "1.78 m",
-      "bio": "A prodigious talent emerging from Barcelona's academy, Lamine Yamal possesses exceptional vision, dribbling, and maturity beyond his years. He broke multiple records as the youngest player to debut and score for both Barcelona and the Spanish national team.",
+      "bio": "The most extraordinary teenage talent since Messi himself, Lamine Yamal became the youngest player to appear at and score in a European Championship (Euro 2024) before his 17th birthday. His ability to glide past defenders, create from wide areas, and deliver under pressure for both Barcelona and Spain is already that of a seasoned superstar.",
       "honours": [
+        {
+          "title": "European Championship",
+          "count": 1
+        },
         {
           "title": "La Liga",
           "count": 1
+        },
+        {
+          "title": "Copa del Rey",
+          "count": 1
         }
-      ]
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 25,
+      "worldCupHistory": []
     },
     {
       "id": "v-ctor-mu-oz-esp",
@@ -4424,7 +4509,7 @@
         "apps": 350,
         "goals": 65,
         "assists": 50,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Miguel Ángel Almirón Rejala",
       "birthDate": "1994-02-10",
@@ -5021,7 +5106,7 @@
         "apps": 350,
         "goals": 1,
         "assists": 2,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Gerónimo Rulli",
       "birthDate": "1992-05-20",
@@ -5414,7 +5499,7 @@
         "apps": 160,
         "goals": 8,
         "assists": 8,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Facundo Axel Medina",
       "birthDate": "1999-05-28",
@@ -5757,7 +5842,7 @@
         "apps": 300,
         "goals": 30,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Giovani Lo Celso",
       "birthDate": "1996-04-09",
@@ -6058,52 +6143,98 @@
       "club": "Inter Miami",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/e0i2051750317027.png",
       "stats": {
-        "apps": 873,
-        "goals": 722,
-        "assists": 344,
+        "apps": 900,
+        "goals": 745,
+        "assists": 366,
         "rating": 9.9
       },
       "career": [
         {
           "club": "Barcelona",
-          "years": "2004-2021",
+          "years": "2004–2021",
           "apps": 778,
           "goals": 672
         },
         {
           "club": "PSG",
-          "years": "2021-2023",
+          "years": "2021–2023",
           "apps": 75,
           "goals": 32
         },
         {
           "club": "Inter Miami",
-          "years": "2023-Present",
-          "apps": 20,
-          "goals": 18
+          "years": "2023–Present",
+          "apps": 47,
+          "goals": 41
         }
       ],
       "fullName": "Lionel Andrés Messi",
       "birthDate": "1987-06-24",
       "birthPlace": "Rosario, Argentina",
       "height": "1.70 m",
-      "bio": "Widely regarded as one of the greatest players of all time, Lionel Messi is renowned for his extraordinary dribbling, vision, and playmaking ability. A legend at Barcelona where he won numerous titles, he continues to orchestrate play at the highest level.",
+      "bio": "Widely regarded as the greatest player of all time, Lionel Messi is an eight-time Ballon d'Or winner whose dribbling, vision, and playmaking ability mesmerised the world for two decades. His crowning glory came at the 2022 World Cup, where he led Argentina to glory with 7 goals and 3 assists, ending a lifelong quest for the one title he craved most.",
       "honours": [
         {
           "title": "World Cup",
           "count": 1
         },
         {
-          "title": "Ballon d'Or",
-          "count": 8
+          "title": "Copa América",
+          "count": 3
+        },
+        {
+          "title": "Finalissima",
+          "count": 1
         },
         {
           "title": "Champions League",
           "count": 4
         },
         {
-          "title": "Copa America",
-          "count": 1
+          "title": "La Liga",
+          "count": 10
+        },
+        {
+          "title": "Copa del Rey",
+          "count": 7
+        },
+        {
+          "title": "Ballon d'Or",
+          "count": 8
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 191,
+      "worldCupHistory": [
+        {
+          "year": 2006,
+          "stage": "Round of 16",
+          "goals": 1,
+          "assists": 1
+        },
+        {
+          "year": 2010,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 1
+        },
+        {
+          "year": 2014,
+          "stage": "Runner-up",
+          "goals": 4,
+          "assists": 1
+        },
+        {
+          "year": 2018,
+          "stage": "Round of 16",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Winner",
+          "goals": 7,
+          "assists": 3
         }
       ]
     },
@@ -6843,7 +6974,7 @@
         "apps": 20,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Kojo Peprah Oppong",
       "birthDate": "2004-06-05",
@@ -6873,7 +7004,7 @@
         "apps": 360,
         "goals": 25,
         "assists": 20,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Thomas Teye Partey",
       "birthDate": "1993-06-13",
@@ -7056,7 +7187,7 @@
         "apps": 15,
         "goals": 2,
         "assists": 3,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Caleb Yirenkyi",
       "birthDate": "2005-09-02",
@@ -7469,7 +7600,7 @@
         "apps": 650,
         "goals": 0,
         "assists": 4,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Weverton Pereira da Silva",
       "birthDate": "1987-12-13",
@@ -7720,7 +7851,7 @@
         "apps": 550,
         "goals": 20,
         "assists": 50,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Alex Sandro Lobo Silva",
       "birthDate": "1991-01-26",
@@ -7871,7 +8002,7 @@
         "apps": 500,
         "goals": 30,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Danilo Luiz da Silva",
       "birthDate": "1991-07-15",
@@ -8323,34 +8454,34 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ejuxsh1750271859.png",
       "stats": {
-        "apps": 333,
-        "goals": 97,
-        "assists": 76,
+        "apps": 350,
+        "goals": 112,
+        "assists": 82,
         "rating": 9.1
       },
       "career": [
         {
           "club": "Flamengo",
-          "years": "2017-2018",
+          "years": "2017–2018",
           "apps": 69,
           "goals": 14
         },
         {
           "club": "Real Madrid",
-          "years": "2018-Present",
-          "apps": 264,
-          "goals": 83
+          "years": "2018–Present",
+          "apps": 281,
+          "goals": 98
         }
       ],
       "fullName": "Vinícius José Paixão de Oliveira Júnior",
       "birthDate": "2000-07-12",
       "birthPlace": "São Gonçalo, Brazil",
       "height": "1.76 m",
-      "bio": "Vinícius Júnior is an electrifying winger known for his dazzling dribbling, explosive speed, and flair. Since joining Real Madrid, he has developed into a lethal forward and a key figure in their recent Champions League triumphs.",
+      "bio": "Vinícius Júnior is the electric winger who has made Real Madrid's left flank his personal stage — dazzling defenders with hypnotic dribbling, explosive pace, and an increasingly clinical eye for goal. He became the first Brazilian player to pass 100 Real Madrid goals and is the heartbeat of both club and country going into 2026.",
       "honours": [
         {
           "title": "Champions League",
-          "count": 2
+          "count": 3
         },
         {
           "title": "La Liga",
@@ -8359,6 +8490,20 @@
         {
           "title": "Club World Cup",
           "count": 2
+        },
+        {
+          "title": "Intercontinental Cup",
+          "count": 1
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 48,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 1,
+          "assists": 1
         }
       ]
     },
@@ -8372,16 +8517,16 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/av4ar01767782947.png",
       "stats": {
-        "apps": 510,
-        "goals": 300,
-        "assists": 190,
+        "apps": 615,
+        "goals": 370,
+        "assists": 185,
         "rating": 9.3
       },
       "fullName": "Neymar da Silva Santos Júnior",
       "birthDate": "1992-02-05",
       "birthPlace": "Mogi das Cruzes, Brazil",
       "height": "1.75 m",
-      "bio": "One of the most naturally gifted players in history, Neymar is a supreme dribbler and playmaker. He forms part of Brazil's all-time greatest scorers alongside Pelé.",
+      "bio": "One of the most naturally gifted players to ever play the game, Neymar dazzled the world at Santos and Barcelona before becoming PSG's record signing. Plagued by injuries in his later years, he returned to Santos in 2024. Brazil's third all-time top scorer with 79 goals in 128 caps, his legacy is one of extraordinary flair and unfulfilled World Cup dreams.",
       "honours": [
         {
           "title": "Champions League",
@@ -8392,34 +8537,70 @@
           "count": 2
         },
         {
+          "title": "Copa del Rey",
+          "count": 3
+        },
+        {
           "title": "Ligue 1",
           "count": 5
+        },
+        {
+          "title": "Copa Libertadores",
+          "count": 1
         }
       ],
       "career": [
         {
           "club": "Santos",
-          "years": "2009-2013",
+          "years": "2009–2013",
           "apps": 177,
           "goals": 107
         },
         {
           "club": "Barcelona",
-          "years": "2013-2017",
+          "years": "2013–2017",
           "apps": 186,
           "goals": 105
         },
         {
           "club": "PSG",
-          "years": "2017-2023",
+          "years": "2017–2023",
           "apps": 173,
           "goals": 118
         },
         {
           "club": "Al Hilal",
-          "years": "2023-Present",
-          "apps": 5,
+          "years": "2023–2024",
+          "apps": 7,
           "goals": 1
+        },
+        {
+          "club": "Santos",
+          "years": "2025–Present",
+          "apps": 30,
+          "goals": 14
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 128,
+      "worldCupHistory": [
+        {
+          "year": 2014,
+          "stage": "4th Place",
+          "goals": 4,
+          "assists": 1
+        },
+        {
+          "year": 2018,
+          "stage": "Quarter-Final",
+          "goals": 2,
+          "assists": 1
+        },
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 2,
+          "assists": 0
         }
       ]
     },
@@ -8692,7 +8873,7 @@
         "apps": 80,
         "goals": 25,
         "assists": 5,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Endrick Felipe Moreira de Sousa",
       "birthDate": "2006-07-21",
@@ -8763,7 +8944,7 @@
         "apps": 310,
         "goals": 0,
         "assists": 2,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "José Pedro Malheiro de Sá",
       "birthDate": "1993-01-17",
@@ -8970,16 +9151,16 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/g3psnr1769183713.png",
       "stats": {
-        "apps": 360,
-        "goals": 18,
-        "assists": 10,
+        "apps": 290,
+        "goals": 14,
+        "assists": 6,
         "rating": 8.8
       },
       "fullName": "Rúben dos Santos Gato Alves Dias",
       "birthDate": "1997-05-14",
       "birthPlace": "Amadora, Portugal",
       "height": "1.87 m",
-      "bio": "A commanding and physically dominant center-back, Rúben Dias transformed Manchester City's defense upon arrival and is widely considered one of the best defenders in world football.",
+      "bio": "Rúben Dias arrived at Manchester City in 2020 and immediately transformed them into the most defensively formidable side in England. Commanding in the air, astute in his positioning, and a composed ball-player, he won the Premier League Player of the Season award in just his first year and has been central to City's sustained dominance since.",
       "honours": [
         {
           "title": "Champions League",
@@ -8990,22 +9171,32 @@
           "count": 4
         },
         {
-          "title": "FWA Footballer of the Year",
+          "title": "FA Cup",
           "count": 1
         }
       ],
       "career": [
         {
           "club": "Benfica",
-          "years": "2017-2020",
-          "apps": 91,
-          "goals": 9
+          "years": "2017–2020",
+          "apps": 79,
+          "goals": 5
         },
         {
           "club": "Manchester City",
-          "years": "2020-Present",
-          "apps": 180,
-          "goals": 5
+          "years": "2020–Present",
+          "apps": 223,
+          "goals": 9
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 68,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -9128,7 +9319,7 @@
         "apps": 180,
         "goals": 15,
         "assists": 20,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Matheus Luiz Nunes",
       "birthDate": "1998-08-27",
@@ -9185,7 +9376,7 @@
         "apps": 140,
         "goals": 5,
         "assists": 20,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Nuno Alexandre Tavares Mendes",
       "birthDate": "2002-06-19",
@@ -9456,49 +9647,59 @@
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/jhasls1766826690.png",
       "stats": {
         "apps": 510,
-        "goals": 170,
-        "assists": 140,
-        "rating": 8.8
+        "goals": 145,
+        "assists": 175,
+        "rating": 8.7
       },
       "fullName": "Bruno Miguel Borges Fernandes",
       "birthDate": "1994-09-08",
       "birthPlace": "Maia, Portugal",
       "height": "1.79 m",
-      "bio": "A talismanic attacking midfielder and captain of Manchester United, Bruno Fernandes is renowned for his exceptional goalscoring output, vision, and relentless work rate.",
+      "bio": "Bruno Fernandes is the heartbeat of Manchester United's midfield — a creative force with an insatiable desire to influence every moment of a match through his passing range, pressing intensity, and eye for goal. He has 329 United appearances with 108 goals and recorded a Premier League single-season record of 21 assists in 2025/26.",
       "honours": [
         {
-          "title": "Nations League",
+          "title": "Europa League",
           "count": 1
         },
         {
-          "title": "EFL Cup",
+          "title": "League Cup",
           "count": 1
         }
       ],
       "career": [
         {
           "club": "Udinese",
-          "years": "2013-2016",
-          "apps": 86,
-          "goals": 10
+          "years": "2012–2013",
+          "apps": 25,
+          "goals": 1
         },
         {
           "club": "Sampdoria",
-          "years": "2016-2017",
-          "apps": 33,
+          "years": "2013–2014",
+          "apps": 28,
           "goals": 5
         },
         {
           "club": "Sporting CP",
-          "years": "2017-2020",
-          "apps": 83,
-          "goals": 39
+          "years": "2014–2020",
+          "apps": 194,
+          "goals": 77
         },
         {
           "club": "Manchester United",
-          "years": "2020-Present",
-          "apps": 230,
-          "goals": 75
+          "years": "2020–Present",
+          "apps": 329,
+          "goals": 108
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 80,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 1,
+          "assists": 2
         }
       ]
     },
@@ -9719,62 +9920,70 @@
       "club": "Al Nassr",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/a19jje1761592498.png",
       "stats": {
-        "apps": 999,
-        "goals": 746,
-        "assists": 236,
+        "apps": 1024,
+        "goals": 895,
+        "assists": 255,
         "rating": 9.8
       },
       "career": [
         {
           "club": "Sporting CP",
-          "years": "2002-2003",
+          "years": "2002–2003",
           "apps": 31,
           "goals": 5
         },
         {
           "club": "Manchester United",
-          "years": "2003-2009",
+          "years": "2003–2009",
           "apps": 292,
           "goals": 118
         },
         {
           "club": "Real Madrid",
-          "years": "2009-2018",
+          "years": "2009–2018",
           "apps": 438,
           "goals": 450
         },
         {
           "club": "Juventus",
-          "years": "2018-2021",
+          "years": "2018–2021",
           "apps": 134,
           "goals": 101
         },
         {
           "club": "Manchester United",
-          "years": "2021-2022",
+          "years": "2021–2022",
           "apps": 54,
           "goals": 27
         },
         {
           "club": "Al Nassr",
-          "years": "2023-Present",
-          "apps": 50,
-          "goals": 45
+          "years": "2023–Present",
+          "apps": 148,
+          "goals": 129
         }
       ],
       "fullName": "Cristiano Ronaldo dos Santos Aveiro",
       "birthDate": "1985-02-05",
       "birthPlace": "Funchal, Portugal",
       "height": "1.87 m",
-      "bio": "A prolific goalscorer and phenomenal athlete, Cristiano Ronaldo has shattered countless records throughout his career. Known for his powerful shot, aerial ability, and relentless work ethic, he has dominated European football with Real Madrid, Manchester United, and Juventus.",
+      "bio": "The all-time international top-scorer with 143 goals in 227 caps and the first man to play in five World Cups, Cristiano Ronaldo combined explosive athleticism with a ferocious right foot and elite aerial ability. A five-time Champions League winner and five-time Ballon d'Or recipient, he remains the most prolific human goalscorer in football history.",
       "honours": [
-        {
-          "title": "Ballon d'Or",
-          "count": 5
-        },
         {
           "title": "Champions League",
           "count": 5
+        },
+        {
+          "title": "La Liga",
+          "count": 2
+        },
+        {
+          "title": "Premier League",
+          "count": 3
+        },
+        {
+          "title": "Serie A",
+          "count": 2
         },
         {
           "title": "European Championship",
@@ -9783,6 +9992,44 @@
         {
           "title": "Nations League",
           "count": 1
+        },
+        {
+          "title": "Ballon d'Or",
+          "count": 5
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 227,
+      "worldCupHistory": [
+        {
+          "year": 2006,
+          "stage": "4th Place",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2010,
+          "stage": "Round of 16",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2014,
+          "stage": "Group Stage",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2018,
+          "stage": "Round of 16",
+          "goals": 4,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 1,
+          "assists": 1
         }
       ]
     },
@@ -9799,7 +10046,7 @@
         "apps": 180,
         "goals": 20,
         "assists": 35,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Pedro Lomba Neto",
       "birthDate": "2000-03-09",
@@ -10353,7 +10600,7 @@
         "apps": 160,
         "goals": 5,
         "assists": 10,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Hiroki Ito",
       "birthDate": "1999-05-12",
@@ -10437,7 +10684,7 @@
         "apps": 180,
         "goals": 15,
         "assists": 8,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Ko Itakura",
       "birthDate": "1997-01-27",
@@ -10661,7 +10908,7 @@
         "apps": 480,
         "goals": 45,
         "assists": 30,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Wataru Endō",
       "birthDate": "1993-02-09",
@@ -11005,7 +11252,7 @@
         "apps": 280,
         "goals": 55,
         "assists": 40,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Ritsu Doan",
       "birthDate": "1998-06-16",
@@ -12089,7 +12336,7 @@
         "apps": 220,
         "goals": 15,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Álvaro Fidalgo Fernández",
       "birthDate": "1997-04-09",
@@ -12302,7 +12549,7 @@
         "apps": 320,
         "goals": 95,
         "assists": 40,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Julián Andrés Quiñones Quiñones",
       "birthDate": "1997-03-24",
@@ -13170,7 +13417,7 @@
         "apps": 5,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Nico O'Reilly",
       "birthDate": "2005-03-21",
@@ -13200,7 +13447,7 @@
         "apps": 600,
         "goals": 35,
         "assists": 60,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Jordan Brian Henderson",
       "birthDate": "1990-06-17",
@@ -13483,36 +13730,36 @@
       "club": "Real Madrid",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/trk5271750271712.png",
       "stats": {
-        "apps": 218,
-        "goals": 51,
-        "assists": 35,
+        "apps": 250,
+        "goals": 65,
+        "assists": 45,
         "rating": 9.2
       },
       "career": [
         {
           "club": "Birmingham City",
-          "years": "2019-2020",
+          "years": "2019–2020",
           "apps": 44,
           "goals": 4
         },
         {
           "club": "Borussia Dortmund",
-          "years": "2020-2023",
+          "years": "2020–2023",
           "apps": 132,
           "goals": 24
         },
         {
           "club": "Real Madrid",
-          "years": "2023-Present",
-          "apps": 42,
-          "goals": 23
+          "years": "2023–Present",
+          "apps": 74,
+          "goals": 37
         }
       ],
       "fullName": "Jude Victor William Bellingham",
       "birthDate": "2003-06-29",
       "birthPlace": "Stourbridge, England",
       "height": "1.86 m",
-      "bio": "Jude Bellingham is a dynamic, box-to-box midfielder who combines immense physical strength with technical elegance and a keen eye for goal. He quickly established himself as a world-class talent at Borussia Dortmund before making a blockbuster move to Real Madrid.",
+      "bio": "Jude Bellingham announced himself to the world at Borussia Dortmund before his blockbuster move to Real Madrid, where he became the club's top scorer in his debut season with 23 La Liga goals — an unprecedented achievement for a midfielder. A Champions League winner at 20, he combines physical excellence with elite technical ability and match-winning instincts.",
       "honours": [
         {
           "title": "Champions League",
@@ -13525,6 +13772,20 @@
         {
           "title": "DFB-Pokal",
           "count": 1
+        },
+        {
+          "title": "Intercontinental Cup",
+          "count": 1
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 50,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 1
         }
       ]
     },
@@ -13541,7 +13802,7 @@
         "apps": 45,
         "goals": 6,
         "assists": 3,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Kobbie Boateng Mainoo",
       "birthDate": "2005-04-19",
@@ -13710,38 +13971,54 @@
       "club": "Bayern Munich",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/j4ouvd1756408895.png",
       "stats": {
-        "apps": 480,
-        "goals": 324,
-        "assists": 85,
-        "rating": 9.1
+        "apps": 580,
+        "goals": 375,
+        "assists": 115,
+        "rating": 9.2
       },
       "career": [
         {
           "club": "Tottenham Hotspur",
-          "years": "2009-2023",
+          "years": "2012–2023",
           "apps": 435,
           "goals": 280
         },
         {
           "club": "Bayern Munich",
-          "years": "2023-Present",
-          "apps": 45,
-          "goals": 44
+          "years": "2023–Present",
+          "apps": 108,
+          "goals": 93
         }
       ],
       "fullName": "Harry Edward Kane",
       "birthDate": "1993-07-28",
       "birthPlace": "London, England",
       "height": "1.88 m",
-      "bio": "Harry Kane is a complete forward, equally adept at scoring clinical goals and dropping deep to act as a playmaker. As Tottenham Hotspur's and England's all-time top goalscorer, he took his immense talents to Bayern Munich in pursuit of major silverware.",
+      "bio": "Harry Kane is England's all-time leading scorer with 79 international goals in 113 caps — a clinical, intelligent striker who combines superb hold-up play with devastating finishing from any range. A Golden Boot winner at the 2018 World Cup, he joined Bayern Munich in 2023 and quickly became one of the Bundesliga's greatest-ever scorers.",
       "honours": [
         {
-          "title": "Premier League Golden Boot",
-          "count": 3
+          "title": "Bundesliga",
+          "count": 1
         },
         {
-          "title": "World Cup Golden Boot",
-          "count": 1
+          "title": "Premier League Golden Boot",
+          "count": 2
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 113,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "4th Place",
+          "goals": 6,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 3,
+          "assists": 1
         }
       ]
     },
@@ -13755,32 +14032,38 @@
       "club": "Arsenal",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/xfwok41769331816.png",
       "stats": {
-        "apps": 240,
-        "goals": 65,
-        "assists": 60,
-        "rating": 8.7
+        "apps": 260,
+        "goals": 78,
+        "assists": 95,
+        "rating": 8.8
       },
       "fullName": "Bukayo Ayoyinka T. M. Saka",
       "birthDate": "2001-09-05",
       "birthPlace": "Ealing, England",
       "height": "1.78 m",
-      "bio": "A homegrown Arsenal superstar, Saka is a devastatingly effective right winger known for his agility, decision-making, and consistent goal contributions.",
+      "bio": "Despite being naturally right-footed, Bukayo Saka operates as a devastating left winger — a direct, quick, and unpredictable attacker equally comfortable cutting inside to shoot or delivering precise crosses. Arsenal's talisman from Ealing, he has developed into one of the Premier League's very best forwards and England's most important creative outlet.",
       "honours": [
         {
           "title": "FA Cup",
           "count": 1
-        },
-        {
-          "title": "Community Shield",
-          "count": 2
         }
       ],
       "career": [
         {
           "club": "Arsenal",
-          "years": "2018-Present",
-          "apps": 235,
-          "goals": 60
+          "years": "2018–Present",
+          "apps": 260,
+          "goals": 78
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 48,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 3,
+          "assists": 2
         }
       ]
     },
@@ -14272,7 +14555,7 @@
         "apps": 190,
         "goals": 10,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Sergiño Gianni Dest",
       "birthDate": "2000-11-03",
@@ -14384,7 +14667,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Alexander Freeman",
       "birthDate": "2004-08-09",
@@ -14565,7 +14848,7 @@
         "apps": 210,
         "goals": 5,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Tyler Shaan Adams",
       "birthDate": "1999-02-14",
@@ -15042,7 +15325,7 @@
         "apps": 110,
         "goals": 35,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Folarin Jolaoluwa Balogun",
       "birthDate": "2001-07-03",
@@ -15844,7 +16127,7 @@
         "apps": 420,
         "goals": 75,
         "assists": 80,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Lee Jae-sung",
       "birthDate": "1992-08-10",
@@ -16098,7 +16381,7 @@
         "apps": 280,
         "goals": 75,
         "assists": 40,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Hwang Hee-chan",
       "birthDate": "1996-01-26",
@@ -16148,14 +16431,14 @@
       "stats": {
         "apps": 580,
         "goals": 215,
-        "assists": 110,
+        "assists": 112,
         "rating": 8.7
       },
       "fullName": "Son Heung-min",
       "birthDate": "1992-07-08",
       "birthPlace": "Chuncheon, South Korea",
       "height": "1.83 m",
-      "bio": "An incredibly lethal and two-footed forward, Son is an Asian football legend and captain of Tottenham Hotspur. He is famous for his incredible long-range strikes and devastating pace.",
+      "bio": "Heung-min Son is the greatest Asian footballer in history — a two-footed, lethal attacker who shared the Premier League Golden Boot with 23 goals in 2021/22 and captained South Korea to successive World Cup knockout rounds. Known for electrifying long-range goals and Puskas Award-winning strikes, he brought his transcendent talent to LA FC in MLS in 2025.",
       "honours": [
         {
           "title": "Puskas Award",
@@ -16169,21 +16452,49 @@
       "career": [
         {
           "club": "Hamburger SV",
-          "years": "2010-2013",
+          "years": "2010–2013",
           "apps": 78,
           "goals": 20
         },
         {
           "club": "Bayer Leverkusen",
-          "years": "2013-2015",
+          "years": "2013–2015",
           "apps": 87,
           "goals": 29
         },
         {
           "club": "Tottenham Hotspur",
-          "years": "2015-Present",
-          "apps": 400,
-          "goals": 160
+          "years": "2015–2025",
+          "apps": 333,
+          "goals": 127
+        },
+        {
+          "club": "LA FC",
+          "years": "2025–Present",
+          "apps": 22,
+          "goals": 8
+        }
+      ],
+      "preferredFoot": "Both",
+      "nationalTeamCaps": 130,
+      "worldCupHistory": [
+        {
+          "year": 2014,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
+        },
+        {
+          "year": 2018,
+          "stage": "Group Stage",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Round of 16",
+          "goals": 1,
+          "assists": 1
         }
       ]
     },
@@ -16389,7 +16700,7 @@
         "apps": 280,
         "goals": 0,
         "assists": 1,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Brice Laurian Samba",
       "birthDate": "1994-04-25",
@@ -16962,7 +17273,7 @@
         "apps": 110,
         "goals": 1,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Malo Gusto",
       "birthDate": "2003-05-19",
@@ -17359,7 +17670,7 @@
         "apps": 250,
         "goals": 85,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Jean-Philippe Mateta",
       "birthDate": "1997-06-28",
@@ -17476,39 +17787,47 @@
       "club": "Real Madrid",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/h9u9vz1733653583.png",
       "stats": {
-        "apps": 368,
-        "goals": 283,
-        "assists": 124,
+        "apps": 420,
+        "goals": 340,
+        "assists": 135,
         "rating": 9.5
       },
       "career": [
         {
           "club": "Monaco",
-          "years": "2015-2018",
+          "years": "2015–2018",
           "apps": 60,
           "goals": 27
         },
         {
           "club": "PSG",
-          "years": "2017-2024",
+          "years": "2017–2024",
           "apps": 308,
           "goals": 256
         },
         {
           "club": "Real Madrid",
-          "years": "2024-Present",
-          "apps": 0,
-          "goals": 0
+          "years": "2024–Present",
+          "apps": 52,
+          "goals": 43
         }
       ],
       "fullName": "Kylian Mbappé Lottin",
       "birthDate": "1998-12-20",
       "birthPlace": "Paris, France",
       "height": "1.78 m",
-      "bio": "Kylian Mbappé is a generational talent known for his explosive pace, clinical finishing, and incredible dribbling. After a highly successful tenure at PSG where he became their all-time top scorer, he moved to Real Madrid to conquer Europe.",
+      "bio": "Kylian Mbappé is the fastest elite footballer of his era — a 2018 World Cup winner at 19 who became PSG's all-time top scorer before joining Real Madrid, where he shattered the club record with 43 goals in his debut season. Lightning quick, technically brilliant, and ruthlessly clinical, he is the undisputed heir to football's throne.",
       "honours": [
         {
           "title": "World Cup",
+          "count": 1
+        },
+        {
+          "title": "Champions League",
+          "count": 1
+        },
+        {
+          "title": "La Liga",
           "count": 1
         },
         {
@@ -17518,6 +17837,22 @@
         {
           "title": "Ligue 1",
           "count": 7
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 87,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "Winner",
+          "goals": 4,
+          "assists": 2
+        },
+        {
+          "year": 2022,
+          "stage": "Runner-up",
+          "goals": 8,
+          "assists": 2
         }
       ]
     },
@@ -17932,7 +18267,7 @@
         "apps": 220,
         "goals": 10,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Khuliso Johnson Mudau",
       "birthDate": "1995-04-26",
@@ -18061,7 +18396,7 @@
         "apps": 15,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Samukelo Kabini",
       "birthDate": "2003-05-15",
@@ -18121,7 +18456,7 @@
         "apps": 15,
         "goals": 1,
         "assists": 2,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Mbekezeli Mbokazi",
       "birthDate": "2002-04-10",
@@ -18151,7 +18486,7 @@
         "apps": 10,
         "goals": 1,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Khulumani Ndamane",
       "birthDate": "2004-11-20",
@@ -18260,7 +18595,7 @@
         "apps": 220,
         "goals": 25,
         "assists": 30,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Teboho Mokoena",
       "birthDate": "1997-01-24",
@@ -18883,7 +19218,7 @@
         "apps": 30,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Melvin Mastil",
       "birthDate": "2000-03-05",
@@ -19799,7 +20134,7 @@
         "apps": 15,
         "goals": 2,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Anis Moussa",
       "birthDate": "2004-01-01",
@@ -19981,7 +20316,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Patrick Beach",
       "birthDate": "2003-08-05",
@@ -20395,7 +20730,7 @@
         "apps": 5,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Lucas Herrington",
       "birthDate": "2005-01-10",
@@ -20755,7 +21090,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Paul Okon-Engstler",
       "birthDate": "2005-01-24",
@@ -21031,7 +21366,7 @@
         "apps": 40,
         "goals": 8,
         "assists": 3,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Ante Šuto",
       "birthDate": "2000-01-01",
@@ -21987,7 +22322,7 @@
         "apps": 520,
         "goals": 175,
         "assists": 40,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Christopher Grant Wood",
       "birthDate": "1991-12-07",
@@ -23206,7 +23541,7 @@
         "apps": 10,
         "goals": 2,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Johan Manzambi",
       "birthDate": "2005-10-14",
@@ -23236,7 +23571,7 @@
         "apps": 310,
         "goals": 80,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Breel Donald Embolo",
       "birthDate": "1997-02-14",
@@ -23801,7 +24136,7 @@
         "apps": 140,
         "goals": 1,
         "assists": 3,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Willian Joel Pacho Tenorio",
       "birthDate": "2001-10-16",
@@ -24498,7 +24833,7 @@
         "apps": 550,
         "goals": 210,
         "assists": 65,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Enner Remberto Valencia Lastra",
       "birthDate": "1989-11-04",
@@ -26293,7 +26628,7 @@
         "apps": 180,
         "goals": 45,
         "assists": 15,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Ladislav Krejčí",
       "birthDate": "1999-04-20",
@@ -26774,7 +27109,7 @@
         "apps": 420,
         "goals": 65,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Tomáš Souček",
       "birthDate": "1995-02-27",
@@ -27155,7 +27490,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Hugo Sochůrek",
       "birthDate": "2004-01-01",
@@ -28016,64 +28351,86 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/msewdx1758892756.png",
       "stats": {
-        "apps": 831,
-        "goals": 95,
-        "assists": 130,
+        "apps": 870,
+        "goals": 107,
+        "assists": 175,
         "rating": 9.2
       },
       "career": [
         {
           "club": "Dinamo Zagreb",
-          "years": "2003-2008",
-          "apps": 94,
-          "goals": 27
-        },
-        {
-          "club": "Zrinjski Mostar",
-          "years": "2003-2004",
-          "apps": 25,
-          "goals": 8
-        },
-        {
-          "club": "Inter Zaprešić",
-          "years": "2004-2005",
-          "apps": 18,
-          "goals": 4
+          "years": "2003–2008",
+          "apps": 90,
+          "goals": 19
         },
         {
           "club": "Tottenham Hotspur",
-          "years": "2008-2012",
+          "years": "2008–2012",
           "apps": 160,
           "goals": 17
         },
         {
           "club": "Real Madrid",
-          "years": "2012-Present",
-          "apps": 534,
-          "goals": 39
+          "years": "2012–2025",
+          "apps": 597,
+          "goals": 41
+        },
+        {
+          "club": "AC Milan",
+          "years": "2025–Present",
+          "apps": 0,
+          "goals": 0
         }
       ],
       "fullName": "Luka Modrić",
       "birthDate": "1985-09-09",
       "birthPlace": "Zadar, Croatia",
       "height": "1.72 m",
-      "bio": "A midfield maestro and one of the greatest playmakers in football history, Luka Modrić dictates the tempo of matches with his pristine passing and exceptional vision. He won the 2018 Ballon d'Or and has led Real Madrid to numerous Champions League titles.",
+      "bio": "Luka Modrić is the most complete midfielder of his generation and winner of the 2018 Ballon d'Or — the first player other than Messi or Ronaldo to win it since 2007. An architect of Real Madrid's four Champions League triumphs, he combined tireless work rate with a virtuoso touch. He left Madrid in July 2025 for AC Milan after 597 appearances and 41 goals for the club.",
       "honours": [
         {
-          "title": "Ballon d'Or",
-          "count": 1
-        },
-        {
           "title": "Champions League",
-          "count": 6
+          "count": 5
         },
         {
           "title": "La Liga",
-          "count": 4
+          "count": 3
         },
         {
           "title": "World Cup Golden Ball",
           "count": 1
+        },
+        {
+          "title": "Ballon d'Or",
+          "count": 1
+        }
+      ],
+      "preferredFoot": "Both",
+      "nationalTeamCaps": 180,
+      "worldCupHistory": [
+        {
+          "year": 2006,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
+        },
+        {
+          "year": 2014,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
+        },
+        {
+          "year": 2018,
+          "stage": "Runner-up",
+          "goals": 2,
+          "assists": 1
+        },
+        {
+          "year": 2022,
+          "stage": "3rd Place",
+          "goals": 1,
+          "assists": 0
         }
       ]
     },
@@ -29493,7 +29850,7 @@
         "apps": 400,
         "goals": 85,
         "assists": 70,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Salem Muhamed Al-Dawsari",
       "birthDate": "1991-08-19",
@@ -30175,7 +30532,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Abdelmouhib Chamakh",
       "birthDate": "2000-01-01",
@@ -30577,7 +30934,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Moutaz Neffati",
       "birthDate": "2004-01-01",
@@ -31215,7 +31572,7 @@
         "apps": 10,
         "goals": 1,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Khalil Ayari",
       "birthDate": "2002-01-01",
@@ -32078,7 +32435,7 @@
         "apps": 240,
         "goals": 45,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Orkun Kökçü",
       "birthDate": "2000-12-29",
@@ -32414,7 +32771,7 @@
         "apps": 220,
         "goals": 70,
         "assists": 55,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Muhammed Kerem Aktürkoğlu",
       "birthDate": "1998-10-21",
@@ -33006,7 +33363,7 @@
         "apps": 510,
         "goals": 85,
         "assists": 70,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "El Hadji Ousseynou Diouf",
       "birthDate": "1981-01-15",
@@ -33122,7 +33479,7 @@
         "apps": 550,
         "goals": 25,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Idrissa Gana Gueye",
       "birthDate": "1989-09-26",
@@ -33511,7 +33868,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Bara Sapoko Ndiaye",
       "birthDate": "2003-01-01",
@@ -33538,16 +33895,16 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/cify0u1678370417.png",
       "stats": {
-        "apps": 540,
-        "goals": 215,
-        "assists": 95,
+        "apps": 635,
+        "goals": 260,
+        "assists": 105,
         "rating": 8.8
       },
       "fullName": "Sadio Mané",
       "birthDate": "1992-04-10",
       "birthPlace": "Bambali, Senegal",
       "height": "1.74 m",
-      "bio": "A humble off the pitch but devastating on it, Mané is a legendary winger known for his explosive pace, pressing, and crucial goals. He led Senegal to their first-ever AFCON title.",
+      "bio": "Sadio Mané is Senegal's greatest player — a lightning-quick, relentless winger who scored 120 goals for Liverpool, won the 2022 AFCON with Senegal, and became one of the few African players to win a Premier League Golden Boot. Humble off the pitch and devastating on it, he scored 55 goals in 127 international appearances before joining Al Nassr.",
       "honours": [
         {
           "title": "Champions League",
@@ -33558,34 +33915,70 @@
           "count": 1
         },
         {
+          "title": "FA Cup",
+          "count": 1
+        },
+        {
           "title": "AFCON",
+          "count": 1
+        },
+        {
+          "title": "Bundesliga",
           "count": 1
         }
       ],
       "career": [
         {
+          "club": "Metz",
+          "years": "2011–2012",
+          "apps": 22,
+          "goals": 1
+        },
+        {
+          "club": "Red Bull Salzburg",
+          "years": "2012–2014",
+          "apps": 87,
+          "goals": 45
+        },
+        {
           "club": "Southampton",
-          "years": "2014-2016",
+          "years": "2014–2016",
           "apps": 75,
           "goals": 25
         },
         {
           "club": "Liverpool",
-          "years": "2016-2022",
+          "years": "2016–2022",
           "apps": 269,
           "goals": 120
         },
         {
           "club": "Bayern Munich",
-          "years": "2022-2023",
+          "years": "2022–2023",
           "apps": 38,
           "goals": 12
         },
         {
           "club": "Al Nassr",
-          "years": "2023-Present",
-          "apps": 35,
-          "goals": 15
+          "years": "2023–Present",
+          "apps": 62,
+          "goals": 22
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 127,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "Group Stage",
+          "goals": 1,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Round of 16",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -33868,7 +34261,7 @@
         "apps": 620,
         "goals": 0,
         "assists": 2,
-        "rating": 9.0
+        "rating": 9
       },
       "fullName": "Thibaut Nicolas Marc Courtois",
       "birthDate": "1992-05-11",
@@ -34395,48 +34788,54 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/o4flia1764089447.png",
       "stats": {
-        "apps": 611,
-        "goals": 149,
-        "assists": 250,
+        "apps": 550,
+        "goals": 120,
+        "assists": 210,
         "rating": 9.4
       },
       "career": [
         {
           "club": "Genk",
-          "years": "2008-2012",
-          "apps": 113,
-          "goals": 17
+          "years": "2008–2012",
+          "apps": 103,
+          "goals": 19
         },
         {
           "club": "Chelsea",
-          "years": "2012-2014",
-          "apps": 9,
+          "years": "2012–2014",
+          "apps": 3,
           "goals": 0
         },
         {
           "club": "Werder Bremen",
-          "years": "2012-2013",
+          "years": "2012–2013",
           "apps": 34,
           "goals": 10
         },
         {
           "club": "VfL Wolfsburg",
-          "years": "2014-2015",
-          "apps": 73,
+          "years": "2014–2015",
+          "apps": 51,
           "goals": 20
         },
         {
           "club": "Manchester City",
-          "years": "2015-Present",
-          "apps": 382,
-          "goals": 102
+          "years": "2015–2025",
+          "apps": 422,
+          "goals": 108
+        },
+        {
+          "club": "Napoli",
+          "years": "2025–Present",
+          "apps": 0,
+          "goals": 0
         }
       ],
       "fullName": "Kevin De Bruyne",
       "birthDate": "1991-06-28",
       "birthPlace": "Drongen, Belgium",
       "height": "1.81 m",
-      "bio": "Widely regarded as one of the best midfielders of his generation, Kevin De Bruyne is a master of the final pass, possessing unmatched vision, crossing, and shooting ability. He has been the primary creative engine for Manchester City's dominance under Pep Guardiola.",
+      "bio": "Kevin De Bruyne is the most complete central midfielder of his era — an unrivalled passer, set-piece specialist, and tactical thinker who orchestrated Manchester City's four consecutive Premier League titles and their 2023 Treble. His 170 Premier League assists in 422 games stand as the benchmark for creative excellence, before his move to Napoli in June 2025.",
       "honours": [
         {
           "title": "Champions League",
@@ -34444,15 +34843,27 @@
         },
         {
           "title": "Premier League",
-          "count": 6
+          "count": 5
         },
         {
           "title": "FA Cup",
           "count": 2
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 110,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "3rd Place",
+          "goals": 1,
+          "assists": 2
         },
         {
-          "title": "Bundesliga Player of the Year",
-          "count": 1
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -34542,7 +34953,7 @@
         "apps": 480,
         "goals": 75,
         "assists": 65,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Youri Marion A. Tielemans",
       "birthDate": "1997-05-07",
@@ -34851,7 +35262,7 @@
         "apps": 150,
         "goals": 10,
         "assists": 5,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Amadou Ba Zeund Georges Mvom Onana",
       "birthDate": "2001-08-16",
@@ -35072,7 +35483,7 @@
         "apps": 220,
         "goals": 45,
         "assists": 35,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Charles De Ketelaere",
       "birthDate": "2001-03-10",
@@ -35340,54 +35751,68 @@
       "club": null,
       "photo": null,
       "stats": {
-        "apps": 300,
-        "goals": 40,
-        "assists": 65,
-        "rating": 8.5
+        "apps": 380,
+        "goals": 65,
+        "assists": 95,
+        "rating": 9
       },
       "fullName": "Achraf Hakimi Mouh",
       "birthDate": "1998-11-04",
       "birthPlace": "Madrid, Spain",
       "height": "1.81 m",
-      "bio": "An elite attacking full-back, Hakimi boasts blistering speed and a winger's instinct in the final third. He was instrumental in Morocco's historic run to the 2022 World Cup semi-finals.",
+      "bio": "Achraf Hakimi is the world's best attacking right-back — a relentless, powerful runner who combines defensive solidity with the attacking output of a winger. Born in Madrid but raised proudly Moroccan, he won consecutive Champions League titles with PSG in 2025 and 2026, cementing his status as an African football legend. He was named African Player of the Year in 2025.",
       "honours": [
         {
-          "title": "Serie A",
-          "count": 1
+          "title": "Champions League",
+          "count": 2
         },
         {
           "title": "Ligue 1",
           "count": 3
         },
         {
-          "title": "Champions League",
+          "title": "Bundesliga",
+          "count": 2
+        },
+        {
+          "title": "Serie A",
           "count": 1
         }
       ],
       "career": [
         {
-          "club": "Real Madrid",
-          "years": "2017-2020",
-          "apps": 17,
-          "goals": 2
+          "club": "Real Madrid B",
+          "years": "2016–2018",
+          "apps": 56,
+          "goals": 7
         },
         {
-          "club": "Borussia Dortmund (loan)",
-          "years": "2018-2020",
-          "apps": 73,
+          "club": "Borussia Dortmund",
+          "years": "2018–2020",
+          "apps": 71,
           "goals": 12
         },
         {
           "club": "Inter Milan",
-          "years": "2020-2021",
+          "years": "2020–2021",
           "apps": 45,
           "goals": 7
         },
         {
           "club": "PSG",
-          "years": "2021-Present",
-          "apps": 115,
-          "goals": 13
+          "years": "2021–Present",
+          "apps": 208,
+          "goals": 39
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 90,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "4th Place",
+          "goals": 1,
+          "assists": 2
         }
       ]
     },
@@ -35404,7 +35829,7 @@
         "apps": 240,
         "goals": 15,
         "assists": 25,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Noussair Mazraoui",
       "birthDate": "1997-11-14",
@@ -35502,7 +35927,7 @@
         "apps": 260,
         "goals": 18,
         "assists": 8,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Nayef Aguerd",
       "birthDate": "1996-03-30",
@@ -35780,7 +36205,7 @@
         "apps": 320,
         "goals": 8,
         "assists": 20,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Sofyan Amrabat",
       "birthDate": "1996-08-21",
@@ -36173,7 +36598,7 @@
         "apps": 260,
         "goals": 95,
         "assists": 65,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Soufiane Rahimi",
       "birthDate": "1996-06-02",
@@ -36364,7 +36789,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 1,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Ayoube Amaimouni",
       "birthDate": "2002-01-01",
@@ -37092,7 +37517,7 @@
         "apps": 480,
         "goals": 105,
         "assists": 90,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Marcel Sabitzer",
       "birthDate": "1994-03-17",
@@ -37660,7 +38085,7 @@
         "apps": 520,
         "goals": 0,
         "assists": 2,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Camilo Andrés Vargas Gil",
       "birthDate": "1989-03-09",
@@ -37717,7 +38142,7 @@
         "apps": 450,
         "goals": 0,
         "assists": 2,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "David Ospina Ramírez",
       "birthDate": "1988-08-31",
@@ -38493,7 +38918,7 @@
         "apps": 250,
         "goals": 45,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Jhon Adolfo Arias Andrade",
       "birthDate": "1997-09-21",
@@ -39104,7 +39529,7 @@
         "apps": 280,
         "goals": 95,
         "assists": 45,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Juan Camilo Hernández Suárez",
       "birthDate": "1999-04-20",
@@ -39734,7 +40159,7 @@
         "apps": 250,
         "goals": 85,
         "assists": 70,
-        "rating": 8.0
+        "rating": 8
       },
       "fullName": "Ahmed Sayed Zizo",
       "birthDate": "1996-01-10",
@@ -40140,27 +40565,21 @@
       "club": null,
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3blc581757088735.png",
       "stats": {
-        "apps": 600,
-        "goals": 288,
-        "assists": 140,
+        "apps": 560,
+        "goals": 330,
+        "assists": 145,
         "rating": 9.3
       },
       "career": [
         {
-          "club": "Al Mokawloon",
-          "years": "2010-2012",
-          "apps": 44,
-          "goals": 12
-        },
-        {
           "club": "Basel",
-          "years": "2012-2014",
-          "apps": 79,
+          "years": "2012–2014",
+          "apps": 78,
           "goals": 20
         },
         {
           "club": "Chelsea",
-          "years": "2014-2016",
+          "years": "2014–2016",
           "apps": 19,
           "goals": 2
         },
@@ -40172,22 +40591,22 @@
         },
         {
           "club": "Roma",
-          "years": "2015-2017",
+          "years": "2015–2017",
           "apps": 83,
           "goals": 34
         },
         {
           "club": "Liverpool",
-          "years": "2017-Present",
-          "apps": 349,
-          "goals": 211
+          "years": "2017–Present",
+          "apps": 354,
+          "goals": 255
         }
       ],
       "fullName": "Mohamed Salah Hamed Mahrous Ghaly",
       "birthDate": "1992-06-15",
       "birthPlace": "Nagrig, Egypt",
       "height": "1.75 m",
-      "bio": "Mohamed Salah is a devastatingly fast and lethal forward, known for his clinical finishing cutting inside from the right wing. As Liverpool's record Premier League goalscorer, he has been central to the club's resurgence and major trophy wins.",
+      "bio": "Mohamed Salah redefined the left-wing position in the modern game — a devastating combination of electric pace, masterful dribbling, and merciless finishing. Egypt's all-time top scorer and Liverpool's all-time leading goalscorer with 255 goals across all competitions, he won the 2024/25 Premier League Golden Boot with 29 goals as Liverpool clinched the title.",
       "honours": [
         {
           "title": "Champions League",
@@ -40195,15 +40614,25 @@
         },
         {
           "title": "Premier League",
-          "count": 1
+          "count": 2
         },
         {
           "title": "FA Cup",
           "count": 1
         },
         {
-          "title": "Premier League Golden Boot",
-          "count": 3
+          "title": "AFCON",
+          "count": 1
+        }
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 100,
+      "worldCupHistory": [
+        {
+          "year": 2018,
+          "stage": "Group Stage",
+          "goals": 2,
+          "assists": 0
         }
       ]
     },
@@ -40471,7 +40900,7 @@
         "apps": 40,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Owen Goodman",
       "birthDate": "2003-11-27",
@@ -40810,7 +41239,7 @@
         "apps": 10,
         "goals": 0,
         "assists": 0,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Luc De Fougerolles",
       "birthDate": "2005-10-12",
@@ -41896,7 +42325,7 @@
         "apps": 77,
         "goals": 21,
         "assists": 24,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Jean-Ricner Bellegarde",
       "birthDate": "27 June 1998",
@@ -41942,7 +42371,7 @@
         "apps": 103,
         "goals": 25,
         "assists": 12,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Danley Jean Jacques",
       "birthDate": "20 May 2000",
@@ -42041,7 +42470,7 @@
         "apps": 125,
         "goals": 8,
         "assists": 23,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Duckens Nazon",
       "birthDate": "1994-08-10",
@@ -42340,7 +42769,7 @@
         "apps": 46,
         "goals": 18,
         "assists": 25,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Milad Mohammadi",
       "birthDate": "1994-04-16",
@@ -42363,7 +42792,7 @@
         "apps": 76,
         "goals": 7,
         "assists": 13,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Hossein Kanaanizadegan",
       "birthDate": "1994-12-04",
@@ -42386,7 +42815,7 @@
         "apps": 113,
         "goals": 20,
         "assists": 14,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Shojae Khalilzadeh",
       "birthDate": "1989-02-20",
@@ -42570,7 +42999,7 @@
         "apps": 115,
         "goals": 9,
         "assists": 20,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Ariya Yousefi",
       "birthDate": "2002-08-17",
@@ -42823,7 +43252,7 @@
         "apps": 116,
         "goals": 1,
         "assists": 5,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Martin Zlomislić",
       "birthDate": "1999-07-22",
@@ -43076,7 +43505,7 @@
         "apps": 55,
         "goals": 29,
         "assists": 9,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Dženis Burnić",
       "birthDate": "1998-01-27",
@@ -43467,7 +43896,7 @@
         "apps": 134,
         "goals": 0,
         "assists": 2,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Cesar Samudio",
       "birthDate": "1994-10-20",
@@ -43513,7 +43942,7 @@
         "apps": 68,
         "goals": 25,
         "assists": 25,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Fidel Escobar",
       "birthDate": "1995-06-08",
@@ -43582,7 +44011,7 @@
         "apps": 123,
         "goals": 10,
         "assists": 18,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "César Blackman",
       "birthDate": "1998-12-15",
@@ -43766,7 +44195,7 @@
         "apps": 109,
         "goals": 12,
         "assists": 11,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Cecilio Waterman",
       "birthDate": "1991-02-27",
@@ -44157,7 +44586,7 @@
         "apps": 40,
         "goals": 26,
         "assists": 6,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Diney Borges",
       "birthDate": "1995-04-22",
@@ -44318,7 +44747,7 @@
         "apps": 110,
         "goals": 25,
         "assists": 10,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Kevin Pina",
       "birthDate": "1997-07-08",
@@ -45590,7 +46019,7 @@
         "apps": 112,
         "goals": 16,
         "assists": 9,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Amad Diallo",
       "birthDate": "2003-03-15",
@@ -45613,7 +46042,7 @@
         "apps": 68,
         "goals": 29,
         "assists": 16,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Parfait Guiagon",
       "birthDate": "2001-04-26",
@@ -45659,7 +46088,7 @@
         "apps": 59,
         "goals": 17,
         "assists": 22,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Nicolas Pépé",
       "birthDate": "1995-02-24",
@@ -45797,7 +46226,7 @@
         "apps": 85,
         "goals": 15,
         "assists": 9,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Bazoumana Touré",
       "birthDate": "2006-09-24",
@@ -45820,7 +46249,7 @@
         "apps": 54,
         "goals": 26,
         "assists": 21,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Yan Diomandé",
       "birthDate": "2007-08-23",
@@ -46027,7 +46456,7 @@
         "apps": 72,
         "goals": 13,
         "assists": 8,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Sultan Al Brake",
       "birthDate": "1996-02-07",
@@ -47062,7 +47491,7 @@
         "apps": 141,
         "goals": 25,
         "assists": 14,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Mustafa Saadoun",
       "birthDate": "2001-12-09",
@@ -47154,7 +47583,7 @@
         "apps": 140,
         "goals": 14,
         "assists": 6,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Manaf Younis",
       "birthDate": "1997-03-13",
@@ -47384,7 +47813,7 @@
         "apps": 70,
         "goals": 16,
         "assists": 6,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Aymen Hussein",
       "birthDate": "1996-12-07",
@@ -47683,7 +48112,7 @@
         "apps": 106,
         "goals": 8,
         "assists": 9,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Farrukh Sayfiyev",
       "birthDate": "1991-02-02",
@@ -47959,7 +48388,7 @@
         "apps": 104,
         "goals": 27,
         "assists": 5,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Azizjon Ganiev",
       "birthDate": "1998-08-19",
@@ -48143,7 +48572,7 @@
         "apps": 53,
         "goals": 0,
         "assists": 3,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Bart Verbruggen",
       "birthDate": "2003-05-04",
@@ -48209,16 +48638,16 @@
       "club": "Liverpool",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/9cxf2q1757087742.png",
       "stats": {
-        "apps": 540,
-        "goals": 45,
-        "assists": 25,
-        "rating": 9.1
+        "apps": 390,
+        "goals": 42,
+        "assists": 22,
+        "rating": 9
       },
       "fullName": "Virgil van Dijk",
       "birthDate": "1991-07-08",
       "birthPlace": "Breda, Netherlands",
       "height": "1.95 m",
-      "bio": "Widely regarded as one of the best defenders of his generation, van Dijk combines immense physical strength, aerial ability, and leadership to command the Liverpool and Netherlands defenses.",
+      "bio": "Virgil van Dijk transformed Liverpool's defence from a liability into the bedrock of a Champions League and Premier League-winning side. Standing 193 cm tall with elite positioning, aerial dominance, and composure on the ball, he was runner-up for the 2019 Ballon d'Or in recognition of the finest defensive season in a generation.",
       "honours": [
         {
           "title": "Champions League",
@@ -48226,37 +48655,47 @@
         },
         {
           "title": "Premier League",
-          "count": 1
+          "count": 2
         },
         {
-          "title": "PFA Player of the Year",
+          "title": "FA Cup",
           "count": 1
         }
       ],
       "career": [
         {
           "club": "Groningen",
-          "years": "2011-2013",
-          "apps": 66,
+          "years": "2011–2013",
+          "apps": 62,
           "goals": 7
         },
         {
           "club": "Celtic",
-          "years": "2013-2015",
-          "apps": 115,
-          "goals": 15
+          "years": "2013–2015",
+          "apps": 60,
+          "goals": 9
         },
         {
           "club": "Southampton",
-          "years": "2015-2018",
-          "apps": 80,
-          "goals": 7
+          "years": "2015–2018",
+          "apps": 89,
+          "goals": 6
         },
         {
           "club": "Liverpool",
-          "years": "2018-Present",
-          "apps": 260,
-          "goals": 23
+          "years": "2018–Present",
+          "apps": 272,
+          "goals": 20
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 75,
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
         }
       ]
     },
@@ -48319,7 +48758,7 @@
         "apps": 104,
         "goals": 11,
         "assists": 10,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Jurrien Timber",
       "birthDate": "2002-03-28",
@@ -48991,7 +49430,7 @@
         "apps": 51,
         "goals": 14,
         "assists": 11,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Henrik Falchener",
       "birthDate": "2003-03-07",
@@ -49037,7 +49476,7 @@
         "apps": 109,
         "goals": 23,
         "assists": 11,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "David Wolfe",
       "birthDate": "2002-05-11",
@@ -49080,18 +49519,63 @@
       "club": "Arsenal",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5g6vww1769331695.png",
       "stats": {
-        "apps": 89,
-        "goals": 29,
-        "assists": 15,
-        "rating": 7.5
+        "apps": 380,
+        "goals": 80,
+        "assists": 105,
+        "rating": 8.7
       },
       "fullName": "Martin Ødegaard",
       "birthDate": "1999-05-20",
       "birthPlace": "Unknown",
       "height": "1.73 m",
-      "bio": "Martin Ødegaard is a highly talented midfielder known for their technical ability, vision, and tireless work rate in the center of the pitch. Representing NOR on the international stage, Martin Ødegaard has become an important part of the national team setup. With strong performances at the club level, they continue to develop their game and are expected to play a crucial role in upcoming international tournaments.",
-      "honours": [],
-      "career": []
+      "bio": "A child prodigy who signed for Real Madrid aged 16 after a dazzling rise at Strømsgodset, Martin Ødegaard matured into a world-class playmaker at Arsenal, where his visionary passing, technical precision, and captaincy have made him the most important player in the club's recent resurgence. He has scored 41 goals in five Arsenal seasons and set a Premier League assists record in 2025/26.",
+      "honours": [
+        {
+          "title": "FA Cup",
+          "count": 1
+        }
+      ],
+      "career": [
+        {
+          "club": "Strømsgodset",
+          "years": "2012–2014",
+          "apps": 54,
+          "goals": 9
+        },
+        {
+          "club": "Real Madrid",
+          "years": "2015–2021",
+          "apps": 11,
+          "goals": 2
+        },
+        {
+          "club": "Heerenveen",
+          "years": "2017",
+          "apps": 27,
+          "goals": 4
+        },
+        {
+          "club": "Vitesse",
+          "years": "2018–2019",
+          "apps": 50,
+          "goals": 14
+        },
+        {
+          "club": "Real Sociedad",
+          "years": "2019–2021",
+          "apps": 66,
+          "goals": 13
+        },
+        {
+          "club": "Arsenal",
+          "years": "2021–Present",
+          "apps": 195,
+          "goals": 46
+        }
+      ],
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 72,
+      "worldCupHistory": []
     },
     {
       "id": "sander-berge-nor",
@@ -49198,7 +49682,7 @@
         "apps": 56,
         "goals": 9,
         "assists": 21,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Thelo Aasgaard",
       "birthDate": "2002-02-27",
@@ -49310,48 +49794,42 @@
       "club": "Manchester City",
       "photo": "https://r2.thesportsdb.com/images/media/player/cutout/un3jr11769182465.png",
       "stats": {
-        "apps": 280,
-        "goals": 225,
-        "assists": 50,
-        "rating": 9.3
+        "apps": 380,
+        "goals": 295,
+        "assists": 60,
+        "rating": 9.4
       },
       "career": [
         {
-          "club": "Bryne",
-          "years": "2016-2017",
-          "apps": 16,
-          "goals": 0
-        },
-        {
           "club": "Molde",
-          "years": "2017-2019",
+          "years": "2017–2019",
           "apps": 50,
           "goals": 20
         },
         {
           "club": "Red Bull Salzburg",
-          "years": "2019-2020",
+          "years": "2019–2020",
           "apps": 27,
           "goals": 29
         },
         {
           "club": "Borussia Dortmund",
-          "years": "2020-2022",
+          "years": "2020–2022",
           "apps": 89,
           "goals": 86
         },
         {
           "club": "Manchester City",
-          "years": "2022-Present",
-          "apps": 98,
-          "goals": 90
+          "years": "2022–Present",
+          "apps": 131,
+          "goals": 120
         }
       ],
       "fullName": "Erling Braut Haaland",
       "birthDate": "2000-07-21",
       "birthPlace": "Leeds, England",
       "height": "1.95 m",
-      "bio": "A fearsome and ruthlessly efficient striker, Erling Haaland is characterized by his pace, athleticism, and devastating finishing ability. He broke numerous goalscoring records in his debut Premier League season with Manchester City, helping them win the historic treble.",
+      "bio": "Born in Leeds but raised in Bryne, Norway, Erling Haaland is the most prolific centre-forward of his generation. His combination of raw power, predatory instincts, and stunning finishing pace has seen him shatter Premier League records at Manchester City, including 36 PL goals in a single season, a figure unmatched in league history.",
       "honours": [
         {
           "title": "Champions League",
@@ -49359,17 +49837,24 @@
         },
         {
           "title": "Premier League",
-          "count": 2
+          "count": 3
         },
         {
           "title": "FA Cup",
           "count": 1
         },
         {
+          "title": "Bundesliga",
+          "count": 1
+        },
+        {
           "title": "DFB-Pokal",
           "count": 1
         }
-      ]
+      ],
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 55,
+      "worldCupHistory": []
     },
     {
       "id": "andreas-schjelderup-nor",
@@ -49384,7 +49869,7 @@
         "apps": 102,
         "goals": 20,
         "assists": 11,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Andreas Schjelderup",
       "birthDate": "2004-07-22",
@@ -49752,7 +50237,7 @@
         "apps": 73,
         "goals": 7,
         "assists": 13,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Kenny McLean",
       "birthDate": "1992-10-13",
@@ -50396,7 +50881,7 @@
         "apps": 137,
         "goals": 14,
         "assists": 6,
-        "rating": 7.0
+        "rating": 7
       },
       "fullName": "Juninho Bacuna",
       "birthDate": "1998-03-26",
@@ -50612,6 +51097,205 @@
       "bio": "Brandley Kuwas is a highly talented midfielder known for their technical ability, vision, and tireless work rate in the center of the pitch. Representing CUW on the international stage, Brandley Kuwas has become an important part of the national team setup. With strong performances at the club level, they continue to develop their game and are expected to play a crucial role in upcoming international tournaments.",
       "honours": [],
       "career": []
+    },
+    {
+      "id": "phil-foden-eng",
+      "name": "Phil Foden",
+      "team": "ENG",
+      "position": "MF",
+      "number": 47,
+      "age": 25,
+      "club": "Manchester City",
+      "photo": "https://www.thesportsdb.com/images/media/player/cutout/qbyqhf1680695345.png",
+      "fullName": "Philip Walter Foden",
+      "birthDate": "2000-05-28",
+      "birthPlace": "Stockport, England",
+      "height": "1.71 m",
+      "preferredFoot": "Left",
+      "nationalTeamCaps": 42,
+      "bio": "Phil Foden is the most complete English player of his generation — a technically supreme attacking midfielder whose close control, creativity, and knack for the decisive moment have powered Manchester City's dynasty. A product of City's academy, he scored his 100th goal for the club at the 2025 Club World Cup, cementing a legacy already destined for Etihad immortality.",
+      "stats": {
+        "apps": 350,
+        "goals": 102,
+        "assists": 95,
+        "rating": 9
+      },
+      "honours": [
+        {
+          "title": "Champions League",
+          "count": 1
+        },
+        {
+          "title": "Premier League",
+          "count": 6
+        },
+        {
+          "title": "FA Cup",
+          "count": 2
+        }
+      ],
+      "career": [
+        {
+          "club": "Manchester City",
+          "years": "2017–Present",
+          "apps": 350,
+          "goals": 102
+        }
+      ],
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
+        }
+      ]
+    },
+    {
+      "id": "trent-alexander-arnold-eng",
+      "name": "Trent Alexander-Arnold",
+      "team": "ENG",
+      "position": "DF",
+      "number": 66,
+      "age": 27,
+      "club": "Real Madrid",
+      "photo": "https://www.thesportsdb.com/images/media/player/cutout/6k3lgr1699968671.png",
+      "fullName": "Trent Alexander-Arnold",
+      "birthDate": "1998-10-07",
+      "birthPlace": "Liverpool, England",
+      "height": "1.75 m",
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 34,
+      "bio": "Trent Alexander-Arnold redefined the role of right-back in the modern game with his exceptional crossing, passing range, and ability to operate as a de facto playmaker from deep. With 354 Liverpool appearances and 86 assists, he joined Real Madrid in June 2025, taking the next step in a career that has already reshaped football's tactical landscape.",
+      "stats": {
+        "apps": 390,
+        "goals": 25,
+        "assists": 100,
+        "rating": 8.8
+      },
+      "honours": [
+        {
+          "title": "Champions League",
+          "count": 1
+        },
+        {
+          "title": "Premier League",
+          "count": 2
+        },
+        {
+          "title": "FA Cup",
+          "count": 1
+        }
+      ],
+      "career": [
+        {
+          "club": "Liverpool",
+          "years": "2016–2025",
+          "apps": 354,
+          "goals": 23
+        },
+        {
+          "club": "Real Madrid",
+          "years": "2025–Present",
+          "apps": 36,
+          "goals": 2
+        }
+      ],
+      "worldCupHistory": [
+        {
+          "year": 2022,
+          "stage": "Quarter-Final",
+          "goals": 0,
+          "assists": 0
+        }
+      ]
+    },
+    {
+      "id": "robert-lewandowski-pol",
+      "name": "Robert Lewandowski",
+      "team": "POL",
+      "position": "FW",
+      "number": 9,
+      "age": 37,
+      "club": "Barcelona",
+      "photo": "https://www.thesportsdb.com/images/media/player/cutout/jggqvk1580907712.png",
+      "fullName": "Robert Lewandowski",
+      "birthDate": "1988-08-21",
+      "birthPlace": "Warsaw, Poland",
+      "height": "1.85 m",
+      "preferredFoot": "Right",
+      "nationalTeamCaps": 148,
+      "bio": "Robert Lewandowski is the greatest Polish player of all time and one of the most prolific strikers in football history. His 864 career matches and 635 goals place him among the handful of players to have scored more than 600 career goals. He claimed the 2020 Ballon d'Or award that was never given due to COVID, and his 41-goal Bundesliga season remains Gerd Müller's record-equalling benchmark.",
+      "stats": {
+        "apps": 864,
+        "goals": 635,
+        "assists": 185,
+        "rating": 9.3
+      },
+      "honours": [
+        {
+          "title": "Champions League",
+          "count": 1
+        },
+        {
+          "title": "Bundesliga",
+          "count": 8
+        },
+        {
+          "title": "DFB-Pokal",
+          "count": 3
+        },
+        {
+          "title": "La Liga",
+          "count": 1
+        }
+      ],
+      "career": [
+        {
+          "club": "Znicz Pruszków",
+          "years": "2006–2008",
+          "apps": 65,
+          "goals": 42
+        },
+        {
+          "club": "Lech Poznań",
+          "years": "2008–2010",
+          "apps": 82,
+          "goals": 41
+        },
+        {
+          "club": "Borussia Dortmund",
+          "years": "2010–2014",
+          "apps": 187,
+          "goals": 103
+        },
+        {
+          "club": "Bayern Munich",
+          "years": "2014–2022",
+          "apps": 374,
+          "goals": 344
+        },
+        {
+          "club": "Barcelona",
+          "years": "2022–Present",
+          "apps": 156,
+          "goals": 105
+        }
+      ],
+      "worldCupHistory": [
+        {
+          "year": 2006,
+          "stage": "Group Stage",
+          "goals": 0,
+          "assists": 0
+        },
+        {
+          "year": 2022,
+          "stage": "Group Stage",
+          "goals": 2,
+          "assists": 0
+        }
+      ]
     }
   ]
 }

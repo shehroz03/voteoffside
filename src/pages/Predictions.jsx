@@ -1,21 +1,32 @@
 import { useEffect, useMemo, useState } from 'react'
 import { groupKeys } from '../lib/teams.js'
 import { useApp } from '../context/AppContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
+import { useCoins } from '../context/CoinsContext.jsx'
 import MatchCard from '../components/MatchCard.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import SharePredictions from '../components/SharePredictions.jsx'
+import MyBets from '../components/MyBets.jsx'
+import BetModal from '../components/BetModal.jsx'
+import AuthModal from '../components/AuthModal.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
 import { fetchMyStreak } from '../lib/votesApi.js'
 import { getMatchVoteState } from '../lib/matches.js'
+import { TrendingUp } from 'lucide-react'
 
 export default function Predictions() {
   const { votes, matches, username } = useApp()
-  const [group, setGroup] = useState('all')
-  const [onlyOpen, setOnlyOpen] = useState(false)
-  const [openNow, setOpenNow] = useState(false)
-  const [streak, setStreak] = useState(0)
+  const { user } = useAuth()
+  const { betForMatch } = useCoins()
 
-  // Fetch current user's prediction streak (0 in demo mode)
+  const [group, setGroup]       = useState('all')
+  const [onlyOpen, setOnlyOpen] = useState(false)
+  const [openNow, setOpenNow]   = useState(false)
+  const [streak, setStreak]     = useState(0)
+
+  const [betMatch, setBetMatch]   = useState(null)  // match being bet on
+  const [authOpen, setAuthOpen]   = useState(false)
+
   useEffect(() => {
     if (!username) return
     fetchMyStreak(username).then(setStreak)
@@ -31,6 +42,11 @@ export default function Predictions() {
   }, [group, onlyOpen, openNow, votes, matches])
 
   const predicted = Object.keys(votes).length
+
+  const handleBetClick = (match) => {
+    if (!user) { setAuthOpen(true); return }
+    setBetMatch(match)
+  }
 
   return (
     <div className="space-y-6">
@@ -63,7 +79,6 @@ export default function Predictions() {
           />
         </div>
 
-        {/* Streak callout inside the progress card — only when on a streak */}
         {streak >= 1 && (
           <div className={`mt-3 flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold ${
             streak >= 5
@@ -86,33 +101,23 @@ export default function Predictions() {
 
       <SharePredictions compact />
 
+      {/* My Bets */}
+      <MyBets onOpenAuth={() => setAuthOpen(true)} />
+
       {/* Filter chips */}
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => setGroup('all')}
-          className={`chip ${group === 'all' ? 'chip-active' : ''}`}
-        >
+        <button onClick={() => setGroup('all')} className={`chip ${group === 'all' ? 'chip-active' : ''}`}>
           All
         </button>
         {groupKeys.map((g) => (
-          <button
-            key={g}
-            onClick={() => setGroup(g)}
-            className={`chip ${group === g ? 'chip-active' : ''}`}
-          >
+          <button key={g} onClick={() => setGroup(g)} className={`chip ${group === g ? 'chip-active' : ''}`}>
             {g}
           </button>
         ))}
-        <button
-          onClick={() => setOpenNow((v) => !v)}
-          className={`chip ml-auto ${openNow ? 'chip-active' : ''}`}
-        >
+        <button onClick={() => setOpenNow((v) => !v)} className={`chip ml-auto ${openNow ? 'chip-active' : ''}`}>
           Open now
         </button>
-        <button
-          onClick={() => setOnlyOpen((v) => !v)}
-          className={`chip ${onlyOpen ? 'chip-active' : ''}`}
-        >
+        <button onClick={() => setOnlyOpen((v) => !v)} className={`chip ${onlyOpen ? 'chip-active' : ''}`}>
           Not predicted yet
         </button>
       </div>
@@ -120,11 +125,40 @@ export default function Predictions() {
       <AdSlot label="Ad · below vote results" />
 
       <StaggerList className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {list.map((m) => (
-          <StaggerItem key={m.id}>
-            <MatchCard match={m} />
-          </StaggerItem>
-        ))}
+        {list.map((m) => {
+          const existingBet  = betForMatch(m.id)
+          const isUpcoming   = m.status === 'upcoming'
+
+          return (
+            <StaggerItem key={m.id}>
+              <div className="flex flex-col gap-1.5">
+                <MatchCard match={m} />
+
+                {/* Bet button — upcoming matches only */}
+                {isUpcoming && (
+                  <button
+                    onClick={() => handleBetClick(m)}
+                    className={`flex items-center justify-center gap-1.5 rounded-xl border py-1.5 text-xs font-semibold transition-colors ${
+                      existingBet
+                        ? existingBet.status === 'pending'
+                          ? 'border-yellow-500/30 bg-yellow-500/10 text-yellow-400 cursor-default'
+                          : 'border-line/40 text-muted cursor-default'
+                        : 'border-brand/30 bg-brand/8 text-brand hover:bg-brand/15'
+                    }`}
+                    disabled={!!existingBet}
+                  >
+                    <TrendingUp size={11} />
+                    {existingBet
+                      ? existingBet.status === 'pending'
+                        ? `🪙 ${existingBet.amount} on ${existingBet.team_code} @ ${existingBet.odds}×`
+                        : 'Settled'
+                      : 'Place a bet'}
+                  </button>
+                )}
+              </div>
+            </StaggerItem>
+          )
+        })}
       </StaggerList>
 
       {list.length === 0 && (
@@ -132,6 +166,16 @@ export default function Predictions() {
           {onlyOpen ? 'You predicted everything here. 🎉' : 'No matches found.'}
         </p>
       )}
+
+      {/* Modals */}
+      {betMatch && (
+        <BetModal
+          match={betMatch}
+          onClose={() => setBetMatch(null)}
+          onSignIn={() => { setBetMatch(null); setAuthOpen(true) }}
+        />
+      )}
+      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
     </div>
   )
 }

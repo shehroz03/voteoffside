@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { Moon, Sun, Trophy, ChevronDown, LogOut, User } from 'lucide-react'
+import { Moon, Sun, Trophy, ChevronDown, LogOut } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { useCoins } from '../context/CoinsContext.jsx'
 import { supabaseEnabled } from '../lib/supabase.js'
 import AuthModal from './AuthModal.jsx'
 
@@ -71,6 +72,7 @@ export default function TopNav() {
   const { dark, toggle } = useTheme()
   const { username } = useApp()
   const { user, signOut } = useAuth()
+  const { balance } = useCoins()
   const [authOpen, setAuthOpen] = useState(false)
 
   return (
@@ -120,7 +122,14 @@ export default function TopNav() {
             {/* Auth UI */}
             {supabaseEnabled && (
               user ? (
-                <UserDropdown user={user} onSignOut={signOut} />
+                <>
+                  {balance !== null && (
+                    <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-1 text-xs font-bold text-yellow-400">
+                      🪙 {balance.toLocaleString()}
+                    </span>
+                  )}
+                  <UserDropdown user={user} onSignOut={signOut} />
+                </>
               ) : (
                 <>
                   {/* Anon username pill — only show when logged out */}

@@ -7,7 +7,7 @@ import TeamBadge from '../components/TeamBadge.jsx'
 import Avatar from '../components/Avatar.jsx'
 import { useApp } from '../context/AppContext.jsx'
 
-const STAT_MAX = { apps: 220, goals: 140, assists: 60, rating: 10 }
+const STAT_MAX = { apps: 900, goals: 700, assists: 370, rating: 10 }
 const STAT_LABELS = { apps: 'Appearances', goals: 'Goals', assists: 'Assists', rating: 'Rating' }
 
 const POSITION_COLORS = {
@@ -21,6 +21,51 @@ const fadeIn = {
   initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.4 },
+}
+
+function trophyEmoji(title) {
+  const t = (title || '').toLowerCase()
+  if (t.includes('world cup') && !t.includes('club')) return '🏆'
+  if (t.includes('champions league') || t.includes('ucl')) return '⭐'
+  if (t.includes('ballon')) return '🎖️'
+  if (t.includes('la liga') || t.includes('premier league') || t.includes('bundesliga') || t.includes('serie a') || t.includes('ligue 1') || t.includes('eredivisie') || t.includes('liga')) return '🥇'
+  if (t.includes('copa america') || t.includes('copa américa') || t.includes('european championship') || t.includes('afcon') || t.includes('nations league') || t.includes('finalissima')) return '🏅'
+  if (t.includes('copa del rey') || t.includes('dfb-pokal') || t.includes('fa cup') || t.includes('league cup') || t.includes('copa libertadores') || t.includes('pokal')) return '🏵️'
+  if (t.includes('club world cup') || t.includes('intercontinental')) return '🌍'
+  if (t.includes('puskas') || t.includes('golden boot')) return '⚽'
+  if (t.includes('kopa') || t.includes('young player')) return '🌟'
+  if (t.includes('golden ball') || t.includes('golden glove')) return '🥇'
+  return '🏆'
+}
+
+function trophyCardColor(title) {
+  const t = (title || '').toLowerCase()
+  if (t.includes('world cup') && !t.includes('club')) return 'border-yellow-500/50 bg-yellow-500/10'
+  if (t.includes('champions league')) return 'border-yellow-400/40 bg-yellow-400/8'
+  if (t.includes('ballon')) return 'border-amber-500/40 bg-amber-500/8'
+  return 'border-line/60 bg-elevated/40'
+}
+
+function wcStageBadgeClass(stage) {
+  if (stage === 'Winner') return 'border-yellow-400/60 bg-yellow-400/20 text-yellow-400'
+  if (stage === 'Runner-up') return 'border-slate-400/50 bg-slate-400/15 text-slate-300'
+  if (stage === '3rd Place') return 'border-amber-600/50 bg-amber-600/15 text-amber-500'
+  if (stage === '4th Place') return 'border-teal-600/50 bg-teal-600/15 text-teal-400'
+  if (stage === 'Semi-Final') return 'border-blue-500/40 bg-blue-500/12 text-blue-400'
+  if (stage === 'Quarter-Final') return 'border-blue-400/35 bg-blue-400/10 text-blue-300'
+  if (stage === 'Round of 16') return 'border-indigo-400/30 bg-indigo-400/8 text-indigo-300'
+  return 'border-line/40 bg-line/20 text-muted'
+}
+
+function wcStageIcon(stage) {
+  if (stage === 'Winner') return '🏆'
+  if (stage === 'Runner-up') return '🥈'
+  if (stage === '3rd Place') return '🥉'
+  if (stage === '4th Place') return '4️⃣'
+  if (stage === 'Semi-Final') return '🔵'
+  if (stage === 'Quarter-Final') return '🔵'
+  if (stage === 'Round of 16') return '⚪'
+  return '⚫'
 }
 
 export default function PlayerProfile() {
@@ -82,26 +127,38 @@ export default function PlayerProfile() {
               <div className={`rounded-full px-3 py-1.5 text-xs font-bold ${posColors.bg} ${posColors.text}`}>
                 {posColors.label}
               </div>
-              <span className="text-2xl font-extrabold leading-none text-ink dark:text-ink">
-                #{player.number}
-              </span>
+              {player.number && (
+                <span className="text-2xl font-extrabold leading-none text-ink dark:text-ink">
+                  #{player.number}
+                </span>
+              )}
               <span className="text-xs font-semibold text-muted">Age {player.age}</span>
+              {player.preferredFoot && (
+                <span className="rounded-full border border-line/50 bg-elevated px-2.5 py-1 text-xs font-semibold text-muted">
+                  {player.preferredFoot === 'Both' ? '⚽ Both feet' : `${player.preferredFoot === 'Left' ? '🦶 Left' : '🦶 Right'} foot`}
+                </span>
+              )}
             </div>
 
             {/* Personal Details */}
-            {(player.fullName || player.birthDate || player.height) && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs text-muted pt-3 w-full border-t border-line/50">
-                {player.fullName && <div><span className="font-semibold text-ink">Full Name:</span> {player.fullName}</div>}
-                {player.birthDate && <div><span className="font-semibold text-ink">Born:</span> {player.birthDate} {player.birthPlace && `(${player.birthPlace})`}</div>}
-                {player.height && <div><span className="font-semibold text-ink">Height:</span> {player.height}</div>}
-              </div>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs text-muted pt-3 w-full border-t border-line/50">
+              {player.fullName && <div><span className="font-semibold text-ink">Full Name:</span> {player.fullName}</div>}
+              {player.birthDate && (
+                <div>
+                  <span className="font-semibold text-ink">Born:</span> {player.birthDate}
+                  {player.birthPlace && ` — ${player.birthPlace}`}
+                </div>
+              )}
+              {player.height && <div><span className="font-semibold text-ink">Height:</span> {player.height}</div>}
+              {player.nationalTeamCaps && (
+                <div><span className="font-semibold text-ink">Intl. Caps:</span> {player.nationalTeamCaps}</div>
+              )}
+            </div>
           </div>
 
           {/* Right: photo with flag overlay */}
           <div className="relative shrink-0">
             <Avatar src={player.photo} alt={player.name} size={140} />
-            {/* Flag overlay */}
             <div className="absolute -bottom-2 -right-2">
               <TeamBadge code={player.team} size={56} cdnSize="w80" />
             </div>
@@ -113,10 +170,7 @@ export default function PlayerProfile() {
       <motion.div {...fadeIn} transition={{ delay: 0.1 }}>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {['apps', 'goals', 'assists', 'rating'].map((stat) => (
-            <div
-              key={stat}
-              className="card flex flex-col items-center gap-2 p-4 text-center"
-            >
+            <div key={stat} className="card flex flex-col items-center gap-2 p-4 text-center">
               <div className="text-3xl font-extrabold text-brand">
                 {player.stats[stat]}
               </div>
@@ -128,48 +182,90 @@ export default function PlayerProfile() {
         </div>
       </motion.div>
 
-      {/* Bio and Honours */}
-      {(player.bio || (player.honours && player.honours.length > 0)) && (
-        <motion.section {...fadeIn} transition={{ delay: 0.12 }} className="card p-5 space-y-5">
-          {player.bio && (
-            <div>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted">
-                Biography
-              </h2>
-              <p className="text-sm leading-relaxed text-ink/90">
-                {player.bio}
-              </p>
-            </div>
-          )}
-          
-          {player.honours && player.honours.length > 0 && (
-            <div>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted flex items-center gap-2">
-                <Trophy size={16} /> Major Honours
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {player.honours.map((honour, idx) => (
-                  <div key={idx} className="flex items-center gap-1.5 rounded-lg border border-line/60 bg-line/20 px-3 py-1.5 text-xs font-semibold">
-                    <Trophy size={14} className="text-brand" />
-                    <span>{honour.count}x {honour.title}</span>
+      {/* Bio */}
+      {player.bio && (
+        <motion.section {...fadeIn} transition={{ delay: 0.12 }} className="card p-5">
+          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted">Biography</h2>
+          <p className="text-sm leading-relaxed text-ink/90">{player.bio}</p>
+        </motion.section>
+      )}
+
+      {/* Honours shelf — actual trophy icons, one per win */}
+      {player.honours && player.honours.length > 0 && (
+        <motion.section {...fadeIn} transition={{ delay: 0.14 }} className="card p-5">
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted">
+            <Trophy size={16} /> Honours Cabinet
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {player.honours.map((honour, idx) => {
+              const icon = trophyEmoji(honour.title)
+              const cardCls = trophyCardColor(honour.title)
+              const displayCount = Math.min(honour.count, 8)
+              const overflow = honour.count > 8 ? honour.count - 8 : 0
+              return (
+                <div
+                  key={idx}
+                  className={`flex flex-col items-center gap-1.5 rounded-xl border px-3 py-2.5 min-w-[80px] ${cardCls}`}
+                >
+                  <div className="flex flex-wrap justify-center gap-0.5 leading-none">
+                    {Array.from({ length: displayCount }).map((_, i) => (
+                      <span key={i} className="text-lg leading-none">{icon}</span>
+                    ))}
+                    {overflow > 0 && (
+                      <span className="ml-0.5 text-xs font-bold text-muted self-center">+{overflow}</span>
+                    )}
                   </div>
-                ))}
-              </div>
+                  <span className="text-center text-[11px] font-semibold text-muted leading-tight">{honour.title}</span>
+                </div>
+              )
+            })}
+          </div>
+        </motion.section>
+      )}
+
+      {/* World Cup History timeline */}
+      {player.worldCupHistory && player.worldCupHistory.length > 0 && (
+        <motion.section {...fadeIn} transition={{ delay: 0.16 }} className="card p-5">
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted">
+            🌍 World Cup History
+          </h2>
+          <div className="relative pl-5">
+            {/* Vertical line */}
+            <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-line/60 rounded-full" />
+            <div className="space-y-4">
+              {player.worldCupHistory.map((wc, idx) => (
+                <div key={idx} className="relative flex items-start gap-3">
+                  {/* Dot on timeline */}
+                  <div className="absolute -left-3 top-1.5 h-2.5 w-2.5 rounded-full border-2 border-brand bg-elevated" />
+                  {/* Content */}
+                  <div className="flex-1 flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-extrabold text-ink">{wc.year}</span>
+                    <span className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold ${wcStageBadgeClass(wc.stage)}`}>
+                      {wcStageIcon(wc.stage)} {wc.stage}
+                    </span>
+                    {(wc.goals > 0 || wc.assists > 0) && (
+                      <span className="text-xs text-muted">
+                        {wc.goals > 0 && `⚽ ${wc.goals} goal${wc.goals !== 1 ? 's' : ''}`}
+                        {wc.goals > 0 && wc.assists > 0 && '  '}
+                        {wc.assists > 0 && `🎯 ${wc.assists} assist${wc.assists !== 1 ? 's' : ''}`}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
+          </div>
         </motion.section>
       )}
 
       {/* Stat bars section */}
-      <motion.section {...fadeIn} transition={{ delay: 0.15 }} className="card p-5">
-        <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-muted">
-          Career progression
-        </h2>
+      <motion.section {...fadeIn} transition={{ delay: 0.18 }} className="card p-5">
+        <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-muted">Career Stats</h2>
         <div className="space-y-4">
           {Object.entries(player.stats).map(([k, v]) => (
             <div key={k}>
               <div className="mb-1 flex justify-between text-sm">
-                <span className="font-semibold capitalize">{STAT_LABELS[k]}</span>
+                <span className="font-semibold capitalize">{STAT_LABELS[k] || k}</span>
                 <span className="tabular-nums text-muted">{v}</span>
               </div>
               <div className="h-2.5 w-full overflow-hidden rounded-full bg-line">
@@ -185,11 +281,10 @@ export default function PlayerProfile() {
         </div>
       </motion.section>
 
-      {/* Career history section */}
+      {/* Club career table */}
       <motion.section {...fadeIn} transition={{ delay: 0.2 }} className="card p-5">
         <h2 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted">
-          <Briefcase size={16} />
-          Club career
+          <Briefcase size={16} /> Club Career
         </h2>
         {player.career && player.career.length > 0 ? (
           <div className="overflow-x-auto">
