@@ -19,6 +19,7 @@ const Privacy       = lazy(() => import('./pages/Privacy.jsx'))
 const Contact       = lazy(() => import('./pages/Contact.jsx'))
 const Disclaimer    = lazy(() => import('./pages/Disclaimer.jsx'))
 const NotFound      = lazy(() => import('./pages/NotFound.jsx'))
+const Admin         = lazy(() => import('./pages/Admin.jsx'))
 
 function Loader() {
   return (
@@ -47,6 +48,7 @@ function AppRoutes() {
         <Route path="/privacy"     element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/contact"     element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/disclaimer"  element={<PageTransition><Disclaimer /></PageTransition>} />
+        <Route path="/admin"       element={<PageTransition><Admin /></PageTransition>} />
         <Route path="*"            element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
