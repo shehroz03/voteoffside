@@ -291,6 +291,8 @@ export default function MatchCard({ match, votable = true }) {
   const { votes } = useApp()
   const { countsMap, ensureLoaded, vote } = useVotes()
   const { map: reactionsMap, sendReaction, dismissReaction } = useReactions()
+  const { user } = useAuth()
+  const [voteAuthOpen, setVoteAuthOpen] = useState(false)
   const cardReactions = reactionsMap[match.id] ?? []
   const userPick = votes[match.id]
   const home = getTeam(match.home)
@@ -369,6 +371,8 @@ export default function MatchCard({ match, votable = true }) {
   const handleVote = useCallback(
     (side, teamCode) => {
       if (!effectiveVotable) return
+      // Require sign-in before any vote is registered
+      if (supabaseEnabled && !user) { setVoteAuthOpen(true); return }
       vote(match.id, teamCode)
       setFlashState((prev) => ({ side, key: (prev?.key ?? 0) + 1 }))
       confetti({
@@ -379,7 +383,7 @@ export default function MatchCard({ match, votable = true }) {
           : ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff'],
       })
     },
-    [effectiveVotable, vote, match.id]
+    [effectiveVotable, vote, match.id, user]
   )
 
   // Whether to show the inline bet panel
@@ -524,6 +528,16 @@ export default function MatchCard({ match, votable = true }) {
               <p className="text-center text-xs text-muted">
                 {userPick ? (
                   <>You picked <b className="text-ink font-bold">{getTeam(userPick).name}</b> · </>
+                ) : supabaseEnabled && !user ? (
+                  <>
+                    <button
+                      onClick={() => setVoteAuthOpen(true)}
+                      className="font-semibold text-brand hover:underline focus:outline-none"
+                    >
+                      Sign in to vote
+                    </button>
+                    {' · '}
+                  </>
                 ) : (
                   <>Tap a team to predict · </>
                 )}
@@ -601,6 +615,9 @@ export default function MatchCard({ match, votable = true }) {
           ))}
         </div>
       </div>
+
+      {/* Sign-in required to vote */}
+      {voteAuthOpen && <AuthModal onClose={() => setVoteAuthOpen(false)} />}
     </motion.div>
   )
 }

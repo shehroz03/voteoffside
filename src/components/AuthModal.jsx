@@ -53,7 +53,7 @@ export default function AuthModal({ onClose }) {
           country,
         })
         if (err) setError(err.message)
-        else setInfo('Account created! Check your email to confirm.')
+        else onClose()
       }
     } catch (ex) {
       setError(ex.message)

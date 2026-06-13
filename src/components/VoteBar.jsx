@@ -19,34 +19,28 @@ function AnimatedCounter({ value }) {
   return <>{display}</>
 }
 
-// ─── Bar spring (unchanged) ──────────────────────────────────────────────────
+// ─── Bar spring ──────────────────────────────────────────────────────────────
 
-const barSpring = {
-  type: 'spring',
-  stiffness: 160,
-  damping: 24,
-  mass: 0.8,
-}
-
-// ─── Momentum threshold ──────────────────────────────────────────────────────
-
+const barSpring = { type: 'spring', stiffness: 160, damping: 24, mass: 0.8 }
 const TIE_GAP = 5
 
-// ─── One portion of the vote bar (home OR away) ──────────────────────────────
-// Handles fire gradient, glow pulse, and smooth transitions when leadership flips.
+// ─── Fire colors ─────────────────────────────────────────────────────────────
 
-function FirePortion({ pct, isWinner, isTie, side, userPick, teamCode, reduced }) {
-  // MotionValue drives background-position for the shifting fire gradient
+const FIRE_COLORS = ['#fbbf24', '#f97316', '#ef4444', '#fde68a', '#fb923c', '#ff6b35', '#ffaa00']
+const EMBER_COLORS = ['#ff4500', '#ff6b35', '#ffa500', '#ffcc00', '#fff176']
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)] }
+
+// ─── Animated bar segment ─────────────────────────────────────────────────────
+
+function BarSegment({ pct, isWinner, isTie, side, userPick, teamCode, reduced }) {
   const fireX = useMotionValue(0)
   const bgPos = useTransform(fireX, (v) => `${v}% 50%`)
 
   useEffect(() => {
-    if (!isWinner || reduced) {
-      fireX.set(0)
-      return
-    }
+    if (!isWinner || reduced) { fireX.set(0); return }
     const c = animate(fireX, [0, 100], {
-      duration: 2.0,
+      duration: 1.6,
       repeat: Infinity,
       repeatType: 'mirror',
       ease: 'easeInOut',
@@ -55,81 +49,52 @@ function FirePortion({ pct, isWinner, isTie, side, userPick, teamCode, reduced }
   }, [isWinner, reduced]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const isPicked = userPick === teamCode
+  const isHome = side === 'home'
 
-  // Base colour (shows underneath / when fire fades)
-  const baseColor =
-    side === 'home'
-      ? isPicked
-        ? '#1a56db'
-        : 'rgba(26,86,219,0.5)'
-      : isPicked
-        ? '#f59e0b'
-        : 'rgba(245,158,11,0.5)'
+  const baseColor = isHome
+    ? isPicked ? '#1a56db' : 'rgba(26,86,219,0.55)'
+    : isPicked ? '#f59e0b' : 'rgba(245,158,11,0.55)'
 
-  // Box-shadow: winner = orange fire pulse, tie = mild gold pulse, picked = team colour
-  const winnerGlow = [
-    '0 0 6px rgba(249,115,22,0.3)',
-    '0 0 16px rgba(249,115,22,0.75)',
-    '0 0 6px rgba(249,115,22,0.3)',
-  ]
-  const tieGlow = [
-    '0 0 3px rgba(245,158,11,0.15)',
-    '0 0 9px rgba(245,158,11,0.38)',
-    '0 0 3px rgba(245,158,11,0.15)',
-  ]
-  const staticGlow =
-    isPicked
-      ? side === 'home'
-        ? '0 0 8px rgba(26,86,219,0.5)'
-        : '0 0 8px rgba(245,158,11,0.5)'
-      : '0 0 0px transparent'
+  // Winner glow: intense fire orange pulse
+  const glow = isWinner && !reduced
+    ? ['0 0 8px rgba(249,115,22,0.4)', '0 0 22px rgba(249,115,22,0.85)', '0 0 8px rgba(249,115,22,0.4)']
+    : isTie && !reduced
+    ? ['0 0 4px rgba(245,158,11,0.2)', '0 0 12px rgba(245,158,11,0.5)', '0 0 4px rgba(245,158,11,0.2)']
+    : isPicked
+    ? isHome ? '0 0 10px rgba(26,86,219,0.6)' : '0 0 10px rgba(245,158,11,0.6)'
+    : 'none'
 
-  const glowAnim =
-    isWinner && !reduced ? winnerGlow : isTie && !reduced ? tieGlow : staticGlow
-
-  const glowTransition =
-    (isWinner || isTie) && !reduced
-      ? { duration: 1.4, repeat: Infinity, ease: 'easeInOut' }
-      : undefined
-
-  // Fire gradient: pushes toward boundary from outer edge
-  const fireGradient =
-    side === 'home'
-      ? 'linear-gradient(90deg, #ea580c 0%, #f97316 20%, #fbbf24 45%, #ef4444 70%, #f97316 88%, #fbbf24 100%)'
-      : 'linear-gradient(270deg, #ea580c 0%, #f97316 20%, #fbbf24 45%, #ef4444 70%, #f97316 88%, #fbbf24 100%)'
+  // Fire gradient — home flows right, away flows left
+  const fireGrad = isHome
+    ? 'linear-gradient(90deg,#b91c1c 0%,#ea580c 18%,#f97316 35%,#fbbf24 52%,#f97316 68%,#ea580c 82%,#ef4444 100%)'
+    : 'linear-gradient(270deg,#b91c1c 0%,#ea580c 18%,#f97316 35%,#fbbf24 52%,#f97316 68%,#ea580c 82%,#ef4444 100%)'
 
   return (
     <motion.div
       className="relative h-full rounded-full"
-      animate={{
-        width: `${pct}%`,
-        boxShadow: glowAnim,
-      }}
+      animate={{ width: `${pct}%`, boxShadow: glow }}
       transition={
-        glowTransition
-          ? { width: barSpring, boxShadow: glowTransition }
+        (isWinner || isTie) && !reduced
+          ? { width: barSpring, boxShadow: { duration: 1.4, repeat: Infinity, ease: 'easeInOut' } }
           : { width: barSpring }
       }
       style={{ width: `${pct}%` }}
     >
-      {/* Base team colour — always visible, fades when fire overlays it */}
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{ background: baseColor }}
-      />
+      {/* Base colour */}
+      <div className="absolute inset-0 rounded-full" style={{ background: baseColor }} />
 
-      {/* Fire gradient overlay — fades in when winning, out when not */}
+      {/* Fire gradient overlay on winner */}
       <AnimatePresence>
         {isWinner && !reduced && (
           <motion.div
-            key="fire"
+            key="fire-overlay"
             className="absolute inset-0 rounded-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.55, ease: 'easeInOut' }}
+            transition={{ duration: 0.5 }}
             style={{
-              background: fireGradient,
+              background: fireGrad,
               backgroundSize: '200% 100%',
               backgroundPosition: bgPos,
             }}
@@ -142,55 +107,60 @@ function FirePortion({ pct, isWinner, isTie, side, userPick, teamCode, reduced }
 
 // ─── Main VoteBar ─────────────────────────────────────────────────────────────
 
-const FIRE_COLORS = ['#fbbf24', '#f97316', '#ef4444', '#fde68a', '#fb923c']
-
 export default function VoteBar({ homePct, awayPct, userPick, homeCode, awayCode }) {
   const reduced = useReducedMotion()
-  const [sparks, setSparks] = useState([])
+  const [particles, setParticles] = useState([])
+  const [embers, setEmbers] = useState([])
   const intervalRef = useRef(null)
+  const emberRef = useRef(null)
 
-  // Derive momentum state
   const gap = homePct - awayPct
   const isTie = Math.abs(gap) <= TIE_GAP
   const homeLeads = !isTie && gap > 0
   const awayLeads = !isTie && gap < 0
+  const winnerPct = homeLeads ? homePct : awayLeads ? awayPct : 50
 
-  // Ref so the interval callback always reads current momentum without restarting
   const leadRef = useRef({ homeLeads, awayLeads, homePct })
-  useEffect(() => {
-    leadRef.current = { homeLeads, awayLeads, homePct }
-  }, [homeLeads, awayLeads, homePct])
+  useEffect(() => { leadRef.current = { homeLeads, awayLeads, homePct } }, [homeLeads, awayLeads, homePct])
 
-  // Spark particle spawner — interval never restarts due to pct changes
+  // Main fire sparks — concentrated near boundary
   useEffect(() => {
     if (reduced) return
-
     const spawn = () => {
       const { homeLeads: hL, awayLeads: aL, homePct: hPct } = leadRef.current
       const id = Date.now() + Math.random()
-      const dur = 0.55 + Math.random() * 0.4
+      const dur = 0.45 + Math.random() * 0.55
+      const size = 2 + Math.random() * 3.5
 
-      let x
-      if (hL) {
-        // concentrate near boundary
-        const lo = Math.max(2, hPct * 0.15)
-        const hi = Math.max(lo + 2, hPct - 2)
-        x = lo + Math.random() * (hi - lo)
-      } else if (aL) {
-        const lo = hPct + 2
-        const hi = Math.min(98, hPct + (100 - hPct) * 0.85)
-        x = lo + Math.random() * (hi - lo)
-      } else {
-        x = 5 + Math.random() * 90
-      }
+      // Cluster sparks tightly around boundary ± 8%
+      const spread = 8
+      const base = hPct
+      const x = base - spread + Math.random() * (spread * 2)
 
-      const color = FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)]
-      setSparks((s) => [...s.slice(-7), { id, x, color, dur }])
+      const color = pick(FIRE_COLORS)
+      const height = 30 + Math.random() * 28
+      setParticles((s) => [...s.slice(-12), { id, x, color, dur, size, height }])
     }
-
-    intervalRef.current = setInterval(spawn, 430)
+    intervalRef.current = setInterval(spawn, 120)
     return () => clearInterval(intervalRef.current)
-  }, [reduced]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [reduced])
+
+  // Floating embers — rise slowly above boundary
+  useEffect(() => {
+    if (reduced) return
+    const spawn = () => {
+      const { homePct: hPct } = leadRef.current
+      const id = 'e' + Date.now() + Math.random()
+      const dur = 1.2 + Math.random() * 1.4
+      const size = 1.5 + Math.random() * 2.5
+      const x = hPct - 12 + Math.random() * 24
+      const color = pick(EMBER_COLORS)
+      const drift = (Math.random() - 0.5) * 20
+      setEmbers((s) => [...s.slice(-8), { id, x, color, dur, size, drift }])
+    }
+    emberRef.current = setInterval(spawn, 280)
+    return () => clearInterval(emberRef.current)
+  }, [reduced])
 
   return (
     <div className="space-y-2">
@@ -198,69 +168,166 @@ export default function VoteBar({ homePct, awayPct, userPick, homeCode, awayCode
       {/* Track + particle overlay */}
       <div className="relative">
 
-        {/* Particle layer — sits above the track, overflows upward into card body */}
+        {/* Particle + ember layer */}
         {!reduced && (
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0"
-            style={{ bottom: 0, height: 46, overflow: 'visible', zIndex: 10 }}
+            style={{ bottom: 0, height: 72, overflow: 'visible', zIndex: 10 }}
           >
-            {/* Boundary flame column */}
+            {/* Wide halo glow behind boundary */}
             <AnimatePresence>
               {!isTie && (
                 <motion.div
-                  key="boundary"
+                  key="halo"
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: [0.45, 1, 0.45] }}
+                  animate={{ opacity: [0.25, 0.7, 0.25] }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{ duration: 1.0, repeat: Infinity, ease: 'easeInOut' }}
                   style={{
                     position: 'absolute',
                     left: `${homePct}%`,
-                    bottom: 0,
-                    width: 5,
-                    height: '75%',
-                    marginLeft: -2.5,
+                    bottom: -2,
+                    width: 36,
+                    height: 56,
+                    marginLeft: -18,
                     background:
-                      'linear-gradient(to top, rgba(249,115,22,0.95), rgba(251,191,36,0.6), transparent)',
-                    filter: 'blur(2.5px)',
-                    borderRadius: 2,
+                      'radial-gradient(ellipse at 50% 100%, rgba(249,115,22,0.85) 0%, rgba(251,191,36,0.45) 45%, transparent 75%)',
+                    filter: 'blur(6px)',
+                    borderRadius: 4,
                   }}
                 />
               )}
             </AnimatePresence>
 
-            {/* Sparks */}
+            {/* Tight core flame column */}
             <AnimatePresence>
-              {sparks.map(({ id, x, color, dur }) => (
+              {!isTie && (
+                <motion.div
+                  key="core"
+                  initial={{ opacity: 0, scaleY: 0.4 }}
+                  animate={{
+                    opacity: [0.7, 1, 0.7],
+                    scaleY: [0.8, 1.15, 0.8],
+                    scaleX: [0.9, 1.1, 0.9],
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    position: 'absolute',
+                    left: `${homePct}%`,
+                    bottom: 0,
+                    width: 6,
+                    height: '65%',
+                    marginLeft: -3,
+                    transformOrigin: 'bottom',
+                    background:
+                      'linear-gradient(to top, rgba(234,88,12,1), rgba(249,115,22,0.85), rgba(251,191,36,0.6), transparent)',
+                    filter: 'blur(2px)',
+                    borderRadius: 3,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+
+            {/* Secondary flame tongues (flicker) */}
+            <AnimatePresence>
+              {!isTie && (
+                <>
+                  <motion.div
+                    key="flame-l"
+                    animate={{ opacity: [0.4, 0.8, 0.3], x: [-2, 1, -3], scaleY: [0.7, 1, 0.6] }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.55, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{
+                      position: 'absolute',
+                      left: `${homePct}%`,
+                      bottom: 0,
+                      width: 4,
+                      height: '45%',
+                      marginLeft: -8,
+                      transformOrigin: 'bottom',
+                      background: 'linear-gradient(to top, rgba(239,68,68,0.9), rgba(251,191,36,0.5), transparent)',
+                      filter: 'blur(2.5px)',
+                      borderRadius: 3,
+                    }}
+                  />
+                  <motion.div
+                    key="flame-r"
+                    animate={{ opacity: [0.3, 0.7, 0.4], x: [2, -1, 3], scaleY: [0.6, 1, 0.7] }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.65, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
+                    style={{
+                      position: 'absolute',
+                      left: `${homePct}%`,
+                      bottom: 0,
+                      width: 4,
+                      height: '40%',
+                      marginLeft: 4,
+                      transformOrigin: 'bottom',
+                      background: 'linear-gradient(to top, rgba(234,88,12,0.9), rgba(253,230,138,0.5), transparent)',
+                      filter: 'blur(2.5px)',
+                      borderRadius: 3,
+                    }}
+                  />
+                </>
+              )}
+            </AnimatePresence>
+
+            {/* Fire sparks rising from boundary */}
+            <AnimatePresence>
+              {particles.map(({ id, x, color, dur, size, height }) => (
                 <motion.div
                   key={id}
                   style={{
                     position: 'absolute',
-                    bottom: 0,
+                    bottom: 2,
                     left: `${x}%`,
-                    width: 3,
-                    height: 3,
+                    width: size,
+                    height: size,
                     borderRadius: '50%',
                     background: color,
-                    filter: 'blur(0.5px)',
+                    filter: 'blur(0.6px)',
+                    boxShadow: `0 0 ${size + 1}px ${color}`,
                   }}
-                  initial={{ y: 0, opacity: 0.9, scale: 1 }}
-                  animate={{ y: -40, opacity: 0, scale: 0.35 }}
+                  initial={{ y: 0, opacity: 1, scale: 1 }}
+                  animate={{ y: -height, opacity: 0, scale: 0.2 }}
+                  exit={{}}
+                  transition={{ duration: dur, ease: [0.2, 0.8, 0.6, 1] }}
+                  onAnimationComplete={() => setParticles((s) => s.filter((p) => p.id !== id))}
+                />
+              ))}
+            </AnimatePresence>
+
+            {/* Slow-rising embers (drift sideways) */}
+            <AnimatePresence>
+              {embers.map(({ id, x, color, dur, size, drift }) => (
+                <motion.div
+                  key={id}
+                  style={{
+                    position: 'absolute',
+                    bottom: 4,
+                    left: `${x}%`,
+                    width: size,
+                    height: size,
+                    borderRadius: '50%',
+                    background: color,
+                    filter: 'blur(0.8px)',
+                  }}
+                  initial={{ y: 0, opacity: 0.9, x: 0, scale: 1 }}
+                  animate={{ y: -62, opacity: 0, x: drift, scale: 0.3 }}
                   exit={{}}
                   transition={{ duration: dur, ease: 'easeOut' }}
-                  onAnimationComplete={() =>
-                    setSparks((s) => s.filter((sp) => sp.id !== id))
-                  }
+                  onAnimationComplete={() => setEmbers((s) => s.filter((e) => e.id !== id))}
                 />
               ))}
             </AnimatePresence>
           </div>
         )}
 
-        {/* Bar track */}
-        <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-line/60 dark:bg-line/40">
-          <FirePortion
+        {/* The bar track itself */}
+        <div className="flex h-3.5 w-full overflow-hidden rounded-full bg-line/60 dark:bg-white/10">
+          <BarSegment
             pct={homePct}
             isWinner={homeLeads}
             isTie={isTie}
@@ -269,7 +336,7 @@ export default function VoteBar({ homePct, awayPct, userPick, homeCode, awayCode
             teamCode={homeCode}
             reduced={reduced}
           />
-          <FirePortion
+          <BarSegment
             pct={awayPct}
             isWinner={awayLeads}
             isTie={isTie}
@@ -283,14 +350,13 @@ export default function VoteBar({ homePct, awayPct, userPick, homeCode, awayCode
 
       {/* Percentage labels */}
       <div className="flex justify-between">
-        <span className={`vote-pct ${userPick === homeCode ? 'text-brand' : 'text-brand/70'}`}>
+        <span className={`vote-pct ${userPick === homeCode ? 'text-brand font-black' : 'text-brand/70'}`}>
           <AnimatedCounter value={homePct} />%
         </span>
-        <span className={`vote-pct ${userPick === awayCode ? 'text-gold-500' : 'text-gold-500/70'}`}>
+        <span className={`vote-pct ${userPick === awayCode ? 'text-gold-500 font-black' : 'text-gold-500/70'}`}>
           <AnimatedCounter value={awayPct} />%
         </span>
       </div>
-
     </div>
   )
 }

@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
+
 export default function Privacy() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight">Privacy Policy</h1>
-        <p className="mt-2 text-sm text-muted">Last updated: June 8, 2026</p>
+        <p className="mt-2 text-sm text-muted">Last updated: June 13, 2026</p>
       </div>
 
       <div className="card p-6 space-y-5 text-sm leading-relaxed">
@@ -138,13 +140,16 @@ export default function Privacy() {
           <ul className="list-disc pl-5 space-y-1">
             <li>
               <strong>flagcdn.com</strong> — used to serve country flag images. Your browser will
-              make requests to flagcdn.com when viewing team information. Please refer to their
-              privacy policy for details.
+              make requests to flagcdn.com when viewing team information.
             </li>
             <li>
               <strong>Supabase</strong> — our backend database provider. Vote and prediction data is
               stored on Supabase servers. Data is stored anonymously (no personal accounts).
               Supabase's privacy policy is available at supabase.com/privacy.
+            </li>
+            <li>
+              <strong>Unsplash</strong> — used to serve background images on the site. Images load
+              from images.unsplash.com. Their privacy policy applies.
             </li>
           </ul>
         </section>
@@ -152,9 +157,10 @@ export default function Privacy() {
         <section className="space-y-2">
           <h2 className="text-base font-bold">6. No Personal Accounts or Login</h2>
           <p>
-            VoteOffside does not offer user accounts, registration, or login. You do not need to
-            provide an email address or password to use the Site. Any display name you choose for
-            the leaderboard is entirely optional and is not linked to any identity verification.
+            VoteOffside does not offer mandatory user accounts or registration. You do not need to
+            provide an email address to use the Site. An optional sign-in feature is available for
+            users who want to save predictions and appear on the leaderboard. Any display name you
+            choose is entirely optional and is not linked to any identity verification.
           </p>
         </section>
 
@@ -191,9 +197,9 @@ export default function Privacy() {
           <p>
             If you have any questions or concerns about this Privacy Policy or your data, please
             reach out via our{' '}
-            <a href="/contact" className="font-semibold text-brand hover:underline">
+            <Link to="/contact" className="font-semibold text-brand hover:underline">
               Contact page
-            </a>
+            </Link>
             .
           </p>
         </section>

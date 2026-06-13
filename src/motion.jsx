@@ -1,5 +1,24 @@
 import { motion, useReducedMotion } from 'framer-motion'
 
+// ─── Scroll reveal ──────────────────────────────────────────────────────────────
+// Animates content in the first time it scrolls into view. Drop around any block.
+
+export function Reveal({ children, className, delay = 0, y = 26, ...rest }) {
+  const reduced = useReducedMotion()
+  return (
+    <motion.div
+      className={className}
+      initial={reduced ? { opacity: 0 } : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay }}
+      {...rest}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 // ─── Page transition ──────────────────────────────────────────────────────────
 
 export function PageTransition({ children }) {

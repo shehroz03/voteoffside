@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CalendarDays, Radio, Vote, Users, BarChart3, GitCompare, ChevronRight } from 'lucide-react'
+import { CalendarDays, Radio, Vote, Users, BarChart3, GitCompare, ChevronRight, Globe2, Trophy, Flame, Zap } from 'lucide-react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { tournament } from '../lib/teams.js'
 import { useApp } from '../context/AppContext.jsx'
@@ -8,9 +8,17 @@ import MatchCard from '../components/MatchCard.jsx'
 import SectionHeader from '../components/SectionHeader.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import SharePredictions from '../components/SharePredictions.jsx'
-import { StaggerList, StaggerItem } from '../motion.jsx'
+import GoatPoll from '../components/GoatPoll.jsx'
+import { StaggerList, StaggerItem, Reveal } from '../motion.jsx'
 import { fetchCrowdAccuracy } from '../lib/votesApi.js'
 import { supabaseEnabled } from '../lib/supabase.js'
+
+const WC_START = new Date('2026-06-11T00:00:00Z')
+function getTournamentDay() {
+  const diff = Date.now() - WC_START.getTime()
+  if (diff < 0) return null
+  return Math.floor(diff / 86400000) + 1
+}
 
 // ─── Countdown ────────────────────────────────────────────────────────────────
 
@@ -65,7 +73,7 @@ function AnimatedHeadline() {
     return (
       <h1 className={cls}>
         Predict every match.<br />
-        <span className="text-gold-300">Beat the world.</span>
+        <span className="text-gold-shine">Beat the world.</span>
       </h1>
     )
   }
@@ -78,7 +86,7 @@ function AnimatedHeadline() {
       </motion.span>
       <motion.span variants={lineContainerB} initial="hidden" animate="show" className="flex flex-wrap gap-x-[0.24em] text-gold-300">
         {['Beat', 'the', 'world.'].map((w, i) => (
-          <motion.span key={i} variants={wordVariant} className="inline-block">{w}</motion.span>
+          <motion.span key={i} variants={wordVariant} className="inline-block text-gold-shine">{w}</motion.span>
         ))}
       </motion.span>
     </h1>
@@ -173,7 +181,7 @@ function CrowdAccuracyStat({ stat, loaded, isDemo }) {
       <div className="text-center">
         <p className="text-sm text-muted">Fans predicted the winner in</p>
         <p className="mt-1 leading-none">
-          <CountUp to={stat.accuracy_pct} suffix="%" className="text-5xl font-black tabular-nums text-brand" />
+          <CountUp to={stat.accuracy_pct} suffix="%" className="text-5xl font-black tabular-nums text-aurora" />
           <span className="ml-2 text-lg font-bold text-muted/80">of matches</span>
         </p>
       </div>
@@ -189,6 +197,196 @@ function CrowdAccuracyStat({ stat, loaded, isDemo }) {
         </div>
       </div>
     </motion.div>
+  )
+}
+
+// ─── World Cup stats band ───────────────────────────────────────────────────────
+
+const WC_STATS = [
+  { icon: Globe2, value: '48',  label: 'Teams',   color: 'text-blue-300' },
+  { icon: Flame,  value: '104', label: 'Matches', color: 'text-orange-300' },
+  { icon: Trophy, value: '1',   label: 'Trophy',  color: 'text-gold-300' },
+]
+
+function WorldCupBand() {
+  const reduced = useReducedMotion()
+  return (
+    <section
+      className="relative overflow-hidden rounded-3xl px-6 py-10 sm:px-10 sm:py-12 text-white"
+      style={{ backgroundColor: '#06122e' }}
+    >
+      {/* Stadium image background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "url('/hero-stadium.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%',
+          opacity: 0.42,
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(6,16,46,0.95) 0%, rgba(8,20,70,0.78) 45%, rgba(124,58,237,0.25) 100%)' }} />
+      <div className="pointer-events-none absolute -top-16 right-10 h-56 w-56 rounded-full bg-gold/15 blur-3xl motion-safe:animate-orb-drift-a" />
+
+      <div className="relative flex flex-col items-center gap-7 text-center">
+        <div>
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <motion.span
+              className="h-2 w-2 rounded-full bg-red-500"
+              animate={{ opacity: [1, 0.15, 1], scale: [1, 1.5, 1] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <span className="section-label text-red-400/90 tracking-[0.18em]">Tournament Underway</span>
+          </div>
+          <h2 className="mt-2 text-2xl font-black tracking-tight sm:text-4xl">
+            104 matches. One <span className="text-gold-shine">champion.</span><br className="hidden sm:block" /> Your call.
+          </h2>
+        </div>
+
+        {/* Stat trio */}
+        <div className="grid w-full max-w-lg grid-cols-3 gap-3 sm:gap-4">
+          {WC_STATS.map(({ icon: Icon, value, label, color }, i) => (
+            <motion.div
+              key={label}
+              className="glass rounded-2xl px-2 py-4 sm:py-5"
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + i * 0.1, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <Icon size={22} className={`mx-auto mb-1.5 ${color}`} />
+              <p className="text-2xl font-black tabular-nums sm:text-3xl">{value}</p>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-white/55">{label}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <Link
+          to="/predictions"
+          className="sheen btn bg-gold-gradient px-7 py-3 font-black text-[#3a2406] shadow-[0_6px_24px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(245,158,11,0.55)]"
+        >
+          Make your predictions
+        </Link>
+      </div>
+    </section>
+  )
+}
+
+// ─── FIFA Live Day Poster ─────────────────────────────────────────────────────
+
+function FifaLivePoster() {
+  const reduced = useReducedMotion()
+  const day = getTournamentDay()
+  if (!day) return null
+
+  const today = new Date()
+  const dateStr = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+
+  return (
+    <motion.section
+      initial={reduced ? { opacity: 0 } : { opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+      className="relative overflow-hidden rounded-3xl text-white"
+      style={{ background: 'linear-gradient(135deg, #02071a 0%, #0b1d4e 45%, #06102e 100%)' }}
+    >
+      {/* Background glow blobs */}
+      <div aria-hidden className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-red-600/12 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-16 right-10 h-64 w-64 rounded-full bg-yellow-400/10 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-48 w-96 rounded-full bg-blue-700/15 blur-2xl" />
+
+      {/* Top accent — red stripe */}
+      <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-red-700 via-red-500 to-red-700" />
+
+      {/* Dot grid overlay */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px,rgba(255,255,255,0.9) 1px,transparent 0)', backgroundSize: '20px 20px' }} />
+
+      <div className="relative px-6 py-8 sm:px-10 sm:py-10">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10">
+
+          {/* Left — main content */}
+          <div className="flex-1 text-center sm:text-left">
+            {/* LIVE badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/15 px-4 py-1.5 mb-4">
+              <motion.span
+                className="h-2 w-2 rounded-full bg-red-500"
+                animate={{ opacity: [1, 0.1, 1], scale: [1, 1.6, 1] }}
+                transition={{ duration: 1.0, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-red-400">FIFA World Cup · Live Now</span>
+            </div>
+
+            {/* Headline */}
+            <h2 className="text-3xl sm:text-5xl font-black leading-none tracking-tight">
+              <span className="block text-white/90">FIFA</span>
+              <span className="block text-yellow-400 drop-shadow-[0_0_24px_rgba(251,191,36,0.5)]">World Cup 2026™</span>
+              <span className="block text-white/90">Is Happening.</span>
+            </h2>
+
+            <p className="mt-3 text-sm text-white/55 font-medium">{dateStr}</p>
+
+            {/* Host nations */}
+            <div className="mt-4 flex items-center justify-center sm:justify-start gap-3 text-sm font-bold text-white/80">
+              <span>🇺🇸 USA</span>
+              <span className="text-white/25">·</span>
+              <span>🇨🇦 Canada</span>
+              <span className="text-white/25">·</span>
+              <span>🇲🇽 Mexico</span>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+              <Link
+                to="/live"
+                className="inline-flex items-center gap-2 rounded-xl bg-red-500 px-5 py-2.5 text-sm font-black text-white shadow-[0_4px_18px_rgba(239,68,68,0.4)] hover:bg-red-400 hover:-translate-y-0.5 transition-all"
+              >
+                <Zap size={14} />
+                Live Scores
+              </Link>
+              <Link
+                to="/predictions"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/8 hover:text-white transition-all backdrop-blur-sm"
+              >
+                Make Predictions
+              </Link>
+            </div>
+          </div>
+
+          {/* Right — Day counter */}
+          <div className="shrink-0 flex flex-col items-center gap-2">
+            <div
+              className="relative flex flex-col items-center justify-center rounded-2xl border border-yellow-400/20 bg-white/4 px-8 py-6 backdrop-blur-sm"
+              style={{ minWidth: 130 }}
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-white/50 mb-1">Tournament</span>
+              <span className="text-7xl font-black tabular-nums leading-none text-yellow-400 drop-shadow-[0_0_20px_rgba(251,191,36,0.6)]">{day}</span>
+              <span className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-white/60">Day{day === 1 ? '' : 's'} In</span>
+              {/* Glow ring */}
+              <div aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-yellow-400/15" />
+            </div>
+
+            {/* Stats row */}
+            <div className="flex gap-2 mt-1">
+              {[{ v: 48, l: 'Teams' }, { v: 104, l: 'Matches' }].map(({ v, l }) => (
+                <div key={l} className="flex flex-col items-center rounded-xl bg-white/5 border border-white/8 px-3 py-2">
+                  <span className="text-base font-black text-white/90 tabular-nums">{v}</span>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-white/40">{l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bottom shimmer */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-3xl"
+        style={{ background: 'linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.04) 50%, transparent 65%)' }}
+        animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'linear', repeatDelay: 1.5 }}
+      />
+    </motion.section>
   )
 }
 
@@ -250,19 +448,23 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative w-full max-w-lg">
-          <motion.span {...fadeUp(0)} className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-[0.12em] backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]" />
-            FIFA World Cup 2026
+          <motion.span {...fadeUp(0)} className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-[0.12em] backdrop-blur-sm border border-red-500/30">
+            <motion.span
+              className="h-1.5 w-1.5 rounded-full bg-red-500"
+              animate={{ opacity: [1, 0.15, 1], scale: [1, 1.4, 1] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            🔴 Live · FIFA World Cup 2026
           </motion.span>
 
           <AnimatedHeadline />
 
           <motion.p {...fadeUp(0.52)} className="mt-4 max-w-md text-white/75 text-base leading-relaxed">
-            Vote on all 104 matches, watch live scores, and climb the leaderboard. No signup needed.
+            Sign in to vote on all 104 matches, watch live scores, and climb the leaderboard.
           </motion.p>
 
           <motion.div {...fadeUp(0.62)} className="mt-7 flex flex-wrap gap-3">
-            <Link to="/predictions" className="btn bg-white px-6 py-3 text-brand font-black hover:bg-white/92 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.3)] hover:-translate-y-0.5">
+            <Link to="/predictions" className="sheen btn bg-white px-6 py-3 text-brand font-black hover:bg-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_28px_rgba(251,191,36,0.35)] hover:-translate-y-0.5">
               Start predicting
             </Link>
             <Link to="/schedule" className="btn border border-white/30 px-6 py-3 text-white font-semibold hover:bg-white/10 backdrop-blur-sm">
@@ -270,7 +472,21 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          {!c.done && (
+          {c.done ? (
+            <motion.div {...fadeUp(0.72)} className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-red-500/15 px-5 py-3 backdrop-blur-sm border border-red-500/25">
+              <motion.span
+                className="h-2 w-2 shrink-0 rounded-full bg-red-500"
+                animate={{ opacity: [1, 0.1, 1], scale: [1, 1.5, 1] }}
+                transition={{ duration: 1.0, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="text-sm font-black text-white/90">
+                FIFA World Cup 2026 is <span className="text-red-400">LIVE</span> · Day {getTournamentDay()}
+              </span>
+              <Link to="/live" className="ml-1 shrink-0 rounded-lg bg-red-500/20 px-2.5 py-0.5 text-[11px] font-black text-red-300 hover:bg-red-500/35 transition-colors border border-red-500/30">
+                Scores →
+              </Link>
+            </motion.div>
+          ) : (
             <motion.div {...fadeUp(0.72)} className="mt-8 inline-flex items-center gap-4 rounded-2xl bg-white/10 px-5 py-3.5 backdrop-blur-sm border border-white/10">
               <span className="section-label text-white/60 tracking-[0.14em]">Kickoff in</span>
               <div className="flex gap-3 font-black tabular-nums text-xl">
@@ -286,11 +502,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── FIFA Live Poster ─────────────────────────────────────── */}
+      <FifaLivePoster />
+
       {/* ── Quick links ──────────────────────────────────────────── */}
       <StaggerList className="grid grid-cols-3 gap-3 sm:grid-cols-6">
         {QUICK.map(({ to, label, icon: Icon, iconBg, iconColor, shadow, hoverBorder }) => (
           <StaggerItem key={to} lift>
-            <Link to={to} className={`quick-card border border-line/60 hover:shadow-lg ${hoverBorder}`}>
+            <Link to={to} className={`sheen quick-card border border-line/60 hover:shadow-lg ${hoverBorder}`}>
               <span className={`quick-icon ${iconBg} ${iconColor} ${shadow}`}>
                 <Icon size={22} />
               </span>
@@ -301,15 +520,29 @@ export default function Home() {
       </StaggerList>
 
       {/* ── Crowd Intelligence ───────────────────────────────────── */}
-      <CrowdAccuracyStat stat={crowdStat} loaded={crowdLoaded} isDemo={!supabaseEnabled} />
+      <Reveal>
+        <CrowdAccuracyStat stat={crowdStat} loaded={crowdLoaded} isDemo={!supabaseEnabled} />
+      </Reveal>
+
+      {/* ── World Cup band ───────────────────────────────────────── */}
+      <Reveal>
+        <WorldCupBand />
+      </Reveal>
+
+      {/* ── GOAT poll ────────────────────────────────────────────── */}
+      <Reveal>
+        <GoatPoll />
+      </Reveal>
 
       {/* ── Share predictions ────────────────────────────────────── */}
-      <SharePredictions />
+      <Reveal>
+        <SharePredictions />
+      </Reveal>
 
       <AdSlot label="Ad · below navbar" />
 
       {/* ── Featured matches ─────────────────────────────────────── */}
-      <section>
+      <Reveal><section>
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <div className="section-divider mb-2">Next Matches</div>
@@ -327,7 +560,7 @@ export default function Home() {
             </StaggerItem>
           ))}
         </StaggerList>
-      </section>
+      </section></Reveal>
 
     </div>
   )

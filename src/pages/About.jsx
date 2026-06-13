@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function About() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -28,19 +30,34 @@ export default function About() {
           device's local storage. You can clear it at any time by clearing your browser data.
         </p>
 
+        <h2 className="text-base font-bold">Advertising</h2>
+        <p>
+          VoteOffside is a free site supported by advertising. We use Google AdSense to display
+          relevant ads. These ads help us keep the service free for everyone. You can learn more
+          about how we handle data in our{' '}
+          <Link to="/privacy" className="font-semibold text-brand hover:underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
+
         <h2 className="text-base font-bold">Disclaimer</h2>
         <p>
           VoteOffside is an unofficial fan project. It is not affiliated with, endorsed by, or
           connected to FIFA, any national football federation, or any club. Fixture data and
-          statistics are provided for entertainment purposes only.
+          statistics are provided for entertainment purposes only. Read our full{' '}
+          <Link to="/disclaimer" className="font-semibold text-brand hover:underline">
+            Disclaimer
+          </Link>
+          .
         </p>
 
         <h2 className="text-base font-bold">Get in touch</h2>
         <p>
           Have feedback, spotted a bug, or want to say hello? Visit our{' '}
-          <a href="/contact" className="font-semibold text-brand hover:underline">
+          <Link to="/contact" className="font-semibold text-brand hover:underline">
             Contact page
-          </a>
+          </Link>
           .
         </p>
       </div>

@@ -245,51 +245,75 @@ export default function TopNav() {
   const { username } = useApp()
   const { user, signOut } = useAuth()
   const { balance, loading } = useCoins()
+  const reduced = useReducedMotion()
   const [authOpen, setAuthOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [hovered, setHovered] = useState(null)
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line/60 bg-elevated/85 backdrop-blur-md dark:bg-[rgba(6,10,24,0.88)] dark:border-[rgba(24,36,68,0.7)]">
-        {/* Brand accent line */}
-        <div className="absolute top-0 inset-x-0 h-[2px] bg-brand-gradient opacity-90" />
+      <motion.header
+        initial={reduced ? { opacity: 0 } : { y: -72, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 26 }}
+        className="sticky top-0 z-40 border-b border-line/60 bg-elevated/85 backdrop-blur-md dark:bg-[rgba(6,10,24,0.88)] dark:border-[rgba(24,36,68,0.7)]"
+      >
+        {/* Brand accent line — animated aurora */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-aurora bg-[length:300%_auto] animate-gradient-shift opacity-90" />
 
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 font-extrabold tracking-tight shrink-0">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient shadow-brand">
-              <Trophy size={18} className="text-white drop-shadow" />
+          <Link to="/" className="group flex items-center gap-2.5 font-extrabold tracking-tight shrink-0">
+            <span className="relative flex h-9 w-9 items-center justify-center">
+              {/* pulsing glow halo */}
+              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-xl bg-brand-gradient blur-md opacity-50 motion-safe:animate-glow-pulse" />
+              <span className="sheen relative flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient shadow-brand transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-6">
+                <Trophy size={18} className="text-white drop-shadow" />
+              </span>
             </span>
             <span className="text-lg leading-none">
-              Vote<span className="bg-brand-gradient bg-clip-text text-transparent">Offside</span>
+              Vote<span className="text-aurora">Offside</span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="ml-3 hidden items-center gap-0.5 lg:flex">
+          <nav
+            className="ml-3 hidden items-center gap-0.5 lg:flex"
+            onMouseLeave={() => setHovered(null)}
+          >
             {LINKS.map((l) => (
               <NavLink
                 key={l.to}
                 to={l.to}
+                onMouseEnter={() => setHovered(l.to)}
                 className={({ isActive }) =>
-                  `relative rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-150 ${
+                  `relative rounded-full px-4 py-2 text-sm font-bold transition-colors duration-200 ${
                     isActive
-                      ? 'text-brand dark:text-brand-300'
+                      ? 'text-white'
                       : 'text-muted hover:text-ink dark:hover:text-ink'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    {l.label}
+                    {/* Filled glowing gradient pill on the active link */}
                     {isActive && (
                       <motion.span
-                        layoutId="nav-underline"
-                        className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand-gradient"
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 rounded-full bg-aurora bg-[length:200%_auto] animate-gradient-shift shadow-[0_4px_16px_rgba(26,86,219,0.55)]"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
+                    {/* Gliding hover pill on inactive links */}
+                    {hovered === l.to && !isActive && (
+                      <motion.span
+                        layoutId="nav-hover-pill"
+                        className="absolute inset-0 rounded-full bg-brand/10 dark:bg-white/8"
+                        transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                      />
+                    )}
+                    <span className="relative z-10">{l.label}</span>
                   </>
                 )}
               </NavLink>
@@ -312,7 +336,7 @@ export default function TopNav() {
                   </span>
                   <button
                     onClick={() => setAuthOpen(true)}
-                    className="rounded-xl border border-brand/40 bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand hover:bg-brand/20 transition-colors"
+                    className="sheen rounded-xl border border-brand/40 bg-brand/10 px-3.5 py-1.5 text-xs font-bold text-brand hover:bg-brand/20 hover:border-brand/60 hover:shadow-[0_0_14px_rgba(26,86,219,0.35)] transition-all duration-200"
                   >
                     Sign in
                   </button>
@@ -327,13 +351,24 @@ export default function TopNav() {
               </span>
             )}
 
-            {/* Theme toggle — desktop */}
+            {/* Theme toggle — desktop, animated icon swap */}
             <button
               onClick={toggle}
               aria-label="Toggle dark mode"
-              className="hidden lg:flex h-9 w-9 items-center justify-center rounded-xl border border-line/70 text-muted hover:text-ink hover:border-brand/40 hover:bg-brand/5 transition-all duration-150 dark:border-white/10 dark:hover:bg-white/5"
+              className="relative hidden lg:flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-line/70 text-muted hover:text-ink hover:border-brand/40 hover:bg-brand/5 transition-all duration-150 dark:border-white/10 dark:hover:bg-white/5"
             >
-              {dark ? <Sun size={16} /> : <Moon size={16} />}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={dark ? 'sun' : 'moon'}
+                  initial={reduced ? { opacity: 0 } : { y: -16, opacity: 0, rotate: -90 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={reduced ? { opacity: 0 } : { y: 16, opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                  className="flex items-center justify-center"
+                >
+                  {dark ? <Sun size={16} /> : <Moon size={16} />}
+                </motion.span>
+              </AnimatePresence>
             </button>
 
             {/* Mobile hamburger */}
@@ -346,7 +381,7 @@ export default function TopNav() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile drawer */}
       <MobileDrawer

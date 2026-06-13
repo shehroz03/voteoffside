@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Disclaimer() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -36,17 +38,31 @@ export default function Disclaimer() {
           <p>
             VoteOffside is a free, non-commercial fan prediction game. It does not involve real
             money, prizes, or gambling of any kind. Nothing on this site constitutes financial,
-            betting, or gambling advice. The "points" system is purely for entertainment.
+            betting, or gambling advice. The "coins" and "points" system is purely for entertainment.
+          </p>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-bold">Advertising</h2>
+          <p>
+            This site displays advertisements served by Google AdSense and potentially other
+            third-party ad networks. We do not control the content of those advertisements and are
+            not responsible for them. Ad content is served automatically based on page context and
+            visitor interests. Please see our{' '}
+            <Link to="/privacy" className="font-semibold text-brand hover:underline">
+              Privacy Policy
+            </Link>{' '}
+            for details on how advertising cookies work.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-bold">Third-Party Content</h2>
           <p>
-            This site may display advertisements served by Google AdSense or other third parties.
-            We do not control the content of those advertisements and are not responsible for them.
-            Player and team statistics shown on this site are sample/illustrative figures and should
-            not be relied upon as official statistics.
+            Player and team statistics shown on this site are sample or illustrative figures for
+            entertainment and should not be relied upon as official statistics. Player personal life
+            information is sourced from publicly available sources and is provided for informational
+            purposes only.
           </p>
         </section>
 
@@ -63,9 +79,9 @@ export default function Disclaimer() {
           <h2 className="text-base font-bold">Contact</h2>
           <p>
             Questions about this disclaimer? Visit our{' '}
-            <a href="/contact" className="font-semibold text-brand hover:underline">
+            <Link to="/contact" className="font-semibold text-brand hover:underline">
               Contact page
-            </a>
+            </Link>
             .
           </p>
         </section>
