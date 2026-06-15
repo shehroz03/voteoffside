@@ -25,6 +25,20 @@
   --gold-glow:  rgba(245, 158, 11, 0.22);
 }
 
+/* ─── Liquid theme-switch (View Transitions API) ───────────────────
+   The new theme floods across the screen in a circular wave from the
+   toggle button. We disable the default cross-fade so the clip-path
+   reveal (driven from ThemeContext) shows cleanly, with the incoming
+   theme stacked on top of the old one. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+/* Incoming theme always reveals on top of the outgoing one */
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
 /* ─── Base ─────────────────────────────────────────────────────── */
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
