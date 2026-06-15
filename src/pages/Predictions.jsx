@@ -143,13 +143,53 @@ export default function Predictions() {
     if (!user) setView('matches')
   }, [user])
 
-  const list = useMemo(() => {
-    return matches.filter((m) => {
+  const { grouped, totalFiltered } = useMemo(() => {
+    const now = new Date()
+    const todayStr = now.toISOString().slice(0, 10)
+    const tomorrowStr = new Date(now.getTime() + 86400000).toISOString().slice(0, 10)
+
+    const filtered = matches.filter((m) => {
       if (group !== 'all' && m.group !== group) return false
       if (onlyOpen && votes[m.id]) return false
       if (openNow && getMatchVoteState(m) !== 'open') return false
       return true
     })
+
+    // bucket each match into a section key
+    const byDate = {}
+    filtered.forEach((m) => {
+      const mDay = m.date.slice(0, 10)
+      const bucket =
+        m.status === 'live'     ? '__live__'  :
+        mDay === todayStr       ? '__today__' :
+        new Date(m.date) < now  ? '__past__'  : mDay
+      if (!byDate[bucket]) byDate[bucket] = []
+      byDate[bucket].push(m)
+    })
+
+    // ordered section keys: live → today → future dates asc → past
+    const futureKeys = Object.keys(byDate)
+      .filter((k) => !k.startsWith('__'))
+      .sort()
+    const order = ['__live__', '__today__', ...futureKeys, '__past__']
+
+    const sections = order
+      .filter((k) => byDate[k]?.length)
+      .map((k) => ({
+        key: k,
+        label:
+          k === '__live__'  ? '🔴 Live Now' :
+          k === '__today__' ? '⚡ Today' :
+          k === '__past__'  ? 'Completed' :
+          k === tomorrowStr ? 'Tomorrow' :
+          new Date(k + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }),
+        isToday: k === '__today__',
+        isLive:  k === '__live__',
+        isPast:  k === '__past__',
+        matches: byDate[k].sort((a, b) => new Date(a.date) - new Date(b.date)),
+      }))
+
+    return { grouped: sections, totalFiltered: filtered.length }
   }, [group, onlyOpen, openNow, votes, matches])
 
   const predicted = Object.keys(votes).length
@@ -176,7 +216,7 @@ export default function Predictions() {
       <div className="card p-4">
         <div className="mb-2 flex justify-between text-xs font-semibold text-muted">
           <span>Your progress</span>
-          <span>{Math.round((predicted / matches.length) * 100)}%</span>
+          <span>{Math.round((predicted / (matches.length || 1)) * 100)}%</span>
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-line">
           <div
@@ -257,19 +297,46 @@ export default function Predictions() {
         <>
           <AdSlot label="Ad · below vote results" />
 
-          <StaggerList className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {list.map((m) => (
-              <StaggerItem key={m.id}>
-                <MatchCard match={m} />
-              </StaggerItem>
-            ))}
-          </StaggerList>
-
-          {list.length === 0 && (
+          {totalFiltered === 0 && (
             <p className="py-12 text-center text-muted">
               {onlyOpen ? 'You predicted everything here. 🎉' : 'No matches found.'}
             </p>
           )}
+
+          {grouped.map((section, si) => (
+            <div key={section.key} className="space-y-3">
+              {/* Section header */}
+              <div className={`flex items-center gap-2 rounded-xl px-3 py-2 ${
+                section.isLive  ? 'bg-red-500/10 border border-red-500/25' :
+                section.isToday ? 'bg-brand/8 border border-brand/20' :
+                section.isPast  ? 'bg-line/30 dark:bg-white/3 border border-line/40 dark:border-white/6' :
+                'bg-elevated/60 border border-line/40 dark:border-white/6'
+              }`}>
+                <span className={`text-sm font-black ${
+                  section.isLive ? 'text-red-400' :
+                  section.isToday ? 'text-brand dark:text-brand-300' :
+                  section.isPast ? 'text-muted' : 'text-ink'
+                }`}>
+                  {section.label}
+                </span>
+                <span className="ml-auto rounded-full bg-white/8 px-2 py-0.5 text-[10px] font-bold text-muted">
+                  {section.matches.length} match{section.matches.length !== 1 ? 'es' : ''}
+                </span>
+              </div>
+
+              {/* Match cards */}
+              <StaggerList className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {section.matches.map((m) => (
+                  <StaggerItem key={m.id}>
+                    <MatchCard match={m} />
+                  </StaggerItem>
+                ))}
+              </StaggerList>
+
+              {/* Ad after 2nd section */}
+              {si === 1 && <AdSlot label="Ad · mid predictions" />}
+            </div>
+          ))}
         </>
       )}
 
