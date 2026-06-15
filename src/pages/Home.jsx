@@ -392,6 +392,86 @@ function FifaLivePoster() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+// ─── First-visit popup ────────────────────────────────────────────────────────
+
+function FirstVisitPopup() {
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    const seen = localStorage.getItem('vo_welcome_seen')
+    if (!seen) {
+      const t = setTimeout(() => setShow(true), 1200)
+      return () => clearTimeout(t)
+    }
+  }, [])
+
+  function dismiss() {
+    localStorage.setItem('vo_welcome_seen', '1')
+    setShow(false)
+  }
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ x: '120%', opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '120%', opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+          className="fixed bottom-6 right-4 z-50 w-[min(320px,calc(100vw-2rem))]"
+        >
+          <div className="relative overflow-hidden rounded-2xl border border-brand/30 bg-[#081228] shadow-2xl shadow-black/60">
+            {/* top accent */}
+            <div className="h-1 w-full bg-gradient-to-r from-brand via-red-500 to-yellow-400" />
+
+            {/* close */}
+            <button
+              onClick={dismiss}
+              className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-white/60 hover:bg-white/20 transition-colors text-sm font-bold"
+            >
+              ×
+            </button>
+
+            <div className="p-5">
+              {/* emoji + badge */}
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-3xl">⚽</span>
+                <span className="rounded-full bg-red-500/20 border border-red-500/30 px-2.5 py-0.5 text-[10px] font-black text-red-400 tracking-wider uppercase">
+                  🔴 Live · FIFA 2026
+                </span>
+              </div>
+
+              <h3 className="text-lg font-black leading-tight text-white">
+                Vote for your<br />favourite team!
+              </h3>
+              <p className="mt-1.5 text-sm text-white/60 leading-snug">
+                Predict every match, beat the world & climb the leaderboard. It's free!
+              </p>
+
+              {/* flags row */}
+              <div className="my-3 flex gap-1 text-xl">
+                {['🇧🇷','🇦🇷','🇫🇷','🇩🇪','🇪🇸','🇵🇹','🏴󠁧󠁢󠁥󠁮󠁧󠁿','🇺🇸'].map((f,i) => (
+                  <span key={i} className="opacity-90">{f}</span>
+                ))}
+              </div>
+
+              <Link
+                to="/predict"
+                onClick={dismiss}
+                className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-brand/30 hover:bg-brand/90 transition-colors"
+              >
+                <Vote size={15} /> Vote Now — It's Free
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function Home() {
   const reduced = useReducedMotion()
   const { matches } = useApp()
@@ -414,6 +494,8 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
+
+      <FirstVisitPopup />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section
