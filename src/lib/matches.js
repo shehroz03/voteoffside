@@ -70,18 +70,24 @@ export function getMatch(id) {
 }
 
 export function getMatchVoteState(match) {
-  const now = new Date()
-  const kickoff = new Date(match.date)
+  // API-confirmed finished or live → always closed
+  if (match.status === 'finished' || match.status === 'live') return 'closed'
 
-  if (kickoff <= now) return 'closed'
+  const now   = new Date()
+  const pad   = (n) => String(n).padStart(2, '0')
+  const toDay = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
 
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const dayAfterTomorrowStart = new Date(todayStart)
-  dayAfterTomorrowStart.setDate(todayStart.getDate() + 2)
+  const todayStr    = toDay(now)
+  const tomorrowStr = toDay(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1))
+  const matchDay    = match.date.slice(0, 10)
 
-  const kickoffDayStart = new Date(kickoff.getFullYear(), kickoff.getMonth(), kickoff.getDate())
+  // Past calendar days → closed
+  if (matchDay < todayStr) return 'closed'
 
-  if (kickoffDayStart < dayAfterTomorrowStart) return 'open'
+  // Today OR tomorrow → open all day (vote until match is confirmed finished)
+  if (matchDay === todayStr || matchDay === tomorrowStr) return 'open'
+
+  // Day after tomorrow and beyond → locked (visible but not yet votable)
   return 'locked'
 }
 
