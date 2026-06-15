@@ -12,6 +12,7 @@ import { useVotes } from '../context/VotesContext.jsx'
 import { useReactions } from '../context/ReactionsContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useCoins } from '../context/CoinsContext.jsx'
+import ShareWin from './ShareWin.jsx'
 import VoteBar from './VoteBar.jsx'
 import AuthModal from './AuthModal.jsx'
 
@@ -556,6 +557,9 @@ export default function MatchCard({ match, votable = true }) {
           )}
         </div>
       )}
+
+      {/* ── Share your win (only when user picked the winning team) ─────────── */}
+      <ShareWin match={match} userPick={userPick} />
 
       {/* ── Inline bet panel (appears after the user votes on an upcoming match) */}
       {showBetPanel && (
