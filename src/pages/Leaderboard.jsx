@@ -6,6 +6,7 @@ import AdSlot from '../components/AdSlot.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
 import { fetchLeaderboard, fetchPredictorOfDay } from '../lib/votesApi.js'
 import { supabaseEnabled } from '../lib/supabase.js'
+import { useSeo } from '../lib/seo.js'
 
 // ─── Demo data ────────────────────────────────────────────────────────────────
 
@@ -168,6 +169,7 @@ function RankCell({ rank }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Leaderboard() {
+  useSeo({ title: 'Global Leaderboard', description: 'See the top FIFA World Cup 2026 predictors worldwide, ranked by Beat the Crowd points. Can you reach #1?', path: '/leaderboard' })
   const { username } = useApp()
   const [rows,    setRows]    = useState(() => makeDemoRows(username))
   const [potd,    setPotd]    = useState(!supabaseEnabled ? DEMO_POTD : null)

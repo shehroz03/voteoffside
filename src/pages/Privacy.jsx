@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useSeo } from '../lib/seo.js'
 
 export default function Privacy() {
+  useSeo({ title: 'Privacy Policy', description: 'How VoteOffside collects, uses and protects your data, including cookies and Google AdSense advertising.', path: '/privacy' })
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>

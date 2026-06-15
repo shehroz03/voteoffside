@@ -6,6 +6,7 @@ import TeamBadge from '../components/TeamBadge.jsx'
 import Avatar from '../components/Avatar.jsx'
 import { players } from '../lib/players.js'
 import { useApp } from '../context/AppContext.jsx'
+import { useSeo } from '../lib/seo.js'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -219,6 +220,12 @@ export default function TeamProfile() {
   const { code } = useParams()
   const team = getTeam(code)
   const { isFavTeam, toggleFavTeam, matches } = useApp()
+
+  useSeo({
+    title: `${team.name} — World Cup 2026 Squad, Fixtures & Results`,
+    description: `${team.name} at the 2026 FIFA World Cup — Group ${team.group} fixtures, results, live group standings and the full squad with player stats.`,
+    path: `/teams/${code}`,
+  })
 
   const groupCodes = groups[team.group] || []
   const groupMates = groupCodes.filter(c => c !== code)

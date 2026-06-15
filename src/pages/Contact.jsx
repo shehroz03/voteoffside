@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { useSeo } from '../lib/seo.js'
 
 export default function Contact() {
+  useSeo({ title: 'Contact Us', description: 'Get in touch with the VoteOffside team. Questions, feedback or partnership enquiries about our FIFA World Cup 2026 prediction game.', path: '/contact' })
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState(null) // null | 'sending' | 'sent' | 'error'
   const [errors, setErrors] = useState({})

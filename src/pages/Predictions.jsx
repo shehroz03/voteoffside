@@ -10,6 +10,7 @@ import AuthModal from '../components/AuthModal.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
 import { fetchMyStreak } from '../lib/votesApi.js'
 import { getMatchVoteState } from '../lib/matches.js'
+import { useSeo } from '../lib/seo.js'
 
 // ─── Status badge styles (My Bets tab) ───────────────────────────────────────
 const STATUS_CLS = {
@@ -123,6 +124,7 @@ function MyBetsTab() {
 // ─── Predictions page ─────────────────────────────────────────────────────────
 
 export default function Predictions() {
+  useSeo({ title: 'Match Predictions', description: 'Predict every FIFA World Cup 2026 match. Vote, compare with the crowd, build your streak and climb the global leaderboard. Free to play.', path: '/predictions' })
   const { votes, matches, username } = useApp()
   const { user } = useAuth()
 

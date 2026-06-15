@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useSeo } from '../lib/seo.js'
 
 export default function Disclaimer() {
+  useSeo({ title: 'Disclaimer', description: 'VoteOffside is an independent fan game and is not affiliated with FIFA. Predictions are for entertainment only.', path: '/disclaimer' })
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>

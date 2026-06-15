@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useSeo } from '../lib/seo.js'
 
 export default function About() {
+  useSeo({ title: 'About', description: 'About VoteOffside — the free fan prediction game for the 2026 FIFA World Cup. Vote on matches, follow live scores and compare players.', path: '/about' })
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>

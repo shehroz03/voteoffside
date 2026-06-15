@@ -8,8 +8,10 @@ import { fetchLiveMatches } from '../lib/scoresApi.js'
 import MatchCard from '../components/MatchCard.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
+import { useSeo } from '../lib/seo.js'
 
 export default function Live() {
+  useSeo({ title: 'Live Scores', description: 'Live FIFA World Cup 2026 scores updating in real time. Follow every goal, card and result as it happens.', path: '/live' })
   const reduced = useReducedMotion()
   const { matches } = useApp()
   const [tick, setTick] = useState(0)

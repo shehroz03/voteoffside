@@ -7,8 +7,10 @@ import TeamBadge from '../components/TeamBadge.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
+import { useSeo } from '../lib/seo.js'
 
 export default function Players() {
+  useSeo({ title: 'Player Stats & Profiles', description: 'Explore FIFA World Cup 2026 player stats, profiles, goals and squads for every nation. Compare your favourite stars.', path: '/players' })
   const { isFavPlayer, toggleFavPlayer } = useApp()
   const navigate = useNavigate()
   const [q, setQ] = useState('')

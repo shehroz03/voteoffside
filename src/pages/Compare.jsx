@@ -4,6 +4,7 @@ import { X, Plus, Search, Trophy } from 'lucide-react'
 import { players, getPlayer } from '../lib/players.js'
 import { getTeam } from '../lib/teams.js'
 import TeamBadge from '../components/TeamBadge.jsx'
+import { useSeo } from '../lib/seo.js'
 
 const STAT_KEYS = ['apps', 'goals', 'assists', 'rating']
 const STAT_LABEL = { apps: 'Appearances', goals: 'Goals', assists: 'Assists', rating: 'Avg rating' }
@@ -50,6 +51,7 @@ function TrophyIcons({ count, title, maxDisplay = 5 }) {
 }
 
 export default function Compare() {
+  useSeo({ title: 'Compare Players Head-to-Head', description: 'Compare FIFA World Cup 2026 players side by side — goals, assists, appearances and form. Settle the GOAT debate.', path: '/compare' })
   const [params, setParams] = useSearchParams()
   const [selected, setSelected] = useState([])
   const [picker, setPicker] = useState(false)

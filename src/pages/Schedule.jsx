@@ -4,8 +4,10 @@ import { groupKeys } from '../lib/teams.js'
 import MatchCard from '../components/MatchCard.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
+import { useSeo } from '../lib/seo.js'
 
 export default function Schedule() {
+  useSeo({ title: 'Match Schedule & Fixtures', description: 'Full FIFA World Cup 2026 schedule — all 104 matches with kickoff times, groups and venues. Never miss a game.', path: '/schedule' })
   const { matches } = useApp()
   const [group,    setGroup]    = useState('all')
   const [matchday, setMatchday] = useState('all')

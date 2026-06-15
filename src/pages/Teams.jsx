@@ -6,8 +6,10 @@ import TeamBadge from '../components/TeamBadge.jsx'
 import { useApp } from '../context/AppContext.jsx'
 import AdSlot from '../components/AdSlot.jsx'
 import { StaggerList, StaggerItem } from '../motion.jsx'
+import { useSeo } from '../lib/seo.js'
 
 export default function Teams() {
+  useSeo({ title: 'All 48 Teams & Groups', description: 'Browse all 48 FIFA World Cup 2026 teams, group standings and full squads. Pick your favourites and follow their journey.', path: '/teams' })
   const { isFavTeam, toggleFavTeam } = useApp()
   const [group, setGroup] = useState('all')
   const [conf, setConf] = useState('all')

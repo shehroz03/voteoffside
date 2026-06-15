@@ -7,6 +7,7 @@ import { getTeam } from '../lib/teams.js'
 import TeamBadge from '../components/TeamBadge.jsx'
 import Avatar from '../components/Avatar.jsx'
 import { useApp } from '../context/AppContext.jsx'
+import { useSeo } from '../lib/seo.js'
 import { personalLife } from '../data/playerPersonalLife.js'
 import PersonalLifeModal from '../components/PersonalLifeModal.jsx'
 
@@ -116,6 +117,12 @@ export default function PlayerProfile() {
   const navigate = useNavigate()
   const player = getPlayer(id)
   const { isFavPlayer, toggleFavPlayer } = useApp()
+
+  useSeo(player ? {
+    title: `${player.name} — ${getTeam(player.team).name} | World Cup 2026 Stats`,
+    description: `${player.name} (${getTeam(player.team).name}) profile for the 2026 FIFA World Cup — position, goals, assists, appearances and career stats.`,
+    path: `/players/${id}`,
+  } : { title: 'Player Profile', path: `/players/${id}` })
 
   if (!player) {
     return (

@@ -12,6 +12,7 @@ import GoatPoll from '../components/GoatPoll.jsx'
 import { StaggerList, StaggerItem, Reveal } from '../motion.jsx'
 import { fetchCrowdAccuracy } from '../lib/votesApi.js'
 import { supabaseEnabled } from '../lib/supabase.js'
+import { useSeo } from '../lib/seo.js'
 
 const WC_START = new Date('2026-06-11T00:00:00Z')
 function getTournamentDay() {
@@ -456,7 +457,7 @@ function FirstVisitPopup() {
               </div>
 
               <Link
-                to="/predict"
+                to="/predictions"
                 onClick={dismiss}
                 className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-brand/30 hover:bg-brand/90 transition-colors"
               >
@@ -473,6 +474,7 @@ function FirstVisitPopup() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  useSeo({ path: '/' })
   const reduced = useReducedMotion()
   const { matches } = useApp()
   const c = useCountdown(tournament.openingMatch.kickoff_ET)
