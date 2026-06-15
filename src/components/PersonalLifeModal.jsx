@@ -115,7 +115,10 @@ export default function PersonalLifeModal({ life, playerName, onClose }) {
                       transition={{ delay: i * 0.05 }}
                       className="flex flex-col items-center gap-2 rounded-xl border border-line/40 bg-elevated/30 p-3 dark:border-white/8 hover:border-pink-500/20 transition-colors"
                     >
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-pink-500/15 to-purple-500/15 text-3xl ring-2 ring-pink-500/10">
+                      {child.photo ? (
+                        <img src={child.photo} alt={child.name} className="h-14 w-14 rounded-full object-cover ring-2 ring-pink-500/10" referrerPolicy="no-referrer" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }} />
+                      ) : null}
+                      <div className={`flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-pink-500/15 to-purple-500/15 text-3xl ring-2 ring-pink-500/10 ${child.photo ? 'hidden' : ''}`}>
                         {child.emoji}
                       </div>
                       <div className="text-center w-full">
