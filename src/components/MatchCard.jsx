@@ -305,7 +305,7 @@ export default function MatchCard({ match, votable = true }) {
 
   const voteState       = getMatchVoteState(match)
   const showVoteBar     = live || finished || voteState === 'open'
-  const effectiveVotable = votable && !live && !finished && voteState === 'open'
+  const effectiveVotable = votable && !finished && voteState === 'open'
 
   // Re-evaluate vote window once a minute
   const [, setTick] = useState(0)

@@ -70,8 +70,10 @@ export function getMatch(id) {
 }
 
 export function getMatchVoteState(match) {
-  // API-confirmed finished or live → always closed
-  if (match.status === 'finished' || match.status === 'live') return 'closed'
+  // Finished matches → closed (no more voting)
+  if (match.status === 'finished') return 'closed'
+  // Live matches → open (users can still vote during the match)
+  if (match.status === 'live') return 'open'
 
   const now   = new Date()
   const pad   = (n) => String(n).padStart(2, '0')
