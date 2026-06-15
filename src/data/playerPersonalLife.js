@@ -6,7 +6,7 @@ export const personalLife = {
     partner: {
       name: 'Antonela Roccuzzo',
       role: 'Wife',
-      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Antonela_Roccuzzo_2023_%28cropped%29.jpg/320px-Antonela_Roccuzzo_2023_%28cropped%29.jpg',
+      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/LIONEL_MESSI_-_BRESH_MIAMI.jpg/500px-LIONEL_MESSI_-_BRESH_MIAMI.jpg',
       since: '2017',
       note: 'Childhood sweethearts — known each other since age 5 in Rosario, Argentina.',
     },
@@ -14,9 +14,9 @@ export const personalLife = {
       { name: 'Antonela Roccuzzo', date: 'June 30, 2017', place: 'Rosario, Argentina', status: 'Married ✅' },
     ],
     children: [
-      { name: 'Thiago Messi',  born: 'Nov 2, 2012', with: 'Antonela Roccuzzo', emoji: '👦', photo: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=150&h=150&fit=crop' },
-      { name: 'Mateo Messi',   born: 'Sep 11, 2015', with: 'Antonela Roccuzzo', emoji: '👦', photo: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop' },
-      { name: 'Ciro Messi',    born: 'Mar 10, 2018', with: 'Antonela Roccuzzo', emoji: '👦', photo: 'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=150&h=150&fit=crop' },
+      { name: 'Thiago Messi',  born: 'Nov 2, 2012', with: 'Antonela Roccuzzo', emoji: '👦' },
+      { name: 'Mateo Messi',   born: 'Sep 11, 2015', with: 'Antonela Roccuzzo', emoji: '👦' },
+      { name: 'Ciro Messi',    born: 'Mar 10, 2018', with: 'Antonela Roccuzzo', emoji: '👦' },
     ],
     relationshipHistory: [
       { name: 'Antonela Roccuzzo', years: '2008 – Present', status: 'Wife ✅' },
@@ -27,7 +27,7 @@ export const personalLife = {
     partner: {
       name: 'Georgina Rodríguez',
       role: 'Long-term Partner',
-      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Georgina_Rodriguez_2019.jpg/320px-Georgina_Rodriguez_2019.jpg',
+      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Georgina_Rodr%C3%ADguez_in_the_Oval_Office_%2854934212986%29_%28cropped%29.jpg/500px-Georgina_Rodr%C3%ADguez_in_the_Oval_Office_%2854934212986%29_%28cropped%29.jpg',
       since: '2016',
       note: 'Met at a Gucci store in Madrid in 2016. They have been together ever since.',
     },
@@ -35,11 +35,11 @@ export const personalLife = {
       { name: 'Never officially married', date: '—', place: '—', status: 'Unmarried (together since 2016)' },
     ],
     children: [
-      { name: 'Cristiano Jr.', born: 'Jun 17, 2010', with: 'Surrogate', emoji: '👦', photo: 'https://images.unsplash.com/photo-1542080681-b52d382432af?w=150&h=150&fit=crop' },
-      { name: 'Eva Maria',      born: 'Jun 8, 2017',  with: 'Surrogate (twin)', emoji: '👧', photo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=150&h=150&fit=crop' },
-      { name: 'Mateo',          born: 'Jun 8, 2017',  with: 'Surrogate (twin)', emoji: '👦', photo: 'https://images.unsplash.com/photo-1506869640319-fea1a2789150?w=150&h=150&fit=crop' },
-      { name: 'Alana Martina',  born: 'Nov 12, 2017', with: 'Georgina Rodríguez', emoji: '👧', photo: 'https://images.unsplash.com/photo-1517677129300-07b130802f46?w=150&h=150&fit=crop' },
-      { name: 'Bella Esmeralda',born: 'Apr 18, 2022', with: 'Georgina Rodríguez', emoji: '👧', photo: 'https://images.unsplash.com/photo-1521151716396-b2da26523bf5?w=150&h=150&fit=crop' },
+      { name: 'Cristiano Jr.', born: 'Jun 17, 2010', with: 'Surrogate', emoji: '👦' },
+      { name: 'Eva Maria',      born: 'Jun 8, 2017',  with: 'Surrogate (twin)', emoji: '👧' },
+      { name: 'Mateo',          born: 'Jun 8, 2017',  with: 'Surrogate (twin)', emoji: '👦' },
+      { name: 'Alana Martina',  born: 'Nov 12, 2017', with: 'Georgina Rodríguez', emoji: '👧' },
+      { name: 'Bella Esmeralda',born: 'Apr 18, 2022', with: 'Georgina Rodríguez', emoji: '👧' },
     ],
     relationshipHistory: [
       { name: 'Merche Romero',      years: '2004–2006', status: 'Ex-girlfriend' },
@@ -53,7 +53,7 @@ export const personalLife = {
     partner: {
       name: 'Bruna Biancardi',
       role: 'Girlfriend',
-      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Bruna_Biancardi_2022.jpg/320px-Bruna_Biancardi_2022.jpg',
+      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Bruna_Biancardi_2022.jpg/500px-Bruna_Biancardi_2022.jpg',
       since: '2022',
       note: 'Brazilian model and influencer. They reconciled after a brief split in 2023.',
     },
@@ -61,8 +61,8 @@ export const personalLife = {
       { name: 'Never married', date: '—', place: '—', status: 'Unmarried' },
     ],
     children: [
-      { name: 'Davi Lúcio', born: 'Aug 24, 2011', with: 'Carolina Dantas', emoji: '👦', photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop' },
-      { name: 'Mavie',       born: 'Oct 6, 2023',  with: 'Bruna Biancardi', emoji: '👧', photo: 'https://images.unsplash.com/photo-1533512930330-4ac257c86793?w=150&h=150&fit=crop' },
+      { name: 'Davi Lúcio', born: 'Aug 24, 2011', with: 'Carolina Dantas', emoji: '👦' },
+      { name: 'Mavie',       born: 'Oct 6, 2023',  with: 'Bruna Biancardi', emoji: '👧' },
     ],
     relationshipHistory: [
       { name: 'Carolina Dantas',   years: '2010–2011', status: 'Ex (mother of Davi)' },
@@ -137,9 +137,9 @@ export const personalLife = {
       { name: 'Michèle Lacroix', date: 'June 2017', place: 'Sorrento, Italy', status: 'Married ✅' },
     ],
     children: [
-      { name: 'Mason Milian', born: '2016', with: 'Michèle Lacroix', emoji: '👦', photo: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=150&h=150&fit=crop' },
-      { name: 'Rome',          born: '2018', with: 'Michèle Lacroix', emoji: '👦', photo: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop' },
-      { name: 'Suri',          born: '2020', with: 'Michèle Lacroix', emoji: '👧', photo: 'https://images.unsplash.com/photo-1471286174890-9c11241c4098?w=150&h=150&fit=crop' },
+      { name: 'Mason Milian', born: '2016', with: 'Michèle Lacroix', emoji: '👦' },
+      { name: 'Rome',          born: '2018', with: 'Michèle Lacroix', emoji: '👦' },
+      { name: 'Suri',          born: '2020', with: 'Michèle Lacroix', emoji: '👧' },
     ],
     relationshipHistory: [
       { name: 'Michèle Lacroix', years: '2014 – Present', status: 'Wife ✅' },
@@ -150,7 +150,7 @@ export const personalLife = {
     partner: {
       name: 'Anna Lewandowska',
       role: 'Wife',
-      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Festiwal_Gwiazd_2014_Anna_Lewandowska_%281%29.jpg/320px-Festiwal_Gwiazd_2014_Anna_Lewandowska_%281%29.jpg',
+      photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Anna_Lewandowska_%28cropped%29.jpg/500px-Anna_Lewandowska_%28cropped%29.jpg',
       since: '2007',
       note: 'Polish karateka (3× world champion), personal trainer, nutritionist and entrepreneur.',
     },
@@ -158,8 +158,8 @@ export const personalLife = {
       { name: 'Anna Lewandowska', date: 'June 22, 2013', place: 'Serock, Poland', status: 'Married ✅' },
     ],
     children: [
-      { name: 'Klara',  born: 'May 4, 2017',  with: 'Anna Lewandowska', emoji: '👧', photo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=150&h=150&fit=crop' },
-      { name: 'Laura',  born: 'May 6, 2020',  with: 'Anna Lewandowska', emoji: '👧', photo: 'https://images.unsplash.com/photo-1517677129300-07b130802f46?w=150&h=150&fit=crop' },
+      { name: 'Klara',  born: 'May 4, 2017',  with: 'Anna Lewandowska', emoji: '👧' },
+      { name: 'Laura',  born: 'May 6, 2020',  with: 'Anna Lewandowska', emoji: '👧' },
     ],
     relationshipHistory: [
       { name: 'Anna Lewandowska', years: '2007 – Present', status: 'Wife ✅' },
@@ -196,10 +196,10 @@ export const personalLife = {
       { name: 'Katie Goodland', date: 'June 2019', place: 'Bahamas', status: 'Married ✅' },
     ],
     children: [
-      { name: 'Ivy Jane',    born: 'Jan 8, 2017',  with: 'Katie Goodland', emoji: '👧', photo: 'https://images.unsplash.com/photo-1521151716396-b2da26523bf5?w=150&h=150&fit=crop' },
-      { name: 'Vivienne',    born: 'Aug 2018',      with: 'Katie Goodland', emoji: '👧', photo: 'https://images.unsplash.com/photo-1533512930330-4ac257c86793?w=150&h=150&fit=crop' },
-      { name: 'Louis Harry', born: 'Dec 2020',      with: 'Katie Goodland', emoji: '👦', photo: 'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=150&h=150&fit=crop' },
-      { name: 'Henry',       born: 'Dec 2023',      with: 'Katie Goodland', emoji: '👦', photo: 'https://images.unsplash.com/photo-1542080681-b52d382432af?w=150&h=150&fit=crop' },
+      { name: 'Ivy Jane',    born: 'Jan 8, 2017',  with: 'Katie Goodland', emoji: '👧' },
+      { name: 'Vivienne',    born: 'Aug 2018',      with: 'Katie Goodland', emoji: '👧' },
+      { name: 'Louis Harry', born: 'Dec 2020',      with: 'Katie Goodland', emoji: '👦' },
+      { name: 'Henry',       born: 'Dec 2023',      with: 'Katie Goodland', emoji: '👦' },
     ],
     relationshipHistory: [
       { name: 'Katie Goodland', years: '2011 – Present', status: 'Wife ✅' },
