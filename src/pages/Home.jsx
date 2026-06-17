@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CalendarDays, Radio, Vote, Users, BarChart3, GitCompare, ChevronRight, Globe2, Trophy, Flame, Zap } from 'lucide-react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
@@ -478,7 +478,12 @@ export default function Home() {
   const reduced = useReducedMotion()
   const { matches } = useApp()
   const c = useCountdown(tournament.openingMatch.kickoff_ET)
-  const featured = matches.slice(0, 3)
+  const featured = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10)
+    const live = matches.filter(m => m.status === 'live')
+    const upcoming = matches.filter(m => m.status !== 'finished' && m.status !== 'live' && m.date.slice(0, 10) >= today)
+    return [...live, ...upcoming].slice(0, 3)
+  }, [matches])
 
   const [crowdStat,   setCrowdStat]   = useState(!supabaseEnabled ? DEMO_CROWD_STAT : null)
   const [crowdLoaded, setCrowdLoaded] = useState(!supabaseEnabled)
